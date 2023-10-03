@@ -1,0 +1,184 @@
+<questions>
+<question>
+  <title>Valid Sudoku</title>
+  <statement>
+    Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
+
+    1. Each row must contain the digits 1-9 without repetition.
+    2. Each column must contain the digits 1-9 without repetition.
+    3. Each of the nine 3 x 3 sub-grids of the grid must contain the digits 1-9 without repetition.
+
+    The Sudoku board could be partially filled, where empty cells are filled with the character '.'.
+
+    Note:
+    - A valid Sudoku board (partially filled) is not necessarily solvable. Only the filled cells need to be validated.
+
+    Example 1:
+    Input:
+    board = [
+      ["5","3",".",".","7",".",".",".","."],
+      ["6",".",".","1","9","5",".",".","."],
+      [".","9","8",".",".",".",".","6","."],
+      ["8",".",".",".","6",".",".",".","3"],
+      ["4",".",".","8",".","3",".",".","1"],
+      ["7",".",".",".","2",".",".",".","6"],
+      [".","6",".",".",".",".","2","8","."],
+      [".",".",".","4","1","9",".",".","5"],
+      [".",".",".",".","8",".",".","7","9"]
+    ]
+    Output: true
+
+    Example 2:
+    Input:
+    board = [
+      ["8","3",".",".","7",".",".",".","."],
+      ["6",".",".","1","9","5",".",".","."],
+      [".","9","8",".",".",".",".","6","."],
+      ["8",".",".",".","6",".",".",".","3"],
+      ["4",".",".","8",".","3",".",".","1"],
+      ["7",".",".",".","2",".",".",".","6"],
+      [".","6",".",".",".",".","2","8","."],
+      [".",".",".","4","1","9",".",".","5"],
+      [".",".",".",".","8",".",".","7","9"]
+    ]
+    Output: false
+  </statement>
+  <solution>
+    <code>
+    def isValidSudoku(self, board: List[List[str]]) -&gt; bool:
+        cols = collections.defaultdict(set)
+        rows = collections.defaultdict(set)
+        squares = collections.defaultdict(set) # key = (r / 3, c / 3)
+
+        for r in range(9):
+            for c in range(9):
+                # if empty position
+                if board[r][c] == ".":
+                    continue
+                if (board[r][c] in rows[r] or board[r][c] in cols[c] or board[r][c] in squares[(r // 3, c // 3)]):
+                    return False
+
+                cols[c].add(board[r][c])
+                rows[r].add(board[r][c])
+                squares[(r // 3, c // 3)].add(board[r][c])
+        return True
+
+    Time:O(9 &amp; 2)
+    Space: O(9 &amp; 2)
+    </code>
+  </solution>
+</question>
+<question>
+  <title>Trapping Rain Water</title>
+  <statement>
+    Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
+
+    Example:
+    Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
+    Output: 6
+    Explanation: In this case, 6 units of rainwater (blue section) are being trapped.
+  </statement>
+  <solution>
+    <code>
+        def trap(self, height: List[int]) -&gt; int:
+        l, r = 0, len(height) - 1
+        leftMax, rightMax = height[l], height[r]
+        res = 0
+
+        while l &lt; r:
+            if leftMax &lt; rightMax:
+                l += 1
+                leftMax = max(leftMax, height[l])
+                res += leftMax - height[l]
+            else:
+                r -= 1
+                rightMax = max(rightMax, height[r])
+                res += rightMax - height[r]
+        return res
+      Time:O(n)
+      Space:O(1)
+    </code>
+  </solution>
+</question>
+<question>
+  <title>Two Sum II - Input array is sorted</title>
+  <statement>
+    Given an array of integers numbers that is already sorted in non-decreasing order, find two numbers such that they add up to a specific target number.
+
+    You may return the answer in any order.
+
+    Example:
+    Input: numbers = [2,7,11,15], target = 9
+    Output: [2,7]
+    Explanation: The sum of 2 and 7 is 9.
+  </statement>
+  <solution>
+    <code>
+    def twoSum(self, numbers: List[int], target: int) -&gt; List[int]:
+        l, r = 0, len(numbers) - 1
+
+        while l &lt; r:
+            sum = numbers[l] + numbers[r]
+
+            if sum &lt; target:
+                l += 1
+            elif sum &gt; target:
+                r -= 1
+            else:
+                return [l + 1, r + 1]
+    </code>
+  </solution>
+</question>
+<question>
+  <title>Permutation in String</title>
+  <statement>
+    Given two strings s1 and s2, write a function to return true if s2 contains the permutation of s1.
+
+    In other words, one of the first string's permutations is the substring of the second string.
+
+    Example:
+    Input: s1 = "ab", s2 = "eidbaooo"
+    Output: true
+    Explanation: s2 contains one permutation of s1 ("ba").
+  </statement>
+  <solution>
+    <code>
+    def checkInclusion(self, s1: str, s2: str) -&gt; bool:
+        if len(s1) &gt; len(s2):
+            return False
+
+        s1Count, s2Count = [0] * 26, [0] * 26
+        for i in range(len(s1)):
+            s1Count[ord(s1[i]) - ord("a")] += 1
+            s2Count[ord(s2[i]) - ord("a")] += 1
+
+        matches = 0
+        for i in range(26):
+            matches += 1 if s1Count[i] == s2Count[i] else 0
+
+        l = 0
+        for r in range(len(s1), len(s2)):
+            if matches == 26:
+                return True
+
+            index = ord(s2[r]) - ord("a")
+            s2Count[index] += 1
+            if s1Count[index] == s2Count[index]:
+                matches += 1
+            elif s1Count[index] + 1 == s2Count[index]:
+                matches -= 1
+
+            index = ord(s2[l]) - ord("a")
+            s2Count[index] -= 1
+            if s1Count[index] == s2Count[index]:
+                matches += 1
+            elif s1Count[index] - 1 == s2Count[index]:
+                matches -= 1
+            l += 1
+        return matches == 26
+
+    </code>
+  </solution>
+</question>
+
+</questions>
