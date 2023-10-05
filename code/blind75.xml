@@ -40,6 +40,9 @@
           return -1
     </code>
   </solution>
+    <links>
+    <link>https://leetcode.com/problems/search-in-rotated-sorted-array/description/</link>
+    </links>
 </question>
 <question>
   <title>Longest Repeating Character Replacement</title>
@@ -48,28 +51,6 @@
     In one operation, you can choose any character of the string and change it to any other uppercase English letter.
     Find the length of the longest subarray containing repeating letters you can get after performing the `k` operations.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <s>"ABAB"</s>
-        <k>2</k>
-      </input>
-      <output>4</output>
-      <explanation>
-        The longest repeating character subarray we can get is "ABAB" after changing the two 'A's to 'B's.
-      </explanation>
-    </example>
-    <example>
-      <input>
-        <s>"AABABBA"</s>
-        <k>1</k>
-      </input>
-      <output>4</output>
-      <explanation>
-        The longest repeating character subarray we can get is "ABBBBA" after changing the 'A' to 'B'.
-      </explanation>
-    </example>
-  </examples>
   <solution>
     <code>
        def characterReplacement(self, s: str, k: int):
@@ -89,17 +70,9 @@
             res = max(res, r - l + 1)
         return res
     </code>
-    <complexity>
-      <time>O(n)</time>
-      <space>O(26) ≈ O(1)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Two Pointers</topic>
-    <topic>Sliding Window</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Longest Repeating Character Replacement: https://leetcode.com/problems/longest-repeating-character-replacement/</link>
+    <link>https://leetcode.com/problems/longest-repeating-character-replacement/description/</link>
   </links>
 </question>
 <question>
@@ -153,12 +126,9 @@
     Space: O(1)
     </code>
   </solution>
-  <related_topics>
-    <topic>Two Pointers</topic>
-    <topic>String</topic>
-  </related_topics>
+
   <links>
-    <link>LeetCode - Valid Palindrome: https://leetcode.com/problems/valid-palindrome/</link>
+    <link>https://leetcode.com/problems/valid-palindrome/description/</link>
   </links>
 </question>
 <question>
@@ -205,13 +175,8 @@
       Space: O(n)
     </code>
   </solution>
-  <related_topics>
-    <topic>Array</topic>
-    <topic>Hash Table</topic>
-    <topic>Union Find</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Longest Consecutive Sequence: https://leetcode.com/problems/longest-consecutive-sequence/</link>
+    <link>https://leetcode.com/problems/longest-consecutive-sequence/description/</link>
   </links>
 </question>
 <question>
@@ -221,45 +186,6 @@
     You can return the answer in any order.
     An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <strs>["eat","tea","tan","ate","nat","bat"]</strs>
-      </input>
-      <output>
-        <item>
-          <anagram>["eat","tea","ate"]</anagram>
-        </item>
-        <item>
-          <anagram>["tan","nat"]</anagram>
-        </item>
-        <item>
-          <anagram>["bat"]</anagram>
-        </item>
-      </output>
-      <explanation>
-        The input array contains the following anagrams:
-        - ["eat", "tea", "ate"]
-        - ["tan", "nat"]
-        - ["bat"]
-        The anagrams are grouped together in the output.
-      </explanation>
-    </example>
-    <example>
-      <input>
-        <strs>[""]</strs>
-      </input>
-      <output>
-        <item>
-          <anagram>[""]</anagram>
-        </item>
-      </output>
-      <explanation>
-        The input array contains a single empty string.
-        The output also contains a single group with the empty string.
-      </explanation>
-    </example>
-  </examples>
   <solution>
     <code>
       def groupAnagrams(self, strs: List[str]) -&gt; List[List[str]]:
@@ -276,13 +202,8 @@
       Space: O(k * m) k is max numbers of anagram groups formed from input string and n is size of input array
     </code>
   </solution>
-  <related_topics>
-    <topic>String</topic>
-    <topic>Hash Table</topic>
-    <topic>Sorting</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Group Anagrams: https://leetcode.com/problems/group-anagrams/</link>
+    <link>https://leetcode.com/problems/group-anagrams/description/</link>
   </links>
 </question>
 <question>
@@ -292,34 +213,6 @@
     You may assume that each input would have exactly one solution, and you may not use the same element twice.
     You can return the answer in any order.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <nums>[2,7,11,15]</nums>
-        <target>9</target>
-      </input>
-      <output>
-        <item>0</item>
-        <item>1</item>
-      </output>
-      <explanation>
-        The numbers at indices 0 and 1 (2 and 7) add up to the target value 9.
-      </explanation>
-    </example>
-    <example>
-      <input>
-        <nums>[3,2,4]</nums>
-        <target>6</target>
-      </input>
-      <output>
-        <item>1</item>
-        <item>2</item>
-      </output>
-      <explanation>
-        The numbers at indices 1 and 2 (2 and 4) add up to the target value 6.
-      </explanation>
-    </example>
-  </examples>
   <solution>
     <code>
       def twoSum(self, nums: List[int], target: int) -&gt; List[int]:
@@ -334,12 +227,8 @@
       Space: O(n)
     </code>
   </solution>
-  <related_topics>
-    <topic>Array</topic>
-    <topic>Hash Table</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Two Sum: https://leetcode.com/problems/two-sum/</link>
+    <link>https://leetcode.com/problems/two-sum/description/</link>
   </links>
 </question>
 <question>
@@ -347,24 +236,6 @@
   <statement>
     Reverse a singly linked list.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <head>[1,2,3,4,5]</head>
-      </input>
-      <output>[5,4,3,2,1]</output>
-    </example>
-    <example>
-      <input>
-        <head>[1]</head>
-      </input>
-      <output>[1]</output>
-      <explanation>
-        The original linked list contains a single node: 1
-        The reversed linked list is the same: 1
-      </explanation>
-    </example>
-  </examples>
   <solution>
     <code>
       class ListNode:
@@ -382,16 +253,9 @@
               curr = next_node
           return prev
     </code>
-    <complexity>
-      <time>O(n)</time>
-      <space>O(1)</space>
-    </complexity>
-  </solution>
-  <related_topics>
-    <topic>Linked List</topic>
-  </related_topics>
+    </solution>
   <links>
-    <link>LeetCode - Reverse Linked List: https://leetcode.com/problems/reverse-linked-list/</link>
+    <link>https://leetcode.com/problems/reverse-linked-list/description/</link>
   </links>
 </question>
 <question>
@@ -400,20 +264,6 @@
     Given a singly linked list `L: L0→L1→…→Ln-1→Ln`, reorder it to: `L0→Ln→L1→Ln-1→L2→Ln-2→…`
     You may assume the given list always has a valid reorder.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <head>[1,2,3,4]</head>
-      </input>
-      <output>[1,4,2,3]</output>
-    </example>
-    <example>
-      <input>
-        <head>[1,2,3,4,5]</head>
-      </input>
-      <output>[1,5,2,4,3]</output>
-    </example>
-  </examples>
   <solution>
     <code>
       def reorderList(self, head: ListNode) -&gt; None:
@@ -439,17 +289,13 @@
             first.next = second
             second.next = tmp1
             first, second = tmp1, tmp2
+
+        Time: O(n)
+        Space: O(1)
     </code>
-    <complexity>
-      <time>O(n)</time>
-      <space>O(1)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Linked List</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Reorder List: https://leetcode.com/problems/reorder-list/</link>
+    <link>https://leetcode.com/problems/reorder-list/description/</link>
   </links>
 </question>
 <question>
@@ -460,26 +306,6 @@
     Find two lines, which, together with the x-axis, forms a container that contains the most water.
     Return the maximum area of water that can be contained.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <height>[1,8,6,2,5,4,8,3,7]</height>
-      </input>
-      <output>49</output>
-    </example>
-    <example>
-      <input>
-        <height>[4,3,2,1,4]</height>
-      </input>
-      <output>16</output>
-    </example>
-    <example>
-      <input>
-        <height>[1,2,1]</height>
-      </input>
-      <output>2</output>
-    </example>
-  </examples>
   <solution>
     <code>
       def maxArea(height):
@@ -501,12 +327,8 @@
       Space: O(1)
     </code>
   </solution>
-  <related_topics>
-    <topic>Two Pointers</topic>
-    <topic>Greedy</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Container With Most Water: https://leetcode.com/problems/container-with-most-water/</link>
+    <link>https://leetcode.com/problems/container-with-most-water/description/</link>
   </links>
 </question>
 <question>
@@ -515,20 +337,6 @@
     You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.
     Merge all the linked-lists into one sorted linked-list and return it.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <lists>[[1,4,5],[1,3,4],[2,6]]</lists>
-      </input>
-      <output>[1,1,2,3,4,4,5,6]</output>
-    </example>
-    <example>
-      <input>
-        <lists>[[],[]]</lists>
-      </input>
-      <output>[]</output>
-    </example>
-  </examples>
   <solution>
     <code>
       def mergeKLists(self, lists: List[ListNode]) -&gt; ListNode:
@@ -561,19 +369,13 @@
         if l2:
             tail.next = l2
         return dummy.next
+
+    Time: O(N log K)
+    Space: O(1)
     </code>
-    <complexity>
-      <time>O(N log k)</time>
-      <space>O(1)</space>
-    </complexity>
-  </solution>
-  <related_topics>
-    <topic>Linked List</topic>
-    <topic>Divide and Conquer</topic>
-    <topic>Heap</topic>
-  </related_topics>
+    </solution>
   <links>
-    <link>LeetCode - Merge k Sorted Lists: https://leetcode.com/problems/merge-k-sorted-lists/</link>
+    <link>https://leetcode.com/problems/merge-k-sorted-lists/description</link>
   </links>
 </question>
 <question>
@@ -581,25 +383,6 @@
   <statement>
     Given a linked list, remove the n-th node from the end of list and return its head.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <head>[1,2,3,4,5]</head>
-        <n>2</n>
-      </input>
-      <output>[1,2,3,5]</output>
-    </example>
-    <example>
-      <input>
-        <head>[1]</head>
-        <n>1</n>
-      </input>
-      <output>[]</output>
-      <explanation>
-        The list becomes empty after removing the only node.
-      </explanation>
-    </example>
-  </examples>
   <solution>
     <code>
       def removeNthFromEnd(self, head: ListNode, n: int) -&gt; ListNode:
@@ -619,16 +402,9 @@
         left.next = left.next.next
         return dummy.next
     </code>
-    <complexity>
-      <time>O(L)</time>
-      <space>O(1)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Linked List</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Remove Nth Node From End of List: https://leetcode.com/problems/remove-nth-node-from-end-of-list/</link>
+    <link>https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/</link>
   </links>
 </question>
 <question>
@@ -639,28 +415,6 @@
     You can make at most one transaction (i.e., buy one and sell one share of the stock), and you must buy before you sell.
     Note: If you cannot achieve any profit, return 0.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <nums>[7,1,5,3,6,4]</nums>
-      </input>
-      <output>5</output>
-      <explanation>
-        The maximum profit can be achieved by buying on day 2 (price = 1) and selling on day 5 (price = 6).
-        The maximum profit is 6 - 1 = 5.
-      </explanation>
-    </example>
-    <example>
-      <input>
-        <nums>[7,6,4,3,1]</nums>
-      </input>
-      <output>0</output>
-      <explanation>
-        In this case, there is no transaction that can be made to achieve a profit.
-        Thus, the maximum profit is 0.
-      </explanation>
-    </example>
-  </examples>
   <solution>
     <code>
       def maxProfit(self, prices: List[int]) -&gt; int:
@@ -677,17 +431,9 @@
             r += 1
         return max_profit
     </code>
-    <complexity>
-      <time>O(n)</time>
-      <space>O(1)</space>
-    </complexity>
-  </solution>
-  <related_topics>
-    <topic>Array</topic>
-    <topic>Greedy</topic>
-  </related_topics>
+    </solution>
   <links>
-    <link>LeetCode - Best Time to Buy and Sell Stock: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/</link>
+    <link>https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/</link>
   </links>
 </question>
 <question>
@@ -696,38 +442,6 @@
     Given a linked list, determine if it has a cycle in it.
     To represent a cycle in the linked list, we use an integer pos which represents the position (0-indexed) in the linked list where the tail connects to. If pos is -1, then there is no cycle in the linked list.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <head>[3,2,0,-4]</head>
-        <pos>1</pos>
-      </input>
-      <output>true</output>
-      <explanation>
-        The list contains a cycle, where the tail connects to the second node (index 1).
-      </explanation>
-    </example>
-    <example>
-      <input>
-        <head>[1,2]</head>
-        <pos>0</pos>
-      </input>
-      <output>true</output>
-      <explanation>
-        The list contains a cycle, where the tail connects to the first node (index 0).
-      </explanation>
-    </example>
-    <example>
-      <input>
-        <head>[1]</head>
-        <pos>-1</pos>
-      </input>
-      <output>false</output>
-      <explanation>
-        The list does not contain any cycle.
-      </explanation>
-    </example>
-  </examples>
   <solution>
     <code>
       def hasCycle(self, head: Optional[ListNode]) -&gt; bool:
@@ -740,17 +454,9 @@
                 return True
         return False
     </code>
-    <complexity>
-      <time>O(n)</time>
-      <space>O(1)</space>
-    </complexity>
-  </solution>
-  <related_topics>
-    <topic>Linked List</topic>
-    <topic>Two Pointers</topic>
-  </related_topics>
+    </solution>
   <links>
-    <link>LeetCode - Linked List Cycle: https://leetcode.com/problems/linked-list-cycle/</link>
+    <link>https://leetcode.com/problems/linked-list-cycle/description/</link>
   </links>
 </question>
 <question>
@@ -758,26 +464,6 @@
   <statement>
     Given a string `s`, find the length of the longest substring without repeating characters.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <s>"abcabcbb"</s>
-      </input>
-      <output>3</output>
-      <explanation>
-        The longest substring without repeating characters is "abc", which has a length of 3.
-      </explanation>
-    </example>
-    <example>
-      <input>
-        <s>"bbbbb"</s>
-      </input>
-      <output>1</output>
-      <explanation>
-        The longest substring without repeating characters is "b", which has a length of 1.
-      </explanation>
-    </example>
-  </examples>
   <solution>
     <code>
       def lengthOfLongestSubstring(self, s: str) -&gt; int:
@@ -792,18 +478,9 @@
             res = max(res, len(charSet))
         return res
     </code>
-    <complexity>
-      <time>O(n)</time>
-      <space>O(min(n, m))</space>
-    </complexity>
-  </solution>
-  <related_topics>
-    <topic>String</topic>
-    <topic>Sliding Window</topic>
-    <topic>Hash Table</topic>
-  </related_topics>
+    </solution>
   <links>
-    <link>LeetCode - Longest Substring Without Repeating Characters: https://leetcode.com/problems/longest-substring-without-repeating-characters/</link>
+    <link>https://leetcode.com/problems/longest-substring-without-repeating-characters/description/</link>
   </links>
 </question>
 <question>
@@ -812,28 +489,6 @@
     Given two strings `s` and `t`, return true if `t` is an anagram of `s`, and false otherwise.
     An anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <s>"anagram"</s>
-        <t>"nagaram"</t>
-      </input>
-      <output>true</output>
-      <explanation>
-        The string "nagaram" is an anagram of "anagram" as both strings contain the same letters.
-      </explanation>
-    </example>
-    <example>
-      <input>
-        <s>"rat"</s>
-        <t>"car"</t>
-      </input>
-      <output>false</output>
-      <explanation>
-        The string "car" is not an anagram of "rat" as the letters "c" and "a" are not present in the original word.
-      </explanation>
-    </example>
-  </examples>
   <solution>
     <code>
       def isAnagram(self, s: str, t: str) -&gt; bool:
@@ -850,13 +505,8 @@
       Space: O(S + T)
     </code>
   </solution>
-  <related_topics>
-    <topic>String</topic>
-    <topic>Hash Table</topic>
-    <topic>Sorting</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Valid Anagram: https://leetcode.com/problems/valid-anagram/</link>
+    <link>https://leetcode.com/problems/valid-anagram/description/</link>
   </links>
 </question>
 <question>
@@ -868,35 +518,6 @@
     2. Open brackets must be closed in the correct order.
     Note: An empty string is also considered valid.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <s>"()"</s>
-      </input>
-      <output>true</output>
-      <explanation>
-        The string "()" is a valid parentheses sequence.
-      </explanation>
-    </example>
-    <example>
-      <input>
-        <s>"()[]{}"</s>
-      </input>
-      <output>true</output>
-      <explanation>
-        The string "()[]{}" is a valid parentheses sequence.
-      </explanation>
-    </example>
-    <example>
-      <input>
-        <s>"(]"</s>
-      </input>
-      <output>false</output>
-      <explanation>
-        The string "(]" is not a valid parentheses sequence.
-      </explanation>
-    </example>
-  </examples>
   <solution>
     <code>
       def isValid(self, s: str) -&gt; bool:
@@ -914,17 +535,9 @@
         return True if not stack else False
 
     </code>
-    <complexity>
-      <time>O(n)</time>
-      <space>O(n)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Stack</topic>
-    <topic>String</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Valid Parentheses: https://leetcode.com/problems/valid-parentheses/</link>
+    <link>https://leetcode.com/problems/valid-parentheses/description/</link>
   </links>
 </question>
 <question>
@@ -932,23 +545,6 @@
   <statement>
     Given an array of integers, nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <nums>[1,2,3,1]</nums>
-      </input>
-      <output>True</output>
-    </example>
-    <example>
-      <input>
-        <nums>[1,2,3,4]</nums>
-      </input>
-      <output>False</output>
-      <explanation>
-        The array does not contain any duplicates.
-      </explanation>
-    </example>
-  </examples>
   <solution>
     <code>
       def containsDuplicate(nums):
@@ -964,10 +560,9 @@
       Space: O(n)
     </code>
   </solution>
-  <related_topics>
-    <topic>Array</topic>
-    <topic>Hash Table</topic>
-  </related_topics>
+  <links>
+    <link>https://leetcode.com/problems/contains-duplicate/description/</link>
+  </links>
 </question>
 <question>
   <title>Top K Frequent Elements</title>
@@ -975,35 +570,6 @@
     Given an integer array `nums` and an integer `k`, return the `k` most frequent elements in the array.
     You may return the answer in any order.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <nums>[1,1,1,2,2,3]</nums>
-        <k>2</k>
-      </input>
-      <output>
-        <item>1</item>
-        <item>2</item>
-      </output>
-      <explanation>
-        The array [1, 1, 1, 2, 2, 3] contains three unique elements: 1, 2, and 3.
-        The top 2 most frequent elements are 1 and 2.
-      </explanation>
-    </example>
-    <example>
-      <input>
-        <nums>[1]</nums>
-        <k>1</k>
-      </input>
-      <output>
-        <item>1</item>
-      </output>
-      <explanation>
-        The array [1] contains one unique element, which is 1.
-        The top 1 most frequent element is 1.
-      </explanation>
-    </example>
-  </examples>
   <solution>
     <code>
       def topKFrequent(self, nums: List[int], k: int) -&gt; List[int]:
@@ -1026,12 +592,8 @@
     Space: O(n)
     </code>
   </solution>
-  <related_topics>
-    <topic>Heap</topic>
-    <topic>Hash Table</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Top K Frequent Elements: https://leetcode.com/problems/top-k-frequent-elements/</link>
+    <link>https://leetcode.com/problems/top-k-frequent-elements/description/</link>
   </links>
 </question>
 <question>
@@ -1039,25 +601,6 @@
   <statement>
     Merge two sorted linked lists and return it as a new sorted list. The new list should be made by splicing together the nodes of the first two lists.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <l1>[1,2,4]</l1>
-        <l2>[1,3,4]</l2>
-      </input>
-      <output>[1,1,2,3,4,4]</output>
-    </example>
-    <example>
-      <input>
-        <l1>[]</l1>
-        <l2>[]</l2>
-      </input>
-      <output>[]</output>
-      <explanation>
-        Both lists are empty, so the merged list is also empty.
-      </explanation>
-    </example>
-  </examples>
   <solution>
     <code>
       def mergeTwoLists(self, list1: ListNode, list2: ListNode) -&gt; ListNode:
@@ -1080,16 +623,9 @@
 
         return dummy.next
     </code>
-    <complexity>
-      <time>O(n + m)</time>
-      <space>O(1)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Linked List</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Merge Two Sorted Lists: https://leetcode.com/problems/merge-two-sorted-lists/</link>
+    <link>https://leetcode.com/problems/merge-two-sorted-lists/description/</link>
   </links>
 </question>
 <question>
@@ -1098,31 +634,6 @@
     Given an integer array `nums`, find all unique triplets in the array which gives the sum of zero.
     Note: The solution set must not contain duplicate triplets.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <nums>[-1,0,1,2,-1,-4]</nums>
-      </input>
-      <output>
-        <item>[-1, -1, 2]</item>
-        <item>[-1, 0, 1]</item>
-      </output>
-      <explanation>
-        The array [-1, 0, 1, 2, -1, -4] contains two unique triplets that sum up to zero: [-1, -1, 2] and [-1, 0, 1].
-      </explanation>
-    </example>
-    <example>
-      <input>
-        <nums>[0,0,0,0]</nums>
-      </input>
-      <output>
-        <item>[0, 0, 0]</item>
-      </output>
-      <explanation>
-        The array [0, 0, 0, 0] contains one unique triplet [0, 0, 0] that sums up to zero.
-      </explanation>
-    </example>
-  </examples>
   <solution>
     <code>
       def threeSum(self, nums: List[int]):
@@ -1148,18 +659,9 @@
       Time:O(n log n) + O(n2) = O(n2)
       Space: O(1) or O(n) depending on library
     </code>
-    <complexity>
-      <time>O(n^2)</time>
-      <space>O(log n)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Array</topic>
-    <topic>Two Pointers</topic>
-    <topic>Sorting</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - 3Sum: https://leetcode.com/problems/3sum/</link>
+    <link>https://leetcode.com/problems/3sum/description/</link>
   </links>
 </question>
 <question>
@@ -1169,26 +671,6 @@
     You need to find the minimum element in the array.
     The array may contain duplicates.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <nums>[4,5,6,7,0,1,2]</nums>
-      </input>
-      <output>0</output>
-      <explanation>
-        The minimum element in the array is 0.
-      </explanation>
-    </example>
-    <example>
-      <input>
-        <nums>[2,2,2,0,1]</nums>
-      </input>
-      <output>0</output>
-      <explanation>
-        The minimum element in the array is 0.
-      </explanation>
-    </example>
-  </examples>
   <solution>
     <code>
       def findMin(self, nums: List[int]) -&gt; int:
@@ -1209,17 +691,9 @@
                 
         return min(curr_min,nums[start])
     </code>
-    <complexity>
-      <time>O(log n)</time>
-      <space>O(1)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Array</topic>
-    <topic>Binary Search</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Find Minimum in Rotated Sorted Array: https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/</link>
+    <link>https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/</link>
   </links>
 </question>
 <question>
@@ -1228,25 +702,6 @@
     Given two strings, s and t, find the minimum window in s which will contain all the characters in t in any order.
     If there is no such window in s that covers all characters in t, return an empty string "".
   </statement>
-  <examples>
-    <example>
-      <input>
-        <s>"ADOBECODEBANC"</s>
-        <t>"ABC"</t>
-      </input>
-      <output>"BANC"</output>
-    </example>
-    <example>
-      <input>
-        <s>"a"</s>
-        <t>"aa"</t>
-      </input>
-      <output>""</output>
-      <explanation>
-        There is no window in s that contains both 'a' characters from t.
-      </explanation>
-    </example>
-  </examples>
   <solution>
     <code>
       def minWindow(self, s: str, t: str) -&gt; str:
@@ -1280,18 +735,9 @@
         l, r = res
         return s[l : r + 1] if resLen != float("infinity") else ""
     </code>
-    <complexity>
-      <time>O(n + m)</time>
-      <space>O(n + m)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>String</topic>
-    <topic>Sliding Window</topic>
-    <topic>Hash Table</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Minimum Window Substring: https://leetcode.com/problems/minimum-window-substring/</link>
+    <link>https://leetcode.com/problems/minimum-window-substring/description/</link>
   </links>
 </question>
 <question>
@@ -1318,72 +764,6 @@
     The above example is just a visual representation of 4he inverted tree.
     The input and output format will be the same, as a binary tree represented by its root node.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <root>
-          <value>4</value>
-          <left>
-            <value>2</value>
-            <left>
-              <value>1</value>
-              <left/>
-              <right/>
-            </left>
-            <right>
-              <value>3</value>
-              <left/>
-              <right/>
-            </right>
-          </left>
-          <right>
-            <value>7</value>
-            <left>
-              <value>6</value>
-              <left/>
-              <right/>
-            </left>
-            <right>
-              <value>9</value>
-              <left/>
-              <right/>
-            </right>
-          </right>
-        </root>
-      </input>
-      <output>
-        <root>
-          <value>4</value>
-          <left>
-            <value>7</value>
-            <left>
-              <value>9</value>
-              <left/>
-              <right/>
-            </left>
-            <right>
-              <value>6</value>
-              <left/>
-              <right/>
-            </right>
-          </left>
-          <right>
-            <value>2</value>
-            <left>
-              <value>3</value>
-              <left/>
-              <right/>
-            </left>
-            <right>
-              <value>1</value>
-              <left/>
-              <right/>
-            </right>
-          </right>
-        </root>
-      </output>
-    </example>
-  </examples>
   <solution>
     <code>
       def invertTree(self, root: TreeNode) -&gt; TreeNode:
@@ -1399,18 +779,9 @@
         self.invertTree(root.right)
         return root
     </code>
-    <complexity>
-      <time>O(n)</time>
-      <space>O(h)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Tree</topic>
-    <topic>Depth-First Search (DFS)</topic>
-    <topic>Breadth-First Search (BFS)</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Invert Binary Tree: https://leetcode.com/problems/invert-binary-tree/</link>
+    <link> https://leetcode.com/problems/invert-binary-tree/description/</link>
   </links>
 </question>
 <question>
@@ -1431,34 +802,6 @@
 
     Return its maximum depth: 3.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <root>
-          <value>3</value>
-          <left>
-            <value>9</value>
-            <left/>
-            <right/>
-          </left>
-          <right>
-            <value>20</value>
-            <left>
-              <value>15</value>
-              <left/>
-              <right/>
-            </left>
-            <right>
-              <value>7</value>
-              <left/>
-              <right/>
-            </right>
-          </right>
-        </root>
-      </input>
-      <output>3</output>
-    </example>
-  </examples>
   <solution>
     <code>
       def maxDepth(self, root: TreeNode) -&gt; int:
@@ -1500,18 +843,9 @@
             level += 1
         return level
     </code>
-    <complexity>
-      <time>O(n)</time>
-      <space>O(h)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Tree</topic>
-    <topic>Depth-First Search (DFS)</topic>
-    <topic>Breadth-First Search (BFS)</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Maximum Depth of Binary Tree: https://leetcode.com/problems/maximum-depth-of-binary-tree/</link>
+    <link>https://leetcode.com/problems/maximum-depth-of-binary-tree/description/</link>
   </links>
 </question>
 <question>
@@ -1536,95 +870,9 @@
     - The number of nodes in both trees is in the range [0, 100].
     - -10^4 &lt;= Node.val &lt;= 10^4
   </statement>
-  <examples>
-    <example>
-      <input>
-        <p>
-          <value>1</value>
-          <left>
-            <value>2</value>
-            <left/>
-            <right/>
-          </left>
-          <right>
-            <value>3</value>
-            <left/>
-            <right/>
-          </right>
-        </p>
-        <q>
-          <value>1</value>
-          <left>
-            <value>2</value>
-            <left/>
-            <right/>
-          </left>
-          <right>
-            <value>3</value>
-            <left/>
-            <right/>
-          </right>
-        </q>
-      </input>
-      <output>true</output>
-    </example>
-    <example>
-      <input>
-        <p>
-          <value>1</value>
-          <left>
-            <value>2</value>
-            <left/>
-            <right/>
-          </left>
-        </p>
-        <q>
-          <value>1</value>
-          <left/>
-          <right>
-            <value>2</value>
-            <left/>
-            <right/>
-          </right>
-        </q>
-      </input>
-      <output>false</output>
-    </example>
-    <example>
-      <input>
-        <p>
-          <value>1</value>
-          <left>
-            <value>2</value>
-            <left/>
-            <right/>
-          </left>
-          <right>
-            <value>1</value>
-            <left/>
-            <right/>
-          </right>
-        </p>
-        <q>
-          <value>1</value>
-          <left>
-            <value>1</value>
-            <left/>
-            <right/>
-          </left>
-          <right>
-            <value>2</value>
-            <left/>
-            <right/>
-          </right>
-        </q>
-      </input>
-      <output>false</output>
-    </example>
-  </examples>
   <solution>
     <code>
-      def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+      def isSameTree(self, p: TreeNode, q: TreeNode) -&gt; bool:
         if not p and not q:
             return True
         if p and q and p.val == q.val:
@@ -1632,17 +880,9 @@
         else:
             return False
     </code>
-    <complexity>
-      <time>O(n)</time>
-      <space>O(h)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Tree</topic>
-    <topic>Depth-First Search (DFS)</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Same Tree: https://leetcode.com/problems/same-tree/</link>
+    <link>https://leetcode.com/problems/same-tree/description</link>
   </links>
 </question>
 <question>
@@ -1664,93 +904,9 @@
     - `-10^4 &lt;= root.val &lt;= 10^4`
     - `-10^4 &lt;= subRoot.val &lt;= 10^4`
   </statement>
-  <examples>
-    <example>
-      <input>
-        <root>
-          <value>3</value>
-          <left>
-            <value>4</value>
-            <left>
-              <value>1</value>
-              <left/>
-              <right/>
-            </left>
-            <right>
-              <value>2</value>
-              <left/>
-              <right/>
-            </right>
-          </left>
-          <right>
-            <value>5</value>
-            <left/>
-            <right/>
-          </right>
-        </root>
-        <subRoot>
-          <value>4</value>
-          <left>
-            <value>1</value>
-            <left/>
-            <right/>
-          </left>
-          <right>
-            <value>2</value>
-            <left/>
-            <right/>
-          </right>
-        </subRoot>
-      </input>
-      <output>true</output>
-    </example>
-    <example>
-      <input>
-        <root>
-          <value>3</value>
-          <left>
-            <value>4</value>
-            <left>
-              <value>1</value>
-              <left/>
-              <right/>
-            </left>
-            <right>
-              <value>2</value>
-              <left/>
-              <right>
-                <value>0</value>
-                <left/>
-                <right/>
-              </right>
-            </right>
-          </left>
-          <right>
-            <value>5</value>
-            <left/>
-            <right/>
-          </right>
-        </root>
-        <subRoot>
-          <value>4</value>
-          <left>
-            <value>1</value>
-            <left/>
-            <right/>
-          </left>
-          <right>
-            <value>2</value>
-            <left/>
-            <right/>
-          </right>
-        </subRoot>
-      </input>
-      <output>false</output>
-    </example>
-  </examples>
   <solution>
     <code>
-      def isSubtree(self, s: TreeNode, t: TreeNode) -> bool:
+      def isSubtree(self, s: TreeNode, t: TreeNode) -&gt; bool:
         if not t:
             return True
         if not s:
@@ -1767,17 +923,9 @@
             return self.sameTree(s.left, t.left) and self.sameTree(s.right, t.right)
         return False
     </code>
-    <complexity>
-      <time>O(n * m)</time>
-      <space>O(h)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Tree</topic>
-    <topic>Depth-First Search (DFS)</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Subtree of Another Tree: https://leetcode.com/problems/subtree-of-another-tree/</link>
+    <link>https://leetcode.com/problems/subtree-of-another-tree/description/</link>
   </links>
 </question>
 <question>
@@ -1803,121 +951,23 @@
     - p != q
     - p and q will exist in the BST.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <root>
-          <value>6</value>
-          <left>
-            <value>2</value>
-            <left>
-              <value>0</value>
-              <left/>
-              <right/>
-            </left>
-            <right>
-              <value>4</value>
-              <left>
-                <value>3</value>
-                <left/>
-                <right/>
-              </left>
-              <right>
-                <value>5</value>
-                <left/>
-                <right/>
-              </right>
-            </right>
-          </left>
-          <right>
-            <value>8</value>
-            <left>
-              <value>7</value>
-              <left/>
-              <right/>
-            </left>
-            <right>
-              <value>9</value>
-              <left/>
-              <right/>
-            </right>
-          </right>
-        </root>
-        <p>2</p>
-        <q>8</q>
-      </input>
-      <output>6</output>
-    </example>
-    <example>
-      <input>
-        <root>
-          <value>6</value>
-          <left>
-            <value>2</value>
-            <left>
-              <value>0</value>
-              <left/>
-              <right/>
-            </left>
-            <right>
-              <value>4</value>
-              <left>
-                <value>3</value>
-                <left/>
-                <right/>
-              </left>
-              <right>
-                <value>5</value>
-                <left/>
-                <right/>
-              </right>
-            </right>
-          </left>
-          <right>
-            <value>8</value>
-            <left>
-              <value>7</value>
-              <left/>
-              <right/>
-            </left>
-            <right>
-              <value>9</value>
-              <left/>
-              <right/>
-            </right>
-          </right>
-        </root>
-        <p>2</p>
-        <q>4</q>
-      </input>
-      <output>2</output>
-    </example>
-  </examples>
   <solution>
     <code>
       def lowestCommonAncestor(
         self, root: "TreeNode", p: "TreeNode", q: "TreeNode"
-    ) -> "TreeNode":
+    ) -&gt; "TreeNode":
         cur = root
         while cur:
-            if p.val > cur.val and q.val > cur.val:
+            if p.val &gt; cur.val and q.val &gt; cur.val:
                 cur = cur.right
             elif p.val &lt; cur.val and q.val &lt; cur.val:
                 cur = cur.left
             else:
                 return cur
     </code>
-    <complexity>
-      <time>O(h)</time>
-      <space>O(h)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Tree</topic>
-    <topic>Binary Search Tree (BST)</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Lowest Common Ancestor of a Binary Search Tree: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/</link>
+    <link>https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/</link>
   </links>
 </question>
 <question>
@@ -1942,70 +992,6 @@
     - The number of nodes in the tree is in the range [0, 2000].
     - -1000 &lt;= Node.val &lt;= 1000
   </statement>
-  <examples>
-    <example>
-      <input>
-        <root>
-          <value>3</value>
-          <left>
-            <value>9</value>
-            <left/>
-            <right/>
-          </left>
-          <right>
-            <value>20</value>
-            <left>
-              <value>15</value>
-              <left/>
-              <right/>
-            </left>
-            <right>
-              <value>7</value>
-              <left/>
-              <right/>
-            </right>
-          </right>
-        </root>
-      </input>
-      <output>
-        <levels>
-          <level>
-            <value>3</value>
-          </level>
-          <level>
-            <value>9</value>
-            <value>20</value>
-          </level>
-          <level>
-            <value>15</value>
-            <value>7</value>
-          </level>
-        </levels>
-      </output>
-    </example>
-    <example>
-      <input>
-        <root>
-          <value>1</value>
-          <left/>
-          <right/>
-        </root>
-      </input>
-      <output>
-        <levels>
-          <level>
-            <value>1</value>
-          </level>
-        </levels>
-      </output>
-    </example>
-    <example>
-      <input>
-        <root/>
-      </input>
-      <output/>
-    </example>
-  </examples>
   <solution>
     <code>
       def levelOrder(self, root: TreeNode) -&gt; List[List[int]]:
@@ -2027,17 +1013,9 @@
             res.append(val)
         return res
     </code>
-    <complexity>
-      <time>O(n)</time>
-      <space>O(n)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Tree</topic>
-    <topic>Breadth-First Search (BFS)</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Binary Tree Level Order Traversal: https://leetcode.com/problems/binary-tree-level-order-traversal/</link>
+    <link>https://leetcode.com/problems/binary-tree-level-order-traversal/description/</link>
   </links>
 </question>
 <question>
@@ -2062,55 +1040,9 @@
     - The number of nodes in the tree is in the range [1, 10^4].
     - -2^31 &lt;= Node.val &lt;= 2^31 - 1
   </statement>
-  <examples>
-    <example>
-      <input>
-        <root>
-          <value>2</value>
-          <left>
-            <value>1</value>
-            <left/>
-            <right/>
-          </left>
-          <right>
-            <value>3</value>
-            <left/>
-            <right/>
-          </right>
-        </root>
-      </input>
-      <output>true</output>
-    </example>
-    <example>
-      <input>
-        <root>
-          <value>5</value>
-          <left>
-            <value>1</value>
-            <left/>
-            <right/>
-          </left>
-          <right>
-            <value>4</value>
-            <left>
-              <value>3</value>
-              <left/>
-              <right/>
-            </left>
-            <right>
-              <value>6</value>
-              <left/>
-              <right/>
-            </right>
-          </right>
-        </root>
-      </input>
-      <output>false</output>
-    </example>
-  </examples>
   <solution>
     <code>
-      def isValidBST(self, root: TreeNode) -> bool:
+      def isValidBST(self, root: TreeNode) -&gt; bool:
         def valid(node, left, right):
             if not node:
                 return True
@@ -2123,17 +1055,9 @@
 
         return valid(root, float("-inf"), float("inf"))
     </code>
-    <complexity>
-      <time>O(n)</time>
-      <space>O(h)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Tree</topic>
-    <topic>Depth-First Search (DFS)</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Validate Binary Search Tree: https://leetcode.com/problems/validate-binary-search-tree/</link>
+    <link>https://leetcode.com/problems/validate-binary-search-tree/description/</link>
   </links>
 </question>
 <question>
@@ -2156,62 +1080,6 @@
 
     Follow up: If the BST is modified often (i.e., we can do insert and delete operations) and you need to find the kth smallest frequently, how would you optimize?
   </statement>
-  <examples>
-    <example>
-      <input>
-        <root>
-          <value>3</value>
-          <left>
-            <value>1</value>
-            <left/>
-            <right>
-              <value>2</value>
-              <left/>
-              <right/>
-            </right>
-          </left>
-          <right>
-            <value>4</value>
-            <left/>
-            <right/>
-          </right>
-        </root>
-      </input>
-      <input>1</input>
-      <output>1</output>
-    </example>
-    <example>
-      <input>
-        <root>
-          <value>5</value>
-          <left>
-            <value>3</value>
-            <left>
-              <value>2</value>
-              <left>
-                <value>1</value>
-                <left/>
-                <right/>
-              </left>
-              <right/>
-            </left>
-            <right>
-              <value>4</value>
-              <left/>
-              <right/>
-            </right>
-          </left>
-          <right>
-            <value>6</value>
-            <left/>
-            <right/>
-          </right>
-        </root>
-      </input>
-      <input>3</input>
-      <output>3</output>
-    </example>
-  </examples>
   <solution>
     <code>
       def kthSmallest(self, root: TreeNode, k: int) -&gt; int:
@@ -2228,17 +1096,9 @@
                 return curr.val
             curr = curr.right
     </code>
-    <complexity>
-      <time>O(k)</time>
-      <space>O(h)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Tree</topic>
-    <topic>Binary Search Tree (BST)</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Kth Smallest Element in a BST: https://leetcode.com/problems/kth-smallest-element-in-a-bst/</link>
+    <link>https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/</link>
   </links>
 </question>
 <question>
@@ -2263,69 +1123,9 @@
     - `preorder` is guaranteed to be the preorder traversal of the tree.
     - `inorder` is guaranteed to be the inorder traversal of the tree.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <preorder>
-          <value>3</value>
-          <value>9</value>
-          <value>20</value>
-          <value>15</value>
-          <value>7</value>
-        </preorder>
-        <inorder>
-          <value>9</value>
-          <value>3</value>
-          <value>15</value>
-          <value>20</value>
-          <value>7</value>
-        </inorder>
-      </input>
-      <output>
-        <root>
-          <value>3</value>
-          <left>
-            <value>9</value>
-            <left/>
-            <right/>
-          </left>
-          <right>
-            <value>20</value>
-            <left>
-              <value>15</value>
-              <left/>
-              <right/>
-            </left>
-            <right>
-              <value>7</value>
-              <left/>
-              <right/>
-            </right>
-          </right>
-        </root>
-      </output>
-    </example>
-    <example>
-      <input>
-        <preorder>
-          <value>-1</value>
-        </preorder>
-        <inorder>
-          <value>-1</value>
-        </inorder>
-      </input>
-      <output>
-        <root>
-          <value>-1</value>
-          <left/>
-          <right/>
-        </root>
-      </output>
-    </example>
-  </examples>
   <solution>
     <code>
-      def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+      def buildTree(self, preorder: List[int], inorder: List[int]) -&gt; Optional[TreeNode]:
         if not preorder or not inorder:
             return None
 
@@ -2335,17 +1135,9 @@
         root.right = self.buildTree(preorder[mid + 1 :], inorder[mid + 1 :])
         return root
     </code>
-    <complexity>
-      <time>O(n)</time>
-      <space>O(n)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Tree</topic>
-    <topic>Binary Tree</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Construct Binary Tree from Preorder and Inorder Traversal: https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/</link>
+    <link>https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/</link>
   </links>
 </question>
 <question>
@@ -2369,52 +1161,6 @@
     - The number of nodes in the tree is in the range [0, 3 * 10^4].
     - -1000 &lt;= Node.val &lt;= 1000
   </statement>
-  <examples>
-    <example>
-      <input>
-        <root>
-          <value>1</value>
-          <left>
-            <value>2</value>
-            <left/>
-            <right/>
-          </left>
-          <right>
-            <value>3</value>
-            <left/>
-            <right/>
-          </right>
-        </root>
-      </input>
-      <output>6</output>
-    </example>
-    <example>
-      <input>
-        <root>
-          <value>-10</value>
-          <left>
-            <value>9</value>
-            <left/>
-            <right/>
-          </left>
-          <right>
-            <value>20</value>
-            <left>
-              <value>15</value>
-              <left/>
-              <right/>
-            </left>
-            <right>
-              <value>7</value>
-              <left/>
-              <right/>
-            </right>
-          </right>
-        </root>
-      </input>
-      <output>42</output>
-    </example>
-  </examples>
   <solution>
     <code>
       def maxPathSum(self, root: TreeNode) -&gt; int:
@@ -2437,17 +1183,9 @@
         dfs(root)
         return res[0]
     </code>
-    <complexity>
-      <time>O(n)</time>
-      <space>O(h)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Tree</topic>
-    <topic>Depth-First Search (DFS)</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Binary Tree Maximum Path Sum: https://leetcode.com/problems/binary-tree-maximum-path-sum/</link>
+    <link>https://leetcode.com/problems/binary-tree-maximum-path-sum/description/</link>
   </links>
 </question>
 <question>
@@ -2470,40 +1208,6 @@
     - The number of nodes in the tree is in the range [0, 10^4].
     - -1000 &lt;= Node.val &lt;= 1000
   </statement>
-  <examples>
-    <example>
-      <input>
-        <root>
-          <value>1</value>
-          <left>
-            <value>2</value>
-            <left/>
-            <right/>
-          </left>
-          <right>
-            <value>3</value>
-            <left>
-              <value>4</value>
-              <left/>
-              <right/>
-            </left>
-            <right>
-              <value>5</value>
-              <left/>
-              <right/>
-            </right>
-          </right>
-        </root>
-      </input>
-      <output>[1,2,3,null,null,4,5]</output>
-    </example>
-    <example>
-      <input>
-        <root/>
-      </input>
-      <output>[]</output>
-    </example>
-  </examples>
   <solution>
     <code>
       def serialize(self, root):
@@ -2536,17 +1240,9 @@
 
         return dfs()
     </code>
-    <complexity>
-      <time>O(n)</time>
-      <space>O(n)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Tree</topic>
-    <topic>Depth-First Search (DFS)</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Serialize and Deserialize Binary Tree: https://leetcode.com/problems/serialize-and-deserialize-binary-tree/</link>
+    <link>https://leetcode.com/problems/serialize-and-deserialize-binary-tree/description/</link>
   </links>
 </question>
 <question>
@@ -2581,41 +1277,6 @@
     - word and prefix consist only of lowercase English letters.
     - At most 3 * 10^4 calls in total will be made to insert, search, and startsWith.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <commands>
-          <value>Trie</value>
-          <value>insert</value>
-          <value>search</value>
-          <value>search</value>
-          <value>startsWith</value>
-          <value>insert</value>
-          <value>search</value>
-        </commands>
-        <parameters>
-          <value/>
-          <value>apple</value>
-          <value>apple</value>
-          <value>app</value>
-          <value>app</value>
-          <value>app</value>
-          <value>app</value>
-        </parameters>
-      </input>
-      <output>
-        <values>
-          <value>null</value>
-          <value>null</value>
-          <value>true</value>
-          <value>false</value>
-          <value>true</value>
-          <value>null</value>
-          <value>true</value>
-        </values>
-      </output>
-    </example>
-  </examples>
   <solution>
     <code>
       class TrieNode:
@@ -2651,18 +1312,9 @@
                   node = node.children[c]
               return True
     </code>
-    <complexity>
-      <time>O(m)</time>
-      <space>O(m)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Trie</topic>
-    <topic>Tree</topic>
-    <topic>String</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Implement Trie (Prefix Tree): https://leetcode.com/problems/implement-trie-prefix-tree/</link>
+    <link>https://leetcode.com/problems/implement-trie-prefix-tree/description</link>
   </links>
 </question>
 <question>
@@ -2699,44 +1351,6 @@
     - word in search consist of  '.' or lower-case English letters.
     - At most 50000 calls will be made to addWord and search.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <commands>
-          <value>WordDictionary</value>
-          <value>addWord</value>
-          <value>addWord</value>
-          <value>addWord</value>
-          <value>search</value>
-          <value>search</value>
-          <value>search</value>
-          <value>search</value>
-        </commands>
-        <parameters>
-          <value/>
-          <value>bad</value>
-          <value>dad</value>
-          <value>mad</value>
-          <value>pad</value>
-          <value>bad</value>
-          <value>.ad</value>
-          <value>b..</value>
-        </parameters>
-      </input>
-      <output>
-        <values>
-          <value>null</value>
-          <value>null</value>
-          <value>null</value>
-          <value>null</value>
-          <value>false</value>
-          <value>true</value>
-          <value>true</value>
-          <value>true</value>
-        </values>
-      </output>
-    </example>
-  </examples>
   <solution>
     <code>
 class TrieNode:
@@ -2776,22 +1390,9 @@ class WordDictionary:
 
         return dfs(0, self.root)
     </code>
-    <complexity>
-      <time>
-        <addWord>O(m)</addWord>
-        <search>O(m)</search>
-      </time>
-      <space>O(m * n)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Trie</topic>
-    <topic>Tree</topic>
-    <topic>String</topic>
-    <topic>Backtracking</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Design Add and Search Words Data Structure: https://leetcode.com/problems/design-add-and-search-words-data-structure/</link>
+    <link>https://leetcode.com/problems/design-add-and-search-words-data-structure/description/</link>
   </links>
 </question>
 <question>
@@ -2821,70 +1422,6 @@ class WordDictionary:
     - words[i] consists of lowercase English letters.
     - All the strings of words are unique.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <board>
-          <row>
-            <cell>o</cell>
-            <cell>a</cell>
-            <cell>a</cell>
-            <cell>n</cell>
-          </row>
-          <row>
-            <cell>e</cell>
-            <cell>t</cell>
-            <cell>a</cell>
-            <cell>e</cell>
-          </row>
-          <row>
-            <cell>i</cell>
-            <cell>h</cell>
-            <cell>k</cell>
-            <cell>r</cell>
-          </row>
-          <row>
-            <cell>i</cell>
-            <cell>f</cell>
-            <cell>l</cell>
-            <cell>v</cell>
-          </row>
-        </board>
-        <words>
-          <word>oath</word>
-          <word>pea</word>
-          <word>eat</word>
-          <word>rain</word>
-        </words>
-      </input>
-      <output>
-        <words>
-          <word>eat</word>
-          <word>oath</word>
-        </words>
-      </output>
-    </example>
-    <example>
-      <input>
-        <board>
-          <row>
-            <cell>a</cell>
-            <cell>b</cell>
-          </row>
-          <row>
-            <cell>c</cell>
-            <cell>d</cell>
-          </row>
-        </board>
-        <words>
-          <word>abcb</word>
-        </words>
-      </input>
-      <output>
-        <words/>
-      </output>
-    </example>
-  </examples>
   <solution>
     <code>
 class TrieNode:
@@ -2932,17 +1469,9 @@ class Solution:
 
         return list(res)
     </code>
-    <complexity>
-      <time>O(M * (4 * 3^(L-1)))</time>
-      <space>O(K * L)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Trie</topic>
-    <topic>Backtracking</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Word Search II: https://leetcode.com/problems/word-search-ii/</link>
+    <link>https://leetcode.com/problems/word-search-ii/description</link>
   </links>
 </question>
 <question>
@@ -2973,38 +1502,6 @@ class Solution:
     - There will be at least one element in the data structure before calling findMedian.
     - At most 5 * 10^4 calls will be made to addNum and findMedian.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <commands>
-          <value>MedianFinder</value>
-          <value>addNum</value>
-          <value>addNum</value>
-          <value>findMedian</value>
-          <value>addNum</value>
-          <value>findMedian</value>
-        </commands>
-        <parameters>
-          <value/>
-          <value>1</value>
-          <value>2</value>
-          <value/>
-          <value>3</value>
-          <value/>
-        </parameters>
-      </input>
-      <output>
-        <values>
-          <value>null</value>
-          <value>null</value>
-          <value>null</value>
-          <value>1.5</value>
-          <value>null</value>
-          <value>2.0</value>
-        </values>
-      </output>
-    </example>
-  </examples>
   <solution>
     <code>
 class MedianFinder:
@@ -3038,20 +1535,9 @@ class MedianFinder:
             return self.large[0]
         return (-1 * self.small[0] + self.large[0]) / 2
     </code>
-    <complexity>
-      <time>
-        <addNum>O(log n)</addNum>
-        <findMedian>O(1)</findMedian>
-      </time>
-      <space>O(n)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Heap</topic>
-    <topic>Design</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Find Median from Data Stream: https://leetcode.com/problems/find-median-from-data-stream/</link>
+    <link>https://leetcode.com/problems/find-median-from-data-stream/description/</link>
   </links>
 </question>
 <question>
@@ -3093,102 +1579,6 @@ class MedianFinder:
     - All elements of candidates are distinct.
     - 1 &lt;= target &lt;= 500
   </statement>
-  <examples>
-    <example>
-      <input>
-        <candidates>
-          <value>2</value>
-          <value>3</value>
-          <value>6</value>
-          <value>7</value>
-        </candidates>
-        <target>7</target>
-      </input>
-      <output>
-        <combinations>
-          <combination>
-            <value>2</value>
-            <value>2</value>
-            <value>3</value>
-          </combination>
-          <combination>
-            <value>7</value>
-          </combination>
-        </combinations>
-      </output>
-    </example>
-    <example>
-      <input>
-        <candidates>
-          <value>2</value>
-          <value>3</value>
-          <value>5</value>
-        </candidates>
-        <target>8</target>
-      </input>
-      <output>
-        <combinations>
-          <combination>
-            <value>2</value>
-            <value>2</value>
-            <value>2</value>
-            <value>2</value>
-          </combination>
-          <combination>
-            <value>2</value>
-            <value>3</value>
-            <value>3</value>
-          </combination>
-          <combination>
-            <value>3</value>
-            <value>5</value>
-          </combination>
-        </combinations>
-      </output>
-    </example>
-    <example>
-      <input>
-        <candidates>
-          <value>2</value>
-        </candidates>
-        <target>1</target>
-      </input>
-      <output>
-        <combinations/>
-      </output>
-    </example>
-    <example>
-      <input>
-        <candidates>
-          <value>1</value>
-        </candidates>
-        <target>1</target>
-      </input>
-      <output>
-        <combinations>
-          <combination>
-            <value>1</value>
-          </combination>
-        </combinations>
-      </output>
-    </example>
-    <example>
-      <input>
-        <candidates>
-          <value>1</value>
-        </candidates>
-        <target>2</target>
-      </input>
-      <output>
-        <combinations>
-          <combination>
-            <value>1</value>
-            <value>1</value>
-          </combination>
-        </combinations>
-      </output>
-    </example>
-  </examples>
   <solution>
     <code>
 class Solution:
@@ -3210,17 +1600,9 @@ class Solution:
         dfs(0, [], 0)
         return res
     </code>
-    <complexity>
-      <time>O(k * 2^n)</time>
-      <space>O(k)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Array</topic>
-    <topic>Backtracking</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Combination Sum: https://leetcode.com/problems/combination-sum/</link>
+    <link>https://leetcode.com/problems/combination-sum/description/</link>
   </links>
 </question>
 <question>
@@ -3249,86 +1631,6 @@ class Solution:
     - 1 &lt;= word.length &lt;= 15
     - board and word consists of only uppercase and lowercase English letters.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <board>
-          <row>
-            <cell>A</cell>
-            <cell>B</cell>
-            <cell>C</cell>
-            <cell>E</cell>
-          </row>
-          <row>
-            <cell>S</cell>
-            <cell>F</cell>
-            <cell>C</cell>
-            <cell>S</cell>
-          </row>
-          <row>
-            <cell>A</cell>
-            <cell>D</cell>
-            <cell>E</cell>
-            <cell>E</cell>
-          </row>
-        </board>
-        <word>ABCCED</word>
-      </input>
-      <output>true</output>
-    </example>
-    <example>
-      <input>
-        <board>
-          <row>
-            <cell>A</cell>
-            <cell>B</cell>
-            <cell>C</cell>
-            <cell>E</cell>
-          </row>
-          <row>
-            <cell>S</cell>
-            <cell>F</cell>
-            <cell>C</cell>
-            <cell>S</cell>
-          </row>
-          <row>
-            <cell>A</cell>
-            <cell>D</cell>
-            <cell>E</cell>
-            <cell>E</cell>
-          </row>
-        </board>
-        <word>SEE</word>
-      </input>
-      <output>true</output>
-    </example>
-    <example>
-      <input>
-        <board>
-          <row>
-            <cell>A</cell>
-            <cell>B</cell>
-            <cell>C</cell>
-            <cell>E</cell>
-          </row>
-          <row>
-            <cell>S</cell>
-            <cell>F</cell>
-            <cell>C</cell>
-            <cell>S</cell>
-          </row>
-          <row>
-            <cell>A</cell>
-            <cell>D</cell>
-            <cell>E</cell>
-            <cell>E</cell>
-          </row>
-        </board>
-        <word>ABCB</word>
-      </input>
-      <output>false</output>
-    </example>
-  </examples>
   <solution>
     <code>
 class Solution:
@@ -3359,18 +1661,9 @@ class Solution:
 
 
     </code>
-    <complexity>
-      <time>O(m * n * 4^L)</time>
-      <space>O(L)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Array</topic>
-    <topic>Backtracking</topic>
-    <topic>Depth-First Search (DFS)</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Word Search: https://leetcode.com/problems/word-search/</link>
+    <link>https://leetcode.com/problems/word-search/description/</link>
   </links>
 </question>
 <question>
@@ -3400,78 +1693,6 @@ class Solution:
     - 1 &lt;= m, n &lt;= 300
     - grid[i][j] is '0' or '1'.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <grid>
-          <row>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell>0</cell>
-          </row>
-          <row>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell>0</cell>
-            <cell>1</cell>
-            <cell>0</cell>
-          </row>
-          <row>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell>0</cell>
-          </row>
-          <row>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell>0</cell>
-          </row>
-        </grid>
-      </input>
-      <output>1</output>
-    </example>
-    <example>
-      <input>
-        <grid>
-          <row>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell>0</cell>
-          </row>
-          <row>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell>0</cell>
-          </row>
-          <row>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell>1</cell>
-            <cell>0</cell>
-            <cell>0</cell>
-          </row>
-          <row>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell>1</cell>
-            <cell>1</cell>
-          </row>
-        </grid>
-      </input>
-      <output>3</output>
-    </example>
-  </examples>
   <solution>
     <code>
       class Solution:
@@ -3524,18 +1745,9 @@ class Solution:
                     islands += 1
         return islands
     </code>
-    <complexity>
-      <time>O(m * n)</time>
-      <space>O(m * n)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Depth-First Search (DFS)</topic>
-    <topic>Breadth-First Search (BFS)</topic>
-    <topic>Union Find</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Number of Islands: https://leetcode.com/problems/number-of-islands/</link>
+    <link>https://leetcode.com/problems/number-of-islands/description/</link>
   </links>
 </question>
 <question>
@@ -3561,66 +1773,6 @@ class Solution:
     - There are no repeated edges and no self-loops in the graph.
     - The Graph is connected and all nodes can be visited starting from the given node.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <adjList>
-          <node>
-            <value>2</value>
-            <neighbors>
-              <neighbor>4</neighbor>
-            </neighbors>
-          </node>
-          <node>
-            <value>1</value>
-            <neighbors>
-              <neighbor>3</neighbor>
-            </neighbors>
-          </node>
-          <node>
-            <value>2</value>
-            <neighbors>
-              <neighbor>4</neighbor>
-            </neighbors>
-          </node>
-          <node>
-            <value>3</value>
-            <neighbors>
-              <neighbor>2</neighbor>
-            </neighbors>
-          </node>
-        </adjList>
-      </input>
-      <output>
-        <adjList>
-          <node>
-            <value>2</value>
-            <neighbors>
-              <neighbor>4</neighbor>
-            </neighbors>
-          </node>
-          <node>
-            <value>1</value>
-            <neighbors>
-              <neighbor>3</neighbor>
-            </neighbors>
-          </node>
-          <node>
-            <value>2</value>
-            <neighbors>
-              <neighbor>4</neighbor>
-            </neighbors>
-          </node>
-          <node>
-            <value>3</value>
-            <neighbors>
-              <neighbor>2</neighbor>
-            </neighbors>
-          </node>
-        </adjList>
-      </output>
-    </example>
-  </examples>
   <solution>
     <code>
       class Node:
@@ -3644,18 +1796,9 @@ class Solution:
             return copy
           return dfs(node) if node else None
     </code>
-    <complexity>
-      <time>O(e + v)</time>
-      <space>O(n)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Depth-First Search (DFS)</topic>
-    <topic>Breadth-First Search (BFS)</topic>
-    <topic>Graph</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Clone Graph: https://leetcode.com/problems/clone-graph/</link>
+    <link>https://leetcode.com/problems/clone-graph/description/</link>
   </links>
 </question>
 <question>
@@ -3681,81 +1824,6 @@ class Solution:
     - 1 &lt;= m, n &lt;= 200
     - 0 &lt;= heights[i][j] &lt;= 10^5
   </statement>
-  <examples>
-    <example>
-      <input>
-        <heights>
-          <row>
-            <cell>1</cell>
-            <cell>2</cell>
-            <cell>2</cell>
-            <cell>3</cell>
-            <cell>5</cell>
-          </row>
-          <row>
-            <cell>3</cell>
-            <cell>2</cell>
-            <cell>3</cell>
-            <cell>4</cell>
-            <cell>4</cell>
-          </row>
-          <row>
-            <cell>2</cell>
-            <cell>4</cell>
-            <cell>5</cell>
-            <cell>3</cell>
-            <cell>1</cell>
-          </row>
-          <row>
-            <cell>6</cell>
-            <cell>7</cell>
-            <cell>1</cell>
-            <cell>4</cell>
-            <cell>5</cell>
-          </row>
-          <row>
-            <cell>5</cell>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell>2</cell>
-            <cell>4</cell>
-          </row>
-        </heights>
-      </input>
-      <output>
-        <coordinates>
-          <coordinate>
-            <row>0</row>
-            <col>4</col>
-          </coordinate>
-          <coordinate>
-            <row>1</row>
-            <col>3</col>
-          </coordinate>
-          <coordinate>
-            <row>1</row>
-            <col>4</col>
-          </coordinate>
-          <coordinate>
-            <row>2</row>
-            <col>2</col>
-          </coordinate>
-          <coordinate>
-            <row>3</row>
-            <col>0</col>
-          </coordinate>
-          <coordinate>
-            <row>3</row>
-            <col>1</col>
-          </coordinate>
-          <coordinate>
-            <row>4</row>
-            <col>0</col>
-          </coordinate>
-        </coordinates>
-      </output>
-    </example>
-  </examples>
   <solution>
     <code>
   class Solution:
@@ -3788,18 +1856,9 @@ class Solution:
                     res.append([r,c])
         return res
     </code>
-    <complexity>
-      <time>O(m * n)</time>
-      <space>O(m * n)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Depth-First Search (DFS)</topic>
-    <topic>Breadth-First Search (BFS)</topic>
-    <topic>Graph</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Pacific Atlantic Water Flow: https://leetcode.com/problems/pacific-atlantic-water-flow/</link>
+    <link>https://leetcode.com/problems/pacific-atlantic-water-flow/description/</link>
   </links>
 </question>
 <question>
@@ -3828,36 +1887,6 @@ class Solution:
     - 0 &lt;= ai, bi &lt; numCourses
     - All the pairs prerequisites[i] are unique.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <numCourses>2</numCourses>
-        <prerequisites>
-          <pair>
-            <course>1</course>
-            <prerequisite>0</prerequisite>
-          </pair>
-        </prerequisites>
-      </input>
-      <output>true</output>
-    </example>
-    <example>
-      <input>
-        <numCourses>2</numCourses>
-        <prerequisites>
-          <pair>
-            <course>1</course>
-            <prerequisite>0</prerequisite>
-          </pair>
-          <pair>
-            <course>0</course>
-            <prerequisite>1</prerequisite>
-          </pair>
-        </prerequisites>
-      </input>
-      <output>false</output>
-    </example>
-  </examples>
   <solution>
     <code>
   class Solution:
@@ -3885,19 +1914,9 @@ class Solution:
             if not dfs(crs): return False
         return True
     </code>
-    <complexity>
-      <time>O(n + p)</time>
-      <space>O(V + E)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Depth-First Search (DFS)</topic>
-    <topic>Breadth-First Search (BFS)</topic>
-    <topic>Graph</topic>
-    <topic>Topological Sort</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Course Schedule: https://leetcode.com/problems/course-schedule/</link>
+    <link>https://leetcode.com/problems/course-schedule/description/</link>
   </links>
 </question>
 <question>
@@ -3914,28 +1933,6 @@ class Solution:
     Note:
     - You can assume that no duplicate edges will appear in edges. Since all edges are undirected, [0, 1] is the same as [1, 0] and thus will not appear together in edges.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <n>5</n>
-        <edges>
-          <edge>
-            <node>0</node>
-            <node>1</node>
-          </edge>
-          <edge>
-            <node>1</node>
-            <node>2</node>
-          </edge>
-          <edge>
-            <node>3</node>
-            <node>4</node>
-          </edge>
-        </edges>
-      </input>
-      <output>2</output>
-    </example>
-  </examples>
   <solution>
     <code>
 class Solution:
@@ -3976,18 +1973,9 @@ To check if 2 components are disjoint, we see if they have the same parent.
 If node 2 is alone and 0&lt;-1, we see that node 2 has 2 as parent and node 1 has 0 as parent. So they are disjoint. 
 We then add 2 to the node 0, because he's the parent. Then we update the parent array as [0,0,0,3,4,5] because 1 and 2 have 0 as parent.
     </code>
-    <complexity>
-      <space>O(n)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Depth-First Search (DFS)</topic>
-    <topic>Breadth-First Search (BFS)</topic>
-    <topic>Graph</topic>
-    <topic>Union Find</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Number of Connected Components in an Undirected Graph: https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/</link>
+    <link>https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/description</link>
   </links>
 </question>
 <question>
@@ -4008,60 +1996,6 @@ We then add 2 to the node 0, because he's the parent. Then we update the parent 
     Note:
     - You can assume that no duplicate edges will appear in edges. Since all edges are undirected, [0, 1] is the same as [1, 0] and thus will not appear together in edges.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <n>5</n>
-        <edges>
-          <edge>
-            <node>0</node>
-            <node>1</node>
-          </edge>
-          <edge>
-            <node>0</node>
-            <node>2</node>
-          </edge>
-          <edge>
-            <node>0</node>
-            <node>3</node>
-          </edge>
-          <edge>
-            <node>1</node>
-            <node>4</node>
-          </edge>
-        </edges>
-      </input>
-      <output>true</output>
-    </example>
-    <example>
-      <input>
-        <n>5</n>
-        <edges>
-          <edge>
-            <node>0</node>
-            <node>1</node>
-          </edge>
-          <edge>
-            <node>1</node>
-            <node>2</node>
-          </edge>
-          <edge>
-            <node>2</node>
-            <node>3</node>
-          </edge>
-          <edge>
-            <node>1</node>
-            <node>3</node>
-          </edge>
-          <edge>
-            <node>1</node>
-            <node>4</node>
-          </edge>
-        </edges>
-      </input>
-      <output>false</output>
-    </example>
-  </examples>
   <solution>
     <code>
 class Solution:
@@ -4096,19 +2030,9 @@ To be a valide tree, we need the graph to not have loops and all the nodes are c
 We use a visited set to track if it has loops and if the len(set) == number of nodes, we know its a continuous tree. 
 We also need to have a previousNode value to keep track of false positive loops.
     </code>
-    <complexity>
-      <time>O(E + V)</time>
-      <space>O(E + V)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Depth-First Search (DFS)</topic>
-    <topic>Breadth-First Search (BFS)</topic>
-    <topic>Graph</topic>
-    <topic>Union Find</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Graph Valid Tree: https://leetcode.com/problems/graph-valid-tree/</link>
+    <link>https://leetcode.com/problems/graph-valid-tree/description/</link>
   </links>
 </question>
 <question>
@@ -4138,39 +2062,6 @@ We also need to have a previousNode value to keep track of false positive loops.
     - 1 &lt;= words[i].length &lt;= 100
     - words[i] consists of only lowercase English letters.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <words>
-          <word>wrt</word>
-          <word>wrf</word>
-          <word>er</word>
-          <word>ett</word>
-          <word>rftt</word>
-        </words>
-      </input>
-      <output>wertf</output>
-    </example>
-    <example>
-      <input>
-        <words>
-          <word>z</word>
-          <word>x</word>
-        </words>
-      </input>
-      <output>zx</output>
-    </example>
-    <example>
-      <input>
-        <words>
-          <word>z</word>
-          <word>x</word>
-          <word>z</word>
-        </words>
-      </input>
-      <output></output>
-    </example>
-  </examples>
   <solution>
     <code>
 def alienOrder(self, words:List[str]) -&gt; str:
@@ -4209,17 +2100,9 @@ def alienOrder(self, words:List[str]) -&gt; str:
   res.reverse()
   return "".join(res)
     </code>
-    <complexity>
-      <time>O(n) n is the number of words</time>
-      <space>O(C)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Graph</topic>
-    <topic>Topological Sort</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Alien Dictionary: https://leetcode.com/problems/alien-dictionary/</link>
+    <link>https://leetcode.com/problems/alien-dictionary/description/</link>
   </links>
 </question>
 <question>
@@ -4244,20 +2127,6 @@ def alienOrder(self, words:List[str]) -&gt; str:
                  2. 1 step + 2 steps
                  3. 2 steps + 1 step
   </statement>
-  <examples>
-    <example>
-      <input>
-        <n>2</n>
-      </input>
-      <output>2</output>
-    </example>
-    <example>
-      <input>
-        <n>3</n>
-      </input>
-      <output>3</output>
-    </example>
-  </examples>
   <solution>
     <code>
 class Solution:
@@ -4274,11 +2143,8 @@ Time: O(n)
 Space: O(1)
     </code>
   </solution>
-  <related_topics>
-    <topic>Dynamic Programming</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Climbing Stairs: https://leetcode.com/problems/climbing-stairs/</link>
+    <link>https://leetcode.com/problems/climbing-stairs/description</link>
   </links>
 </question>
 <question>
@@ -4298,20 +2164,6 @@ Space: O(1)
     Output: 4
     Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3). Total amount you can rob = 1 + 3 = 4.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <nums>2,3,2</nums>
-      </input>
-      <output>3</output>
-    </example>
-    <example>
-      <input>
-        <nums>1,2,3,1</nums>
-      </input>
-      <output>4</output>
-    </example>
-  </examples>
   <solution>
     <code>
     class Solution:
@@ -4328,11 +2180,8 @@ Space: O(1)
       Space:O(1)
     </code>
   </solution>
-  <related_topics>
-    <topic>Dynamic Programming</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - House Robber: https://leetcode.com/problems/house-robber-ii/</link>
+    <link>https://leetcode.com/problems/house-robber-ii/description/</link>
   </links>
 </question>
 <question>
@@ -4353,20 +2202,6 @@ Space: O(1)
     Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3). Total amount you can rob = 1 + 3 = 4.
 
   </statement>
-  <examples>
-    <example>
-      <input>
-        <nums>2,3,2</nums>
-      </input>
-      <output>3</output>
-    </example>
-    <example>
-      <input>
-        <nums>1,2,3,1</nums>
-      </input>
-      <output>4</output>
-    </example>
-  </examples>
   <solution>
     <code>
 class Solution:
@@ -4386,11 +2221,8 @@ class Solution:
 
     </code>
   </solution>
-  <related_topics>
-    <topic>Dynamic Programming</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - House Robber II: https://leetcode.com/problems/house-robber-ii/</link>
+    <link>https://leetcode.com/problems/house-robber-ii/description/</link>
   </links>
 </question>
 <question>
@@ -4415,20 +2247,6 @@ class Solution:
     Input: s = "ac"
     Output: "a"
   </statement>
-  <examples>
-    <example>
-      <input>
-        <s>"babad"</s>
-      </input>
-      <output>"bab"</output>
-    </example>
-    <example>
-      <input>
-        <s>"cbbd"</s>
-      </input>
-      <output>"bb"</output>
-    </example>
-  </examples>
   <solution>
     <code>
     class Solution:
@@ -4459,12 +2277,8 @@ class Solution:
         Space:O(1)
     </code>
   </solution>
-  <related_topics>
-    <topic>String</topic>
-    <topic>Dynamic Programming</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Longest Palindromic Substring: https://leetcode.com/problems/longest-palindromic-substring/</link>
+    <link>https://leetcode.com/problems/longest-palindromic-substring/description/</link>
   </links>
 </question>
 <question>
@@ -4487,20 +2301,6 @@ class Solution:
     Explanation: Six palindromic strings: "a", "a", "a", "aa", "aa", "aaa".
 
   </statement>
-  <examples>
-    <example>
-      <input>
-        <s>"abc"</s>
-      </input>
-      <output>3</output>
-    </example>
-    <example>
-      <input>
-        <s>"aaa"</s>
-      </input>
-      <output>6</output>
-    </example>
-  </examples>
   <solution>
     <code>
 class Solution:
@@ -4526,12 +2326,8 @@ class Solution:
       Space:O(1)
     </code>
   </solution>
-  <related_topics>
-    <topic>String</topic>
-    <topic>Dynamic Programming</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Palindromic Substrings: https://leetcode.com/problems/palindromic-substrings/</link>
+    <link>https://leetcode.com/problems/palindromic-substrings/description/</link>
   </links>
 </question>
 <question>
@@ -4558,20 +2354,6 @@ class Solution:
     Output: 3
     Explanation: "226" can be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
   </statement>
-  <examples>
-    <example>
-      <input>
-        <num>"12"</num>
-      </input>
-      <output>2</output>
-    </example>
-    <example>
-      <input>
-        <num>"226"</num>
-      </input>
-      <output>3</output>
-    </example>
-  </examples>
   <solution>
     <code>
     class Solution:
@@ -4592,11 +2374,8 @@ class Solution:
     Space:O(n)
     </code>
   </solution>
-  <related_topics>
-    <topic>Dynamic Programming</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Decode Ways: https://leetcode.com/problems/decode-ways/</link>
+    <link>https://leetcode.com/problems/decode-ways/description/</link>
   </links>
 </question>
 <question>
@@ -4615,22 +2394,6 @@ class Solution:
     Input: coins = [2], amount = 3
     Output: -1
   </statement>
-  <examples>
-    <example>
-      <input>
-        <coins>1, 2, 5</coins>
-        <amount>11</amount>
-      </input>
-      <output>3</output>
-    </example>
-    <example>
-      <input>
-        <coins>2</coins>
-        <amount>3</amount>
-      </input>
-      <output>-1</output>
-    </example>
-  </examples>
   <solution>
     <code>
     class Solution:
@@ -4650,16 +2413,9 @@ class Solution:
     Time:O(amount * n)
     Space:O(amount)
     </code>
-    <complexity>
-      <time>O(amount * n)</time>
-      <space>O(amount)</space>
-    </complexity>
   </solution>
-  <related_topics>
-    <topic>Dynamic Programming</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Coin Change: https://leetcode.com/problems/coin-change/</link>
+    <link>https://leetcode.com/problems/coin-change/description/</link>
   </links>
 </question>
 <question>
@@ -4677,20 +2433,6 @@ class Solution:
     Output: 0
     Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <nums>2,3,-2,4</nums>
-      </input>
-      <output>6</output>
-    </example>
-    <example>
-      <input>
-        <nums>-2,0,-1</nums>
-      </input>
-      <output>0</output>
-    </example>
-  </examples>
   <solution>
     <code>
     class Solution:
@@ -4716,12 +2458,8 @@ class Solution:
       Space:O(1)
     </code>
   </solution>
-  <related_topics>
-    <topic>Array</topic>
-    <topic>Dynamic Programming</topic>
-  </related_topics>
   <links>
-    <link>LeetCode - Maximum Product Subarray: https://leetcode.com/problems/maximum-product-subarray/</link>
+    <link>https://leetcode.com/problems/maximum-product-subarray/descriptions/</link>
   </links>
 </question>
 <question>
@@ -4767,6 +2505,9 @@ class Solution:
       Space:O(n) n is len(s)
     </code>
   </solution>
+  <links>
+    <link>https://leetcode.com/problems/word-break/description/</link>
+  </links>
 </question>
 <question>
   <title>Longest Increasing Subsequence</title>
@@ -4805,6 +2546,9 @@ class Solution:
       Space:O(n)
     </code>
   </solution>
+  <links>
+    <link>https://leetcode.com/problems/longest-increasing-subsequence/description/</link>
+  </links>
 </question>
 <question>
   <title>Unique Paths</title>
@@ -4855,6 +2599,9 @@ class Solution:
         Space: O(n)
     </code>
   </solution>
+  <links>
+    <link>https://leetcode.com/problems/unique-paths/description/</link>
+  </links>
 </question>
 <question>
   <title>Longest Common Subsequence</title>
@@ -4900,6 +2647,9 @@ class Solution:
         Space:O(n * m)
     </code>
   </solution>
+  <links>
+    <link>https://leetcode.com/problems/longest-common-subsequence/description/</link>
+  </links>
 </question>
 <question>
   <title>Maximum Subarray</title>
@@ -4942,6 +2692,9 @@ class Solution:
         Space:O(1)
     </code>
   </solution>
+  <links>
+    <link>https://leetcode.com/problems/maximum-subarray/description/</link>
+  </links>
 </question>
 <question>
   <title>Jump Game</title>
@@ -4977,6 +2730,9 @@ class Solution:
         Space:O(1)
     </code>
   </solution>
+  <links>
+    <link>https://leetcode.com/problems/jump-game/description/</link>
+  </links>
 </question>
 <question>
   <title>Insert Intervals</title>
@@ -5017,6 +2773,9 @@ class Solution:
         Space: O(n)
     </code>
   </solution>
+  <links>
+    <link>https://leetcode.com/problems/insert-interval/description/</link>
+  </links>
 </question>
 <question>
   <title>Merge Intervals</title>
@@ -5056,6 +2815,9 @@ class Solution:
         Space: O(n)
     </code>
   </solution>
+  <links>
+    <link>https://leetcode.com/problems/merge-intervals/description/</link>
+  </links>
 </question>
 <question>
   <title>Non-overlapping Intervals</title>
@@ -5098,6 +2860,9 @@ class Solution:
         Space: O(1)
     </code>
   </solution>
+  <links>
+    <link>https://leetcode.com/problems/non-overlapping-intervals/description/</link>
+  </links>
 </question>
 <question>
   <title>Meeting Rooms</title>
@@ -5138,6 +2903,9 @@ Time:O(n log n)
 Space: O(1)
     </code>
   </solution>
+  <links>
+    <link>https://leetcode.com/problems/meeting-rooms/description/</link>
+  </links>
 </question>
 <question>
   <title>Meeting Rooms II</title>
@@ -5195,6 +2963,9 @@ We move the ptr right.
 If tie, we know that we end a meeting before starting one, so we move the end ptr right.We return the max of the count value.
     </code>
   </solution>
+  <links>
+    <link>https://leetcode.com/problems/meeting-rooms-ii/description/</link>
+  </links>
 </question>
 <question>
   <title>Rotate Image</title>
@@ -5242,6 +3013,9 @@ If tie, we know that we end a meeting before starting one, so we move the end pt
       Space:O(1)
     </code>
   </solution>
+  <links>
+    <link>https://leetcode.com/problems/rotate-image/description/</link>
+  </links>
 </question>
 <question>
   <title>Spiral Matrix</title>
@@ -5289,6 +3063,9 @@ If tie, we know that we end a meeting before starting one, so we move the end pt
     Space: O(1)
     </code>
   </solution>
+  <links>
+    <link>https://leetcode.com/problems/spiral-matrix/description/</link>
+  </links>
 </question>
 <question>
   <title>Set Matrix Zeroes</title>
@@ -5340,6 +3117,9 @@ If tie, we know that we end a meeting before starting one, so we move the end pt
       Space: O(1)
     </code>
   </solution>
+  <links>
+    <link>https://leetcode.com/problems/set-matrix-zeroes/description/</link>
+  </links>
 </question>
 <question>
   <title>Number of 1 Bits</title>
@@ -5373,6 +3153,9 @@ If tie, we know that we end a meeting before starting one, so we move the end pt
     Space: O(1)
     </code>
   </solution>
+  <links>
+    <link>https://leetcode.com/problems/number-of-1-bits/description/</link>
+  </links>
 </question>
 <question>
   <title>Counting Bits</title>
@@ -5411,6 +3194,9 @@ If tie, we know that we end a meeting before starting one, so we move the end pt
       Space:O(n)
     </code>
   </solution>
+  <links>
+    <link>https://leetcode.com/problems/counting-bits/description/</link>
+  </links>
 </question>
 <question>
   <title>Reverse Bits</title>
@@ -5449,9 +3235,10 @@ If tie, we know that we end a meeting before starting one, so we move the end pt
     Space:O(1)
     </code>
   </solution>
+  <links>
+    <link>https://leetcode.com/problems/reverse-bits/description/</link>
+  </links>
 </question>
-
-
 <question>
   <title>Missing Number</title>
   <statement>
@@ -5487,6 +3274,9 @@ If tie, we know that we end a meeting before starting one, so we move the end pt
     Space: O(1)
     </code>
   </solution>
+  <links>
+    <link>https://leetcode.com/problems/missing-number/description/</link>
+  </links>
 </question>
 <question>
   <title>Sum of Two Integers</title>
@@ -5513,6 +3303,9 @@ If tie, we know that we end a meeting before starting one, so we move the end pt
     }
     </code>
   </solution>
+  <links>
+    <link>https://leetcode.com/problems/sum-of-two-integers/description/</link>
+  </links>
 </question>
 </questions>
 

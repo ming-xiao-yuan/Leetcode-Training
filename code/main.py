@@ -2,9 +2,9 @@ import subprocess
 import xml.etree.ElementTree as ET
 import random
 import os
+import webbrowser
 
 USED_INDICES_FILE = "used_indices.txt"
-
 
 def main():
     while True:
@@ -19,11 +19,11 @@ def main():
             print("Invalid choice. Please choose 1 or 2.")
 
     root = tree.getroot()
-
     questions = root.findall("question")
     print(len(questions))
-
     used_indices = load_used_indices()
+
+    reveal_choice = input("Press 1 to reveal in Notepad or Press 2 to open in Browser: ")
 
     while len(used_indices) < len(questions):
         random_index = random.randint(0, len(questions) - 1)
@@ -31,32 +31,43 @@ def main():
             continue
 
         random_question = questions[random_index]
-
         statement = random_question.find("statement").text
         solution_code = random_question.find("solution/code").text
 
-        content = f"{statement}\n"
-
         input("Press to reveal the question...")
-
-        with open("output_question.txt", "w", encoding="utf-8") as file:
-            file.write(content)
-
-        subprocess.Popen(["notepad.exe", "output_question.txt"], shell=True)
 
         used_indices.add(random_index)
         save_used_indices(used_indices)
 
+        if reveal_choice == "1":
+            content = f"{statement}\n"
+            with open("output_question.txt", "w", encoding="utf-8") as file:
+                file.write(content)
+            subprocess.Popen(["notepad.exe", "output_question.txt"], shell=True)
+
+        elif reveal_choice == "2":
+            link = random_question.find("links/link").text
+            try:
+                chrome_browser = webbrowser.get("chrome")
+                chrome_browser.open(link, new=2)
+            except webbrowser.Error:
+                print("Could not open Chrome. Trying the default browser...")
+                webbrowser.open(link, new=2)
+        else:
+            print("Invalid choice. Please choose 1 or 2 and restart the program.")
+            exit()
+
         input("Press Enter to reveal the answer...")
 
         content = f"{solution_code}\n"
-
         with open("output_answer.txt", "w", encoding="utf-8") as file:
             file.write(content)
 
         subprocess.Popen(["notepad.exe", "output_answer.txt"], shell=True)
 
     print("All questions have been used.")
+
+
 
 
 def load_used_indices():
