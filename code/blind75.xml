@@ -1975,7 +1975,7 @@ We then add 2 to the node 0, because he's the parent. Then we update the parent 
     </code>
   </solution>
   <links>
-    <link>https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/description</link>
+    <link>https://www.lintcode.com/problem/3651/</link>
   </links>
 </question>
 <question>
@@ -2006,7 +2006,7 @@ class Solution:
 
 		for n1, n2 in edges:
 			adj[n1].append(n2)
-			adj[n2].append(n2)
+			adj[n2].append(n1)
 
 		visit = set()
 
@@ -2102,7 +2102,7 @@ def alienOrder(self, words:List[str]) -&gt; str:
     </code>
   </solution>
   <links>
-    <link>https://leetcode.com/problems/alien-dictionary/description/</link>
+    <link>https://www.lintcode.com/problem/892/</link>
   </links>
 </question>
 <question>
@@ -2459,7 +2459,7 @@ class Solution:
     </code>
   </solution>
   <links>
-    <link>https://leetcode.com/problems/maximum-product-subarray/descriptions/</link>
+    <link>https://leetcode.com/problems/maximum-product-subarray/description/</link>
   </links>
 </question>
 <question>
@@ -2904,7 +2904,7 @@ Space: O(1)
     </code>
   </solution>
   <links>
-    <link>https://leetcode.com/problems/meeting-rooms/description/</link>
+    <link>https://www.lintcode.com/problem/920/</link>
   </links>
 </question>
 <question>
