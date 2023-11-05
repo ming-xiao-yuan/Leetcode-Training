@@ -2283,7 +2283,7 @@ We also need to have a previousNode value to keep track of false positive loops.
     </code>
   </solution>
   <links>
-    <link>https://leetcode.com/problems/graph-valid-tree/description/</link>
+    <link>https://www.lintcode.com/problem/178/</link>
   </links>
 </question>
 <question>
@@ -3215,7 +3215,7 @@ If tie, we know that we end a meeting before starting one, so we move the end pt
     </code>
   </solution>
   <links>
-    <link>https://leetcode.com/problems/meeting-rooms-ii/description/</link>
+    <link>https://www.lintcode.com/problem/919/</link>
   </links>
 </question>
 <question>
