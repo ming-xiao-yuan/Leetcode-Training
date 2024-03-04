@@ -138,26 +138,6 @@
     A consecutive elements sequence is a sequence of consecutive elements in the array that are sorted in ascending order.
     You must write an algorithm that runs in O(n) time.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <nums>[100,4,200,1,3,2]</nums>
-      </input>
-      <output>4</output>
-      <explanation>
-        The longest consecutive sequence is [1, 2, 3, 4], which has a length of 4.
-      </explanation>
-    </example>
-    <example>
-      <input>
-        <nums>[0,3,7,2,5,8,4,6,0,1]</nums>
-      </input>
-      <output>9</output>
-      <explanation>
-        The longest consecutive sequence is [0, 1, 2, 3, 4, 5, 6, 7, 8], which has a length of 9.
-      </explanation>
-    </example>
-  </examples>
   <solution>
     <code>
       def longestConsecutive(self, nums: List[int]) -&gt; int:
@@ -1440,7 +1420,7 @@ class TrieNode:
 class Solution:
     def findWords(self, board: List[List[str]], words: List[str]) -&gt; List[str]:
         root = TrieNode()
-
+  
         for w in words:
             root.addWord(w)
 
@@ -2032,7 +2012,7 @@ We also need to have a previousNode value to keep track of false positive loops.
     </code>
   </solution>
   <links>
-    <link>https://leetcode.com/problems/graph-valid-tree/description/</link>
+    <link>https://www.lintcode.com/problem/178/</link>
   </links>
 </question>
 <question>
@@ -2064,41 +2044,39 @@ We also need to have a previousNode value to keep track of false positive loops.
   </statement>
   <solution>
     <code>
-def alienOrder(self, words:List[str]) -&gt; str:
-	adj = {c:set() for w in words for c in w}
+        def alien_order(self, words: List[str]) -&gt; str:
+        # Write your code here
 
-	for i in range(len(words) - 1):
-		w1, w2 = words[i], words[i + 1]
-		minLen = min(len(w1), len(w2))
-		# if both words have the same prefix but the order is different
-		if len(w1) &gt; len(w2) and w1[:minLen] == w2[:minLen]:
-			return ""
-		# find the first differing character
-		for j in range(minLen):
-			if w1[j] != w2[j]:
-				# we know that w1 comes before w2
-				adj[w1[j]].add(w2)
-				break
-  visit = {} #False=visited, True=visited and in path
-  res = []
+        adj = {c:set() for w in words for c in w}
 
-  # return True if loop
-  def dfs(c):
-    if c in visit:
-      return visit[c]
-    # add it to the path
-    visit[c] = True
-    for nei in adj[c]:
-      if dfs(nei):
-        return True
-    
-    visit[c] = False
-    res.append(c)
-  for c in adj:
-    if dfs(c):
-      return ""
-  res.reverse()
-  return "".join(res)
+        for i in range(len(words) - 1):
+            w1, w2 = words[i], words[i + 1]
+            minLen = min(len(w1), len(w2))
+
+            if len(w1) &gt; len(w2) and w1[:minLen] == w2[:minLen]:
+                return ""
+            for j in range(minLen):
+                if w1[j] != w2[j]:
+                    adj[w1[j]].add(w2[j])
+                    break
+        visit = {}
+        res = []
+
+        def dfs(c):
+            if c in visit:
+                return visit[c]
+            visit[c] = True
+            for ad in adj[c]:
+                if dfs(ad):
+                    return True
+            visit[c] = False
+            res.append(c) 
+
+        for c in adj:
+            if dfs(c):
+                return ""
+        res.reverse()
+        return "".join(res)
     </code>
   </solution>
   <links>
@@ -2443,7 +2421,7 @@ class Solution:
         for n in nums:
             # edge case for not resetting our curMin and curMax
             if n == 0:
-                curMin, curMax = 1, 1
+                curMin, curMax = 1, 1 
                 continue
             tmp = n * curMax
             curMax = max(n * curMax, n * curMin, n)
@@ -3307,6 +3285,91 @@ If tie, we know that we end a meeting before starting one, so we move the end pt
     <link>https://leetcode.com/problems/sum-of-two-integers/description/</link>
   </links>
 </question>
+<question>
+  <title>Product of Array Except Self</title>
+  <statement>
+    Given an array nums of n integers where n &gt; 1, return an array output such that output[i] is equal to the product of all the elements of nums except nums[i].
+
+    Example:
+    Input:  [1,2,3,4]
+    Output: [24,12,8,6]
+
+    Constraint: It's guaranteed that the product of the elements of any prefix or suffix of the array (including the whole array) fits in a 32-bit integer.
+
+    Note: Please solve it without division and in O(n).
+  </statement>
+  <solution>
+    <code>
+    class Solution:
+    def productExceptSelf(self, nums: List[int]) -&gt; List[int]:
+        res = [1] * len(nums)
+
+        prefix = 1
+        for i in range(len(nums)):
+            res[i] = prefix
+            prefix *= nums[i]
+        postfix = 1
+        for i in range(len(nums) - 1, -1, -1):
+            res[i] *= postfix
+            postfix *= nums[i]
+        return res
+      # Time Complexity: O(N)
+      # Space Complexity: O(N)
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/product-of-array-except-self/</link>
+  </links>
+</question>
+<question>
+  <title>Encode and Decode Strings</title>
+  <statement>
+    Design an algorithm to encode a list of strings to a string. The encoded string is then sent over the network and is decoded back to the original list of strings.
+
+    Implement the encode and decode methods. 
+
+    Note: The string may contain any possible characters out of 256 valid ascii characters. Your algorithm should be generalized enough to work on any possible characters. Do not use class member/global/static variables to store states. Your encode and decode algorithms should be stateless.
+  </statement>
+  <solution>
+    <code>
+
+  class Solution:
+    """
+    @param: strs: a list of strings
+    @return: encodes a list of strings to a single string.
+    """
+    def encode(self, strs):
+        # write your code here
+        res = ""
+
+        for s in strs:
+            res += str(len(s)) + "#" + s
+        return res
+
+    """
+    @param: str: A string
+    @return: decodes a single string to a list of strings
+    """
+    def decode(self, str):
+        # write your code here
+        res, i = [], 0
+
+        while i &lt; len(str):
+            j = i
+            while str[j] != "#":
+                j += 1
+            length = int(str[i:j])
+            res.append(str[j + 1 : j + 1 + length])
+            i = j + 1 + length
+        return res
+
+      # Time Complexity: O(N), where N is the total number of characters in all strings.
+      # Space Complexity: O(1) - ignoring the output data structure.
+    </code>
+  </solution>
+  <links>
+    <link>https://www.lintcode.com/problem/659/</link>
+  </links>
+</question>
+
 </questions>
-
-

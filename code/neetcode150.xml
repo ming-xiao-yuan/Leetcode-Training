@@ -1,256 +1,5 @@
 <questions>
 <question>
-  <title>Valid Sudoku</title>
-  <statement>
-    Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
-
-    1. Each row must contain the digits 1-9 without repetition.
-    2. Each column must contain the digits 1-9 without repetition.
-    3. Each of the nine 3 x 3 sub-grids of the grid must contain the digits 1-9 without repetition.
-
-    The Sudoku board could be partially filled, where empty cells are filled with the character '.'.
-
-    Note:
-    - A valid Sudoku board (partially filled) is not necessarily solvable. Only the filled cells need to be validated.
-
-    Example 1:
-    Input:
-    board = [
-      ["5","3",".",".","7",".",".",".","."],
-      ["6",".",".","1","9","5",".",".","."],
-      [".","9","8",".",".",".",".","6","."],
-      ["8",".",".",".","6",".",".",".","3"],
-      ["4",".",".","8",".","3",".",".","1"],
-      ["7",".",".",".","2",".",".",".","6"],
-      [".","6",".",".",".",".","2","8","."],
-      [".",".",".","4","1","9",".",".","5"],
-      [".",".",".",".","8",".",".","7","9"]
-    ]
-    Output: true
-
-    Example 2:
-    Input:
-    board = [
-      ["8","3",".",".","7",".",".",".","."],
-      ["6",".",".","1","9","5",".",".","."],
-      [".","9","8",".",".",".",".","6","."],
-      ["8",".",".",".","6",".",".",".","3"],
-      ["4",".",".","8",".","3",".",".","1"],
-      ["7",".",".",".","2",".",".",".","6"],
-      [".","6",".",".",".",".","2","8","."],
-      [".",".",".","4","1","9",".",".","5"],
-      [".",".",".",".","8",".",".","7","9"]
-    ]
-    Output: false
-  </statement>
-  <solution>
-    <code>
-    def isValidSudoku(self, board: List[List[str]]) -&gt; bool:
-        cols = collections.defaultdict(set)
-        rows = collections.defaultdict(set)
-        squares = collections.defaultdict(set) # key = (r / 3, c / 3)
-
-        for r in range(9):
-            for c in range(9):
-                # if empty position
-                if board[r][c] == ".":
-                    continue
-                if (board[r][c] in rows[r] or board[r][c] in cols[c] or board[r][c] in squares[(r // 3, c // 3)]):
-                    return False
-
-                cols[c].add(board[r][c])
-                rows[r].add(board[r][c])
-                squares[(r // 3, c // 3)].add(board[r][c])
-        return True
-
-    Time:O(9 &amp; 2)
-    Space: O(9 &amp; 2)
-    </code>
-  </solution>
-  <links>
-    <link>https://leetcode.com/problems/valid-sudoku/</link>
-  </links>
-</question>
-<question>
-  <title>Trapping Rain Water</title>
-  <statement>
-    Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
-
-    Example:
-    Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
-    Output: 6
-    Explanation: In this case, 6 units of rainwater (blue section) are being trapped.
-  </statement>
-  <solution>
-    <code>
-        def trap(self, height: List[int]) -&gt; int:
-        l, r = 0, len(height) - 1
-        leftMax, rightMax = height[l], height[r]
-        res = 0
-
-        while l &lt; r:
-            if leftMax &lt; rightMax:
-                l += 1
-                leftMax = max(leftMax, height[l])
-                res += leftMax - height[l]
-            else:
-                r -= 1
-                rightMax = max(rightMax, height[r])
-                res += rightMax - height[r]
-        return res
-      Time:O(n)
-      Space:O(1)
-    </code>
-  </solution>
-  <links>
-    <link>https://leetcode.com/problems/trapping-rain-water/</link>
-  </links>
-</question>
-<question>
-  <title>Two Sum II - Input array is sorted</title>
-  <statement>
-    Given an array of integers numbers that is already sorted in non-decreasing order, find two numbers such that they add up to a specific target number.
-
-    You may return the answer in any order.
-
-    Example:
-    Input: numbers = [2,7,11,15], target = 9
-    Output: [2,7]
-    Explanation: The sum of 2 and 7 is 9.
-  </statement>
-  <solution>
-    <code>
-    def twoSum(self, numbers: List[int], target: int) -&gt; List[int]:
-        l, r = 0, len(numbers) - 1
-
-        while l &lt; r:
-            sum = numbers[l] + numbers[r]
-
-            if sum &lt; target:
-                l += 1
-            elif sum &gt; target:
-                r -= 1
-            else:
-                return [l + 1, r + 1]
-    </code>
-  </solution>
-  <links>
-    <link>https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/</link>
-  </links>
-</question>
-<question>
-  <title>Permutation in String</title>
-  <statement>
-    Given two strings s1 and s2, write a function to return true if s2 contains the permutation of s1.
-
-    In other words, one of the first string's permutations is the substring of the second string.
-
-    Example:
-    Input: s1 = "ab", s2 = "eidbaooo"
-    Output: true
-    Explanation: s2 contains one permutation of s1 ("ba").
-  </statement>
-  <solution>
-    <code>
-    def checkInclusion(self, s1: str, s2: str) -&gt; bool:
-        if len(s1) &gt; len(s2):
-            return False
-
-        s1Count, s2Count = [0] * 26, [0] * 26
-        for i in range(len(s1)):
-            s1Count[ord(s1[i]) - ord("a")] += 1
-            s2Count[ord(s2[i]) - ord("a")] += 1
-
-        matches = 0
-        for i in range(26):
-            matches += 1 if s1Count[i] == s2Count[i] else 0
-
-        l = 0
-        for r in range(len(s1), len(s2)):
-            if matches == 26:
-                return True
-
-            index = ord(s2[r]) - ord("a")
-            s2Count[index] += 1
-            if s1Count[index] == s2Count[index]:
-                matches += 1
-            elif s1Count[index] + 1 == s2Count[index]:
-                matches -= 1
-
-            index = ord(s2[l]) - ord("a")
-            s2Count[index] -= 1
-            if s1Count[index] == s2Count[index]:
-                matches += 1
-            elif s1Count[index] - 1 == s2Count[index]:
-                matches -= 1
-            l += 1
-        return matches == 26
-
-    </code>
-  </solution>
-  <links>
-    <link>https://leetcode.com/problems/permutation-in-string/</link>
-  </links>
-</question>
-<question>
-  <title>Sliding Window Maximum</title>
-  <statement>
-    You are given an array nums and an integer k. There is a sliding window of size k which is moving from the very left of the array to the very right. You can only see the k numbers in the window. Each time the sliding window moves rightwards by one position.
-
-    Return the max sliding window.
-
-    Example:
-    Input: nums = [1,3,-1,-3,5,3,6,7], k = 3
-    Output: [3,3,5,5,6,7]
-    Explanation: 
-    Window position                Max
-    ---------------               -----
-    [1  3  -1] -3  5  3  6  7       3
-     1 [3  -1  -3] 5  3  6  7       3
-     1  3 [-1  -3  5] 3  6  7       5
-     1  3  -1 [-3  5  3] 6  7       5
-     1  3  -1  -3 [5  3  6] 7       6
-     1  3  -1  -3  5 [3  6  7]      7
-  </statement>
-  <solution>
-    <code>
-   def maxSlidingWindow(self, nums: List[int], k: int) -&gt; List[int]:
-        output = []
-        q = collections.deque() # index
-        l, r = 0, 0
-
-        while r &lt; len(nums):
-            # pop smaller values from q
-            while q and nums[q[-1]] &lt; nums[r]:
-                q.pop()
-
-            q.append(r)
-
-            # remove left value from window
-            if l &gt; q[0]:
-                q.popleft()
-
-            
-            if (r + 1) &gt;= k:
-                output.append(nums[q[0]])
-                l += 1
-
-            r += 1
-        return output
-    </code>
-  </solution>
-  <links>
-    <link>https://leetcode.com/problems/sliding-window-maximum/</link>
-  </links>
-</question>
-
-
-
-
-
-
-
-<question>
   <title>Search in Rotated Sorted Array</title>
   <statement>
     You are given an integer array `nums` sorted in ascending order, which is rotated at some pivot unknown to you beforehand.
@@ -389,26 +138,6 @@
     A consecutive elements sequence is a sequence of consecutive elements in the array that are sorted in ascending order.
     You must write an algorithm that runs in O(n) time.
   </statement>
-  <examples>
-    <example>
-      <input>
-        <nums>[100,4,200,1,3,2]</nums>
-      </input>
-      <output>4</output>
-      <explanation>
-        The longest consecutive sequence is [1, 2, 3, 4], which has a length of 4.
-      </explanation>
-    </example>
-    <example>
-      <input>
-        <nums>[0,3,7,2,5,8,4,6,0,1]</nums>
-      </input>
-      <output>9</output>
-      <explanation>
-        The longest consecutive sequence is [0, 1, 2, 3, 4, 5, 6, 7, 8], which has a length of 9.
-      </explanation>
-    </example>
-  </examples>
   <solution>
     <code>
       def longestConsecutive(self, nums: List[int]) -&gt; int:
@@ -450,7 +179,7 @@
         return ans.values()
 
       Time: O(m * n) m is size of input array n is length of word
-      Space: O(k * m) k is max numbers of anagram groups formed from input string and n is size of input array
+      Space: O(n * m) n is the number of different groups of anagrams (in the worst case, each string is in its own group) and m is the space needed to store the strings themselves.
     </code>
   </solution>
   <links>
@@ -503,6 +232,8 @@
               prev = curr
               curr = next_node
           return prev
+        Time:O(n)
+        Space:O(1)
     </code>
     </solution>
   <links>
@@ -652,6 +383,9 @@
         # delete
         left.next = left.next.next
         return dummy.next
+
+      # Time Complexity: O(N), where N is the length of the linked list.
+      # Space Complexity: O(1).
     </code>
   </solution>
   <links>
@@ -728,6 +462,9 @@
             charSet.add(s[r])
             res = max(res, len(charSet))
         return res
+
+      Time: O(n)
+      Space: O(min(m, n)) where n in the length of the string and m the number of unique character in the character set.
     </code>
     </solution>
   <links>
@@ -752,8 +489,9 @@
             countS[s[i]] = 1 + countS.get(s[i], 0)
             countT[t[i]] = 1 + countT.get(t[i], 0)
         return countS == countT
-      Time: O(S + T)
-      Space: O(S + T)
+
+      Time: O(n)
+      Space: O(n)
     </code>
   </solution>
   <links>
@@ -829,7 +567,7 @@
 
         for n in nums:
             count[n] = 1 + count.get(n, 0)
-        for n, c in count.items():
+        for n, c in count.items():  
             freq[c].append(n)
 
         res = []
@@ -1385,6 +1123,9 @@
         root.left = self.buildTree(preorder[1 : mid + 1], inorder[:mid])
         root.right = self.buildTree(preorder[mid + 1 :], inorder[mid + 1 :])
         return root
+
+      # Time: O(n2) inorder.index takes O(n) time. For each node, we perform inorder.index so O(n2)
+      # Space: O(n)
     </code>
   </solution>
   <links>
@@ -1619,7 +1360,7 @@ class WordDictionary:
         for c in word:
             if c not in cur.children:
                 cur.children[c] = TrieNode()
-            cur = cur.children[c]
+            cur = cur.children[c] 
         cur.word = True
 
     def search(self, word: str) -&gt; bool:
@@ -1640,6 +1381,8 @@ class WordDictionary:
             return cur.word
 
         return dfs(0, self.root)
+        # Time: O(n) in best case, O(26^n) in worst case where n is the length of a word
+        # Space: 
     </code>
   </solution>
   <links>
@@ -1691,7 +1434,7 @@ class TrieNode:
 class Solution:
     def findWords(self, board: List[List[str]], words: List[str]) -&gt; List[str]:
         root = TrieNode()
-
+  
         for w in words:
             root.addWord(w)
 
@@ -1995,6 +1738,9 @@ class Solution:
                     bfs(r,c)
                     islands += 1
         return islands
+
+        Time: O(m * n)
+        Space:O(m * n)
     </code>
   </solution>
   <links>
@@ -2085,7 +1831,7 @@ class Solution:
         def dfs(r, c, visit, previousHeight):
             if(r &lt; 0 or c &lt; 0 or r &gt;= ROWS or c &gt;= COLS or heights[r][c] &lt; previousHeight or (r,c) in visit):
                 return
-
+  
             visit.add((r,c))
             dfs(r - 1, c, visit, heights[r][c])
             dfs(r + 1, c, visit, heights[r][c])
@@ -2315,41 +2061,39 @@ We also need to have a previousNode value to keep track of false positive loops.
   </statement>
   <solution>
     <code>
-def alienOrder(self, words:List[str]) -&gt; str:
-	adj = {c:set() for w in words for c in w}
+        def alien_order(self, words: List[str]) -&gt; str:
+        # Write your code here
 
-	for i in range(len(words) - 1):
-		w1, w2 = words[i], words[i + 1]
-		minLen = min(len(w1), len(w2))
-		# if both words have the same prefix but the order is different
-		if len(w1) &gt; len(w2) and w1[:minLen] == w2[:minLen]:
-			return ""
-		# find the first differing character
-		for j in range(minLen):
-			if w1[j] != w2[j]:
-				# we know that w1 comes before w2
-				adj[w1[j]].add(w2)
-				break
-  visit = {} #False=visited, True=visited and in path
-  res = []
+        adj = {c:set() for w in words for c in w}
 
-  # return True if loop
-  def dfs(c):
-    if c in visit:
-      return visit[c]
-    # add it to the path
-    visit[c] = True
-    for nei in adj[c]:
-      if dfs(nei):
-        return True
-    
-    visit[c] = False
-    res.append(c)
-  for c in adj:
-    if dfs(c):
-      return ""
-  res.reverse()
-  return "".join(res)
+        for i in range(len(words) - 1):
+            w1, w2 = words[i], words[i + 1]
+            minLen = min(len(w1), len(w2))
+
+            if len(w1) &gt; len(w2) and w1[:minLen] == w2[:minLen]:
+                return ""
+            for j in range(minLen):
+                if w1[j] != w2[j]:
+                    adj[w1[j]].add(w2[j])
+                    break
+        visit = {}
+        res = []
+
+        def dfs(c):
+            if c in visit:
+                return visit[c]
+            visit[c] = True
+            for ad in adj[c]:
+                if dfs(ad):
+                    return True
+            visit[c] = False
+            res.append(c) 
+
+        for c in adj:
+            if dfs(c):
+                return ""
+        res.reverse()
+        return "".join(res)
     </code>
   </solution>
   <links>
@@ -2423,6 +2167,9 @@ Space: O(1)
 
         # [rob1, rob2, n, n+1, ...]
         for n in nums:
+            # rob the maximum value we can rob up to this point
+            # rob2 is the last house we robbed and rob1 is the one before
+            # rob1 + n means we rob our current house and rob the one before the last
             tmp = max(rob1 + n, rob2)
             rob1 = rob2
             rob2 = tmp
@@ -2694,7 +2441,7 @@ class Solution:
         for n in nums:
             # edge case for not resetting our curMin and curMax
             if n == 0:
-                curMin, curMax = 1, 1
+                curMin, curMax = 1, 1 
                 continue
             tmp = n * curMax
             curMax = max(n * curMax, n * curMin, n)
@@ -3017,7 +2764,7 @@ class Solution:
             else:
                 newInterval = [min(newInterval[0], intervals[i][0]), max(newInterval[1], intervals[i][1])]
                 
-        res.append(newInte2val)
+        res.append(newInterval)
         return res
 
         Time: O(n)
@@ -3138,16 +2885,14 @@ class Interval(object):
 		self.end = end
 
 def canAttendMeetings(self, intervals):
-	intervals.sort(key = lambda i : i.start)
+	intervals.sort(key = lambda i:i[0])
 
-	# start at 1 because we compare with the previous
-	for i in range(1, len(intervals)):
-		i1 = intervals[i - 1]
-		i2 = intervaps[i]
-
-		if i1.end &gt; i2.start:
-			return False
-	return True
+  for i in range(1, len(intervals)):
+      i1 = intervals[i - 1]
+      i2 = intervals[i]
+      if i1[1] &gt; i2[0]:
+          return False
+  return True
 		
 
 Time:O(n log n)
@@ -3178,28 +2923,27 @@ Space: O(1)
   </statement>
   <solution>
   <code>
-class Interval(object):
-	def __init__(self):
-		self.start = start
-		self.end = end
+      class Interval(object):
+        def __init__(self):
+          self.start = start
+          self.end = end
 
-def minMeetingRooms(self, intervals):
-	start = sorted([i.start for i in intervals])
-	end = sorted([i.end for i in intervals])
+      def minMeetingRooms(self, intervals):
+        start = sorted([i[0] for i in intervals])
+        end = sorted([i[1] for i in intervals])
 
-	res, count = 0, 0
-	s, e = 0, 0
-	# we know we reach end of start array before end array
-	while s &lt; len(intervals):
-		
-		if start[s] &lt; end[e]:
-			s += 1
-			count += 1
-		else:
-			e += 1
-			count -= 1
-		res = max(res, count)
-	return res
+        s, e = 0, 0
+        res, count = 0, 0
+
+        while s &lt; len(intervals):
+            if start[s] &lt; end[e]:
+                s += 1
+                count += 1
+            else:
+                e += 1
+                count -= 1
+            res = max(res, count)
+        return res
 
   Time: O(n log n)
   Space: O(n)
@@ -3215,7 +2959,7 @@ If tie, we know that we end a meeting before starting one, so we move the end pt
     </code>
   </solution>
   <links>
-    <link>https://www.lintcode.com/problem/919/</link>
+    <link>https://leetcode.com/problems/meeting-rooms-ii/description/</link>
   </links>
 </question>
 <question>
@@ -3297,7 +3041,7 @@ If tie, we know that we end a meeting before starting one, so we move the end pt
             for i in range(top, bottom):
                 res.append(matrix[i][right - 1])
             right -= 1
-            if not (left &lt; right and top &lt; bottom):
+            if not (left &lt; right and top &lt; bottom): 
                 break
             # get from bottom row
             for i in range(right - 1, left - 1, -1):
@@ -3507,12 +3251,6 @@ If tie, we know that we end a meeting before starting one, so we move the end pt
   </statement>
   <solution>
     <code>
-      def missingNumber(nums):
-          n = len(nums)
-          expected_sum = n * (n + 1) // 2
-          actual_sum = sum(nums)
-          return expected_sum - actual_sum
-
       def missingNumber(self, nums: List[int]) -&gt; int:
         res = len(nums)
 
@@ -3558,4 +3296,3108 @@ If tie, we know that we end a meeting before starting one, so we move the end pt
     <link>https://leetcode.com/problems/sum-of-two-integers/description/</link>
   </links>
 </question>
+<question>
+  <title>Product of Array Except Self</title>
+  <statement>
+    Given an array nums of n integers where n &gt; 1, return an array output such that output[i] is equal to the product of all the elements of nums except nums[i].
+
+    Example:
+    Input:  [1,2,3,4]
+    Output: [24,12,8,6]
+
+    Constraint: It's guaranteed that the product of the elements of any prefix or suffix of the array (including the whole array) fits in a 32-bit integer.
+
+    Note: Please solve it without division and in O(n).
+  </statement>
+  <solution>
+    <code>
+    class Solution:
+    def productExceptSelf(self, nums: List[int]) -&gt; List[int]:
+        res = [1] * len(nums)
+
+        prefix = 1
+        for i in range(len(nums)):
+            res[i] = prefix
+            prefix *= nums[i]
+        postfix = 1
+        for i in range(len(nums) - 1, -1, -1):
+            res[i] *= postfix
+            postfix *= nums[i]
+        return res
+      # Time Complexity: O(N)
+      # Space Complexity: O(N)
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/product-of-array-except-self/</link>
+  </links>
+</question>
+<question>
+  <title>Encode and Decode Strings</title>
+  <statement>
+    Design an algorithm to encode a list of strings to a string. The encoded string is then sent over the network and is decoded back to the original list of strings.
+
+    Implement the encode and decode methods. 
+
+    Note: The string may contain any possible characters out of 256 valid ascii characters. Your algorithm should be generalized enough to work on any possible characters. Do not use class member/global/static variables to store states. Your encode and decode algorithms should be stateless.
+  </statement>
+  <solution>
+    <code>
+
+  class Solution:
+    """
+    @param: strs: a list of strings
+    @return: encodes a list of strings to a single string.
+    """
+    def encode(self, strs):
+        # write your code here
+        res = ""
+
+        for s in strs:
+            res += str(len(s)) + "#" + s
+        return res
+
+    """
+    @param: str: A string
+    @return: decodes a single string to a list of strings
+    """
+    def decode(self, str):
+        # write your code here
+        res, i = [], 0
+
+        while i &lt; len(str):
+            j = i
+            while str[j] != "#":
+                j += 1
+            length = int(str[i:j])
+            res.append(str[j + 1 : j + 1 + length])
+            i = j + 1 + length
+        return res
+
+      # Time Complexity: O(N), where N is the total number of characters in all strings.
+      # Space Complexity: O(1) - ignoring the output data structure.
+    </code>
+  </solution>
+  <links>
+    <link>https://www.lintcode.com/problem/659/</link>
+  </links>
+</question>
+<question>
+  <title>Permutation in String</title>
+  <statement>
+    Given two strings s1 and s2, write a function to return true if s2 contains the permutation of s1. In other words, one of the first string's permutations is the substring of the second string.
+
+    Example 1:
+    Input: s1 = "ab" s2 = "eidbaooo"
+    Output: True
+    Explanation: s2 contains one permutation of s1 ("ba").
+
+    Example 2:
+    Input: s1= "ab" s2 = "eidboaoo"
+    Output: False
+
+    Note:
+    - The input strings only contain lower case letters.
+    - The length of both given strings is in range [1, 10,000].
+  </statement>
+  <solution>
+    <code>
+      def checkInclusion(self, s1: str, s2: str) -&gt; bool:
+        if len(s1) &gt; len(s2):
+            return False
+
+        s1Count, s2Count = [0] * 26, [0] * 26
+        for i in range(len(s1)):
+            s1Count[ord(s1[i]) - ord("a")] += 1
+            s2Count[ord(s2[i]) - ord("a")] += 1
+
+        matches = 0
+        for i in range(26):
+            matches += 1 if s1Count[i] == s2Count[i] else 0
+
+        l = 0
+        for r in range(len(s1), len(s2)):
+            if matches == 26:
+                return True
+
+            index = ord(s2[r]) - ord("a")
+            s2Count[index] += 1
+            if s1Count[index] == s2Count[index]:
+                matches += 1
+            elif s1Count[index] + 1 == s2Count[index]: # by adding, we unmade a match
+                matches -= 1
+
+            index = ord(s2[l]) - ord("a")
+            s2Count[index] -= 1
+            if s1Count[index] == s2Count[index]:
+                matches += 1
+            elif s1Count[index] - 1 == s2Count[index]: # by removing, we unmade a match
+                matches -= 1
+            l += 1
+        return matches == 26
+
+      # Time Complexity: O(n) - n is the length of s2
+      # Space Complexity: O(1) - as the number of ASCII characters is fixed
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/permutation-in-string/description/</link>
+  </links>
+</question>
+<question>
+  <title>Sliding Window Maximum</title>
+  <statement>
+    You are given an array of integers nums and an integer k. There is a sliding window of size k which is moving from the very left of the array to the very right. You can only see the k numbers in the window. Each time the sliding window moves right by one position. Return the max sliding window.
+
+    Example 1:
+    Input: nums = [1,3,-1,-3,5,3,6,7], k = 3
+    Output: [3,3,5,5,6,7]
+    Explanation: 
+    Window position                Max
+    ---------------               -----
+    [1  3  -1] -3  5  3  6  7       3
+     1 [3  -1  -3] 5  3  6  7       3
+     1  3 [-1  -3  5] 3  6  7       5
+     1  3  -1 [-3  5  3] 6  7       5
+     1  3  -1  -3 [5  3  6] 7       6
+     1  3  -1  -3  5 [3  6  7]      7
+  </statement>
+  <solution>
+    <code>
+      def maxSlidingWindow(self, nums: List[int], k: int) -&gt; List[int]:
+        output = []
+        q = deque() # index
+        l, r = 0, 0
+
+        while r &lt; len(nums):
+            # if the next element is bigger than the most right element.
+            while q and nums[q[-1]] &lt; nums[r]:
+                q.pop()
+
+            q.append(r)
+
+            # remove the leftmost element when window slides to the right
+            if l &gt; q[0]:
+                q.popleft()
+            if (r - l + 1) &gt;= k:
+                output.append(nums[q[0]])
+                l += 1                
+            r += 1
+        return output
+
+      # Time Complexity: O(N), N is number of elements in the array
+      # Space Complexity: O(k), the size of the deque
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/sliding-window-maximum/description/</link>
+  </links>
+</question>
+<question>
+  <title>Min Stack</title>
+  <statement>
+    Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+
+    Implement the MinStack class:
+    - MinStack() initializes the stack object.
+    - void push(int val) pushes the element val onto the stack.
+    - void pop() removes the element on the top of the stack.
+    - int top() gets the top element of the stack.
+    - int getMin() retrieves the minimum element in the stack.
+
+    Example 1:
+    Input
+    ["MinStack","push","push","push","getMin","pop","top","getMin"]
+    [[],[-2],[0],[-3],[],[],[],[]]
+
+    Output
+    [null,null,null,null,-3,null,0,-2]
+
+    Explanation
+    MinStack minStack = new MinStack();
+    minStack.push(-2);
+    minStack.push(0);
+    minStack.push(-3);
+    minStack.getMin(); // return -3
+    minStack.pop();
+    minStack.top();    // return 0
+    minStack.getMin(); // return -2
+  </statement>
+  <solution>
+    <code>
+  class MinStack:
+
+    def __init__(self):
+        self.stack, self.minStack = [], []
+
+    def push(self, val: int) -&gt; None:
+        self.stack.append(val)
+        val = min(val, self.minStack[-1] if self.minStack else val)
+        self.minStack.append(val)
+
+    def pop(self) -&gt; None:
+        self.stack.pop()
+        self.minStack.pop()
+
+    def top(self) -&gt; int:
+        return self.stack[-1]
+
+    def getMin(self) -&gt; int:
+        return self.minStack[-1]
+
+
+# Your MinStack object will be instantiated and called as such:
+# obj = MinStack()
+# obj.push(val)
+# obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.getMin()
+
+      # Time Complexity: O(1) for all operations
+      # Space Complexity: O(N), where N is the number of elements in the stack
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/min-stack/description/</link>
+  </links>
+</question>
+<question>
+  <title>Evaluate Reverse Polish Notation</title>
+  <statement>
+    Evaluate the value of an arithmetic expression in Reverse Polish Notation.
+
+    Valid operators are +, -, *, and /. Each operand may be an integer or another expression.
+
+    Note that division between two integers should truncate toward zero.
+
+    It is guaranteed that the given RPN expression is always valid. That means the expression would always evaluate to a result, and there will not be any division by zero operation.
+
+    Example 1:
+    Input: tokens = ["2","1","+","3","*"]
+    Output: 9
+    Explanation: ((2 + 1) * 3) = 9
+
+    Example 2:
+    Input: tokens = ["4","13","5","/","+"]
+    Output: 6
+    Explanation: (4 + (13 / 5)) = 6
+
+    Example 3:
+    Input: tokens = ["10","6","9","3","+","-11","*","/","*","17","+","5","+"]
+    Output: 22
+    Explanation: 
+      ((10 * (6 / ((9 + 3) * -11))) + 17) + 5
+      = ((10 * (6 / (12 * -11))) + 17) + 5
+      = ((10 * (6 / -132)) + 17) + 5
+      = ((10 * 0) + 17) + 5
+      = (0 + 17) + 5
+      = 17 + 5
+      = 22
+  </statement>
+  <solution>
+    <code>
+      def evalRPN(self, tokens: List[str]) -&gt; int:
+        stack = []
+
+        for c in tokens:
+            if c == "+":
+                stack.append(stack.pop() + stack.pop())
+            elif c == "-":
+                a, b = stack.pop(), stack.pop()
+                stack.append(b - a)
+            elif c == "*":
+                stack.append(stack.pop() * stack.pop())
+            elif c == "/":
+                a, b = stack.pop(), stack.pop()
+                stack.append(int(b / a))
+            else:
+                stack.append(int(c))
+        return stack[0]
+
+      # Time Complexity: O(N), where N is the number of tokens
+      # Space Complexity: O(N), for the stack
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/evaluate-reverse-polish-notation/description/</link>
+  </links>
+</question>
+<question>
+  <title>Generate Parentheses</title>
+  <statement>
+    Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+
+    For example, given n = 3, a solution set is:
+    [
+      "((()))",
+      "(()())",
+      "(())()",
+      "()(())",
+      "()()()"
+    ]
+
+    Example:
+    Input: n = 3
+    Output: ["((()))","(()())","(())()","()(())","()()()"]
+  </statement>
+  <solution>
+    <code>
+      def generateParenthesis(self, n: int) -&gt; List[str]:
+        # only add open parenthesis if open &gt; n
+        # only add a closing parenthesis if closed &lt; open
+        # valid IIF open == closed == n
+
+        stack = []
+        res = []
+
+        def backtrack(openN, closeN):
+            if openN == closeN == n:
+                res.append("".join(stack))
+                return
+            # if we want to add a open parenthesis, we check if the count &lt; n
+            if openN &lt; n:
+                stack.append("(")
+                backtrack(openN + 1, closeN)
+                stack.pop()
+            # if we want to add a closing parenthesis, we check if it's smaller than openN
+            if closeN &lt; openN:
+                stack.append(")")
+                backtrack(openN, closeN + 1)
+                stack.pop()
+        backtrack(0, 0)
+        return res
+
+      # Time Complexity: O(4^n / sqrt(n)) Each valid sequence has at most n steps during the backtracking procedure.
+      # Space Complexity: O(4^n / sqrt(n)) as described above, and using O(n) space to store the sequence.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/generate-parentheses/description/</link>
+  </links>
+</question>
+<question>
+  <title>Daily Temperatures</title>
+  <statement>
+    Given a list of daily temperatures T, return a list such that, for each day in the input, tells you how many days you would have to wait until a warmer temperature. If there is no future day for which this is possible, put 0 instead.
+
+    For example, given the list of temperatures T = [73, 74, 75, 71, 69, 72, 76, 73], your output should be [1, 1, 4, 2, 1, 1, 0, 0].
+
+    Note: The length of temperatures will be in the range [1, 30000]. Each temperature will be an integer in the range [30, 100].
+  </statement>
+  <solution>
+    <code>
+      def dailyTemperatures(temperatures):
+          ans = [0] * len(temperatures)
+          stack = [] # indexes from hottest to coldest
+          for i in range(len(temperatures) - 1, -1, -1):
+              while stack and temperatures[i] &gt;= temperatures[stack[-1]]:
+                  stack.pop()
+              if stack:
+                  ans[i] = stack[-1] - i
+              stack.append(i)
+          return ans
+
+      # Time Complexity: O(N), where N is the length of T
+      # Space Complexity: O(N) for the stack
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/daily-temperatures/description/</link>
+  </links>
+</question>
+<question>
+  <title>Car Fleet</title>
+  <statement>
+    N cars are going to the same destination along a one-lane road. The destination is target miles away.
+
+    Each car i has a constant speed of speed[i] (in miles per hour) and starts from position[i] miles towards the target along the road.
+
+    A car can never pass another car ahead of it, but it can catch up to it and drive bumper to bumper at the same speed.
+
+    The distance between these two cars is ignored (i.e., they are assumed to have the same position).
+
+    A car fleet is some non-empty set of cars driving at the same speed and position. Note that a single car is also a car fleet.
+
+    If a car catches up to a car fleet right at the destination point, it will still be considered as one car fleet.
+
+    How many car fleets will arrive at the destination?
+
+    Example 1:
+    Input: target = 12, position = [10,8,0,5,3], speed = [2,4,1,1,3]
+    Output: 3
+    Explanation:
+    The cars starting at 10 and 8 become a fleet, meeting each other at 12.
+    The car starting at 0 doesn't catch up to any other car, so it is a fleet by itself.
+    The cars starting at 5 and 3 become a fleet, meeting each other at 6.
+    Note that no other cars meet these fleets before the destination, so the answer is 3.
+
+  </statement>
+  <solution>
+    <code>
+      def carFleet(self, target: int, position: List[int], speed: List[int]) -&gt; int:
+        pair = [[p, s] for p, s in zip(position, speed)] # create array of pairs
+        pair.sort(reverse=True)
+        stack = []
+
+        for p, s in pair:
+            stack.append((target - p) / s)
+            if len(stack) &gt;= 2 and stack[-1] &lt;= stack[-2]:
+                stack.pop() # collision
+        return len(stack)
+
+      # Time Complexity: O(NlogN), where N is the number of cars.
+      # Space Complexity: O(N) for the stack.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/car-fleet/description/</link>
+  </links>
+</question>
+<question>
+  <title>Largest Rectangle in Histogram</title>
+  <statement>
+    Given an array of integers heights representing the histogram's bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram.
+
+    Example 1:
+    Input: heights = [2,1,5,6,2,3]
+    Output: 10
+    Explanation: The above is a histogram where width of each bar is 1.
+    The largest rectangle is shown in the red area, which has an area = 10 units.
+
+    Example 2:
+    Input: heights = [2,4]
+    Output: 4
+  </statement>
+  <solution>
+    <code>
+      def largestRectangleArea(self, heights: List[int]) -&gt; int:
+        maxArea = 0
+        stack = [] # pair of elements (index, height)
+
+        for i, h in enumerate(heights):
+            start = i
+            while stack and stack[-1][1] &gt; h:
+                index, height = stack.pop()
+                maxArea = max(maxArea, height * (i - index))
+                start = index
+            stack.append((start, h))
+        
+        # The elements left on the stack are those who can be extended to the end
+        for i, h in stack:
+            maxArea = max(maxArea, h * (len(heights) - i))
+        return maxArea
+
+      # Time Complexity: O(N), where N is the number of bars in the histogram.
+      # Space Complexity: O(N) for the stack.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/largest-rectangle-in-histogram/description/</link>
+  </links>
+</question>
+<question>
+  <title>Search a 2D Matrix</title>
+  <statement>
+    Write an efficient algorithm that searches for a value target in an m x n integer matrix matrix. This matrix has the following properties:
+    - Integers in each row are sorted from left to right.
+    - The first integer of each row is greater than the last integer of the previous row.
+
+    Example 1:
+    Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3
+    Output: true
+
+    Example 2:
+    Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13
+    Output: false
+  </statement>
+  <solution>
+    <code>
+    <question>
+  <title>Search a 2D Matrix</title>
+  <statement>
+    Write an efficient algorithm that searches for a value target in an m x n integer matrix matrix. This matrix has the following properties:
+    - Integers in each row are sorted from left to right.
+    - The first integer of each row is greater than the last integer of the previous row.
+
+    Example 1:
+    Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3
+    Output: true
+
+    Example 2:
+    Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13
+    Output: false
+
+  </statement>
+  <solution>
+    <code>
+  class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -&gt; bool:
+        ROWS, COLS = len(matrix), len(matrix[0])
+
+        top, bot = 0, ROWS - 1
+        while top &lt;= bot:
+            row = (top + bot) // 2
+            # if bigger than the biggest value of the row
+            if target &gt; matrix[row][-1]:
+                top = row + 1
+            elif target &lt; matrix[row][0]:
+                bot = row - 1
+            else:
+                break
+
+        # if one of the rows seems to have the value
+        if not (top &lt;= bot):
+            return False
+        row = (top + bot) // 2
+        l, r = 0, COLS - 1
+        while l &lt;= r:
+            m = (l + r) // 2
+            if target &gt; matrix[row][m]:
+                l = m + 1
+            elif target &lt; matrix[row][m]:
+                r = m - 1
+            else:
+                return True
+        return False
+
+
+      # Time Complexity: O(log(m*n)), which is essentially a binary search.
+      # Space Complexity: O(1).
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/search-a-2d-matrix/description/</link>
+  </links>
+</question>
+
+      # Time Complexity: O(log(m*n)), which is essentially a binary search.
+      # Space Complexity: O(1).
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/search-a-2d-matrix/description/</link>
+  </links>
+</question>
+<question>
+  <title>Koko Eating Bananas</title>
+  <statement>
+    Koko loves to eat bananas. There are N piles of bananas, the i-th pile has piles[i] bananas. The guards have gone and will come back in H hours.
+
+    Koko can decide her bananas-per-hour eating speed of K. Each hour, she chooses some pile of bananas and eats K bananas from that pile. If the pile has less than K bananas, she eats all of them instead and will not eat any more bananas during this hour.
+
+    Koko likes to eat slowly but still wants to finish eating all the bananas before the guards come back.
+
+    Return the minimum integer K such that she can eat all the bananas within H hours.
+
+    Example 1:
+    Input: piles = [3,6,7,11], H = 8
+    Output: 4
+
+    Example 2:
+    Input: piles = [30,11,23,4,20], H = 5
+    Output: 30
+
+    Example 3:
+    Input: piles = [30,11,23,4,20], H = 6
+    Output: 23
+
+  </statement>
+  <solution>
+    <code>
+      def minEatingSpeed(self, piles: List[int], h: int) -&gt; int:
+        l, r = 1, max(piles)
+        res = r
+
+        while l &lt;= r:
+            k = (l + r) // 2
+            hours = 0
+
+            for p in piles:
+                hours += math.ceil(p/k)
+            if hours &lt;= h:
+                res = min(res, k)
+                r = k - 1
+            else:
+                l = k + 1
+        return res
+
+      # Time Complexity: O(NlogM), where N is the number of piles, and M is the max number of bananas in any pile.
+      # Space Complexity: O(1).
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/koko-eating-bananas/description/</link>
+  </links>
+</question>
+<question>
+  <title>Time Based Key-Value Store</title>
+  <statement>
+    Create a time-based key-value store class TimeMap, that supports two operations.
+
+    1. set(string key, string value, int timestamp)
+       - Stores the key and value, along with the given timestamp.
+    
+    2. get(string key, int timestamp)
+       - Returns a value such that set(key, value, timestamp_prev) was called previously, with timestamp_prev <= timestamp.
+       - If there are multiple such values, it returns the one with the largest timestamp_prev.
+       - If there are no values, it returns an empty string ("").
+
+    Example 1:
+    Input
+    ["TimeMap", "set", "get", "get", "set", "get", "get"]
+    [[], ["foo", "bar", 1], ["foo", 1], ["foo", 3], ["foo", "bar2", 4], ["foo", 4], ["foo", 5]]
+    Output
+    [null, null, "bar", "bar", null, "bar2", "bar2"]
+
+    Explanation
+    TimeMap timeMap = new TimeMap();
+    timeMap.set("foo", "bar", 1); // store the key "foo" and value "bar" along with timestamp = 1
+    timeMap.get("foo", 1);  // return "bar"
+    timeMap.get("foo", 3);  // return "bar" since there is no value corresponding to foo at timestamp 3 and timestamp 2, then the only value is at timestamp 1 ie "bar"
+    timeMap.set("foo", "bar2", 4);
+    timeMap.get("foo", 4);  // return "bar2"
+    timeMap.get("foo", 5);  // return "bar2"
+
+    Constraints:
+    - All the timestamps timestamp of set are strictly increasing.
+    - At most 2 * 10^5 calls will be made to set and get.
+  </statement>
+  <solution>
+    <code>
+  class TimeMap:
+
+    def __init__(self):
+        self.store = {} # key=str, value=[list of [value, timestamp]] 
+
+    def set(self, key: str, value: str, timestamp: int) -&gt; None:
+        if key not in self.store:
+            self.store[key] = []
+        self.store[key].append([value, timestamp])
+
+    def get(self, key: str, timestamp: int) -> str:
+        res = ""
+        values = self.store.get(key, [])
+
+        # binary search
+        l, r = 0, len(values) - 1
+        while l &lt;= r:
+            m = (l + r) // 2
+            if values[m][1] &lt;= timestamp:
+                # update the closest element so far
+                res = values[m][0]
+                l = m + 1
+            else:
+                r = m - 1
+        return res
+            
+# Your TimeMap object will be instantiated and called as such:
+# obj = TimeMap()
+# obj.set(key,value,timestamp)
+# param_2 = obj.get(key,timestamp)
+
+      # Time Complexity: O(1) for set, O(logN) for get, where N is the number of entries for the key.
+      # Space Complexity: O(N), where N is the total number of set operations.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/time-based-key-value-store/description/</link>
+  </links>
+</question>
+<question>
+  <title>Median of Two Sorted Arrays</title>
+  <statement>
+    Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.
+
+    The overall run time complexity should be O(log (m+n)).
+
+    Example 1:
+    Input: nums1 = [1,3], nums2 = [2]
+    Output: 2.0
+    Explanation: merged array = [1,2,3] and median is 2.
+
+    Example 2:
+    Input: nums1 = [1,2], nums2 = [3,4]
+    Output: 2.5
+    Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
+
+  </statement>
+  <solution>
+    <code>
+      def findMedianSortedArrays(nums1, nums2):
+          A, B = nums1, nums2
+          total = len(nums1) + len(nums2)
+          half = total // 2
+
+          if len(B) &lt; len(A):
+              A, B = B, A
+
+          l, r = 0, len(A) - 1
+          while True:
+              i = (l + r) // 2  # A
+              j = half - i - 2  # B
+
+              Aleft = A[i] if i &gt;= 0 else float("-infinity")
+              Aright = A[i + 1] if (i + 1) &lt; len(A) else float("infinity")
+              Bleft = B[j] if j &gt;= 0 else float("-infinity")
+              Bright = B[j + 1] if (j + 1) &lt; len(B) else float("infinity")
+
+              # partition is correct
+              if Aleft &lt;= Bright and Bleft &lt;= Aright:
+                  if total % 2:
+                      return min(Aright, Bright)
+                  return (max(Aleft, Bleft) + min(Aright, Bright)) / 2
+              elif Aleft &gt; Bright:
+                  r = i - 1
+              else:
+                  l = i + 1
+
+      # Time Complexity: O(log(min(m,n)))
+      # Space Complexity: O(1)
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/median-of-two-sorted-arrays/description/</link>
+  </links>
+</question>
+<question>
+  <title>Trapping Rain Water</title>
+  <statement>
+    Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
+
+    Example 1:
+    Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
+    Output: 6
+    Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.
+
+    Example 2:
+    Input: height = [4,2,0,3,2,5]
+    Output: 9
+  </statement>
+  <solution>
+    <code>
+  class Solution:
+    def trap(self, height: List[int]) -&gt; int:
+        if not height:
+            return 0
+
+        l, r = 0, len(height) - 1
+        leftMax, rightMax = height[l], height[r]
+        res = 0
+        while l &lt; r:
+            if leftMax &lt; rightMax:
+                l += 1
+                leftMax = max(leftMax, height[l])
+                res += leftMax - height[l]
+            else:
+                r -= 1
+                rightMax = max(rightMax, height[r])
+                res += rightMax - height[r]
+        return res
+
+
+      # Time Complexity: O(N), where N is the number of bars in the height array.
+      # Space Complexity: O(1).
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/trapping-rain-water/description/</link>
+  </links>
+</question>
+<question>
+  <title>Add Two Numbers</title>
+  <statement>
+    You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+
+    You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+    Example 1:
+    Input: l1 = [2,4,3], l2 = [5,6,4]
+    Output: [7,0,8]
+    Explanation: 342 + 465 = 807.
+
+    Example 2:
+    Input: l1 = [0], l2 = [0]
+    Output: [0]
+
+    Example 3:
+    Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+    Output: [8,9,9,9,0,0,0,1]
+  </statement>
+  <solution>
+    <code>
+      # Definition for singly-linked list.
+      # class ListNode:
+      #     def __init__(self, val=0, next=None):
+      #         self.val = val
+      #         self.next = next
+
+      def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -&gt; Optional[ListNode]:
+        dummy = ListNode()
+        cur = dummy
+
+        carry = 0
+        while l1 or l2 or carry:
+            v1 = l1.val if l1 else 0
+            v2 = l2.val if l2 else 0
+
+            # new digit
+            val = v1 + v2 + carry
+            # 15
+            carry = val // 10
+            val = val % 10
+            cur.next = ListNode(val)
+
+            # update pointers
+            cur = cur.next
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
+        return dummy.next
+
+      # Time Complexity: O(max(m, n)), where m and n are the lengths of the two linked lists.
+      # Space Complexity: O(max(m, n)), the length of the new list.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/add-two-numbers/description/</link>
+  </links>
+</question>
+<question>
+  <title>LRU Cache</title>
+  <statement>
+    Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.
+
+    Implement the LRUCache class:
+    - LRUCache(int capacity) Initialize the LRU cache with positive size capacity.
+    - int get(int key) Return the value of the key if the key exists, otherwise return -1.
+    - void put(int key, int value) Update the value of the key if the key exists. Otherwise, add the key-value pair to the cache. If the number of keys exceeds the capacity from this operation, evict the least recently used key.
+
+    The functions get and put must each run in O(1) average time complexity.
+
+    Example 1:
+    Input
+    ["LRUCache", "put", "put", "get", "put", "get", "put", "get", "get", "get"]
+    [[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]
+    Output
+    [null, null, null, 1, null, -1, null, -1, 3, 4]
+
+    Explanation
+    LRUCache lRUCache = new LRUCache(2);
+    lRUCache.put(1, 1); // cache is {1=1}
+    lRUCache.put(2, 2); // cache is {1=1, 2=2}
+    lRUCache.get(1);    // return 1
+    lRUCache.put(3, 3); // LRU key was 2, evicts key 2, cache is {1=1, 3=3}
+    lRUCache.get(2);    // returns -1 (not found)
+    lRUCache.put(4, 4); // LRU key was 1, evicts key 1, cache is {4=4, 3=3}
+    lRUCache.get(1);    // return -1 (not found)
+    lRUCache.get(3);    // return 3
+    lRUCache.get(4);    // return 4
+  </statement>
+  <solution>
+    <code>
+
+  class Node:
+    def __init__(self, key, val):
+        self.key, self.val = key, val
+        self.prev = self.next = None
+
+  class LRUCache:
+
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.cache = {} # map the key to nodes
+
+        # left=LRU right=most recent
+        self.left, self.right = Node(0, 0), Node(0, 0)
+        self.left.next, self.right.prev = self.right, self.left
+
+    # remove node from list
+    def remove(self, node):
+        prev, nxt = node.prev, node.next
+        prev.next, nxt.prev = nxt, prev
+
+    # insert at right
+    def insert(self, node):
+        prev, nxt = self.right.prev, self.right
+        prev.next = nxt.prev = node
+        node.next, node.prev = nxt, prev
+
+    def get(self, key: int) -&gt; int:
+        if key in self.cache:
+            self.remove(self.cache[key]) # 
+            self.insert(self.cache[key]) # Update the linked list's most recent
+            return self.cache[key].val
+        return -1
+
+    def put(self, key: int, value: int) -&gt; None:
+        if key in self.cache:
+            self.remove(self.cache[key])
+        self.cache[key] = Node(key, value) # Update the map
+        self.insert(self.cache[key]) # Update the linked list
+
+        if len(self.cache) &gt; self.capacity:
+            # Remove from the list and delete the LRU from cache from the hashmap
+            lru = self.left.next
+            self.remove(lru)
+            del self.cache[lru.key]
+
+    # Your LRUCache object will be instantiated and called as such:
+    # obj = LRUCache(capacity)
+    # param_1 = obj.get(key)
+    # obj.put(key,value)
+
+      # Time Complexity: O(1) for both get and put operations.
+      # Space Complexity: O(capacity).
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/lru-cache/description/</link>
+  </links>
+</question>
+<question>
+  <title>Last Stone Weight</title>
+  <statement>
+    You are given an array of integers stones where stones[i] is the weight of the i-th stone.
+
+    We are playing a game with the stones. On each turn, we choose the two heaviest stones and smash them together. Suppose the heaviest stones have weights x and y with x <= y. The result of this smash is:
+    - If x == y, both stones are destroyed, and
+    - If x != y, the stone of weight x is destroyed, and the stone of weight y has new weight y - x.
+
+    At the end of the game, there is at most one stone left.
+
+    Return the smallest possible weight of the left stone. If there are no stones left, return 0.
+
+    Example 1:
+    Input: stones = [2,7,4,1,8,1]
+    Output: 1
+    Explanation: 
+    We combine 7 and 8 to get 1 so the array converts to [2,4,1,1,1] then,
+    we combine 2 and 4 to get 2 so the array converts to [2,1,1,1] then,
+    we combine 2 and 1 to get 1 so the array converts to [1,1,1] then,
+    we combine 1 and 1 to get 0 so the array converts to [1] then that's the value of the last stone.
+
+    Example 2:
+    Input: stones = [1]
+    Output: 1
+  </statement>
+  <solution>
+    <code>
+      def lastStoneWeight(self, stones: List[int]) -> int:
+        stones = [-s for s in stones]
+        heapq.heapify(stones) # maxheap
+
+        while len(stones) &gt; 1:
+            first, second = heapq.heappop(stones), heapq.heappop(stones)
+            if second &gt; first: # it's supposed to be the contrary but we have -value for maxheap
+                heapq.heappush(stones, -1 * (second - first))
+        return -1 * stones[0] if len(stones) else 0
+
+      # Time Complexity: O(NlogN), where N is the number of stones.
+      # Space Complexity: O(N) for the heap.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/last-stone-weight/description/</link>
+  </links>
+</question>
+<question>
+  <title>Minimum Operations to Reduce Integer to Zero</title>
+  <statement>
+    You are given an integer array nums and an integer x. In one operation, you can either remove the leftmost or rightmost element from the array nums and subtract its value from x. Return the minimum number of operations to reduce x to exactly 0.
+
+    If it is not possible, return -1.
+
+    Example 1:
+    Input: nums = [1,1,4,2,3], x = 5
+    Output: 2
+    Explanation: The optimal solution is to remove the last two elements to reduce x to zero.
+
+    Example 2:
+    Input: nums = [5,6,7,8,9], x = 4
+    Output: -1
+
+    Example 3:
+    Input: nums = [3,2,20,1,1,3], x = 10
+    Output: 5
+    Explanation: The optimal solution is to remove the first three elements and the last two elements.
+  </statement>
+  <solution>
+    <code>
+  class Solution:
+    def minOperations(self, n: int) -&gt; int:
+        # If the number is a power of 2, return 1 step
+        if n == 2 ** int(math.log2(n)):
+            return 1
+
+        # Find the power of 2 smaller and bigger than the number
+        low = 2 ** int(math.log2(n))
+        high = 2 ** (int(math.log2(n)) + 1)
+
+        d1 = n - low
+        d2 = high - n
+
+        return 1 + min(self.minOperations(d1), self.minOperations(d2))
+
+      # Time Complexity: O(log n), where n is the length of nums.
+      # Space Complexity: O(log n).
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/description/</link>
+  </links>
+</question>
+<question>
+  <title>Ways to Make a Fair Array</title>
+  <statement>
+    You are given an integer array nums. You can choose exactly one index (0-indexed) and remove the element. Notice that the index of the elements may change after the removal.
+
+    For example, if nums = [6,1,7,4,1]:
+    - Choosing to remove index 1 results in nums = [6,7,4,1].
+    - Choosing to remove index 2 results in nums = [6,1,4,1].
+    - Choosing to remove index 4 results in nums = [6,1,7,4].
+
+    An array is fair if the sum of the odd-indexed values equals the sum of the even-indexed values.
+
+    Return the number of indices that you could choose such that after the removal, nums is fair.
+
+    Example 1:
+    Input: nums = [2,1,6,4]
+    Output: 1
+    Explanation:
+    - Remove index 0: [1,6,4] -&gt; The sum of the even-indexed values is 1 + 4 = 5. The sum of the odd-indexed values is 6. Not fair.
+    - Remove index 1: [2,6,4] -&gt; The sum of the even-indexed values is 2 + 4 = 6. The sum of the odd-indexed values is 6. Fair.
+    - Remove index 2: [2,1,4] -&gt; The sum of the even-indexed values is 2 + 4 = 6. The sum of the odd-indexed values is 1. Not fair.
+    - Remove index 3: [2,1,6] -&gt; The sum of the even-indexed values is 2 + 6 = 8. The sum of the odd-indexed values is 1. Not fair.
+    The only index that can be removed to get a fair array is index 1.
+
+    Example 2:
+    Input: nums = [1,1,1]
+    Output: 3
+    Explanation: You can remove any index and the remaining array is fair.
+
+  </statement>
+  <solution>
+    <code>
+      def waysToMakeFair(self, nums: List[int]) -&gt; int:
+        res, sm1, sm2 = 0, 0, 0
+        for i in range(1, len(nums)):
+            if i%2 == 1:  
+                sm1 += nums[i]
+            else:
+                sm2 += nums[i]
+        if sm1 == sm2:
+            res += 1
+
+        for i in range(1, len(nums)):
+            if i % 2 == 1:
+                sm1 = sm1 - nums[i] + nums[i-1]
+            else:
+                sm2 = sm2 - nums[i] + nums[i-1]
+            if sm1 == sm2:
+                res += 1
+
+        return res
+
+      # Time Complexity: O(N), where N is the length of the array.
+      # Space Complexity: O(N), for the even and odd arrays.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/ways-to-make-a-fair-array/description/</link>
+  </links>
+</question>
+<question>
+  <title>Double a Number Represented as Linked List</title>
+  <statement>
+    You are given a non-empty linked list representing a non-negative integer, where each node contains a single digit. The digits are stored in reverse order, and each of their nodes can store a single digit. Double the value represented by the linked list and return it as a linked list.
+
+    Example 1:
+    Input: 1 -&gt; 2 -&gt; 3  (Represents 321)
+    Output: 2 -&gt; 4 -&gt; 6  (Represents 642)
+    Explanation: The number represented by the list is 321. Doubling it we get 642, which is represented by the list 2 -&gt; 4 -&gt; 6.
+
+    Example 2:
+    Input: 9 -&gt; 9  (Represents 99)
+    Output: 8 -&gt; 9  (Represents 198)
+    Explanation: The number represented by the list is 99. Doubling it we get 198, which is represented by the list 8 -&gt; 9.
+
+    - The number represented by the list does not contain leading zeros except for the zero itself. 
+  </statement>
+  <solution>
+    <code>
+      # Definition for singly-linked list.
+      # class ListNode:
+      #     def __init__(self, val=0, next=None):
+      #         self.val = val
+      #         self.next = next
+
+      def doubleIt(self, head: Optional[ListNode]) -&gt; Optional[ListNode]:
+        # check if doubling it will give carry
+        if head.val &gt;= 5:
+            head = ListNode(0, head)
+
+        curr = head
+
+        while curr:
+            curr.val *= 2
+            curr.val %= 10
+            # if the next value doubles and carrys 1, already add 1 in the current value
+            if curr.next and curr.next.val &gt;= 5:
+                curr.val += 1
+            curr = curr.next
+
+        return head
+
+      # Time Complexity: O(N), where N is the number of nodes in the list.
+      # Space Complexity: O(1), no additional space is used.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/double-a-number-represented-as-a-linked-list/description/</link>
+  </links>
+</question>
+<question>
+  <title>Shuffle an Array</title>
+  <statement>
+    Given an integer array nums, design an algorithm to randomly shuffle the array. All permutations of the array should be equally likely as a result of the shuffling.
+
+    Implement the Solution class:
+    - Solution(int[] nums) Initializes the object with the integer array nums.
+    - int[] reset() Resets the array to its original configuration and returns it.
+    - int[] shuffle() Returns a random shuffling of the array.
+
+    Example 1:
+    Input
+    ["Solution", "shuffle", "reset", "shuffle"]
+    [[[1, 2, 3]], [], [], []]
+    Output
+    [null, [3, 1, 2], [1, 2, 3], [1, 3, 2]]
+
+    Explanation
+    Solution solution = new Solution([1, 2, 3]);
+    solution.shuffle(); // Shuffle the array [1,2,3] and return its result.
+                        // Any permutation of [1,2,3] must be equally likely to be returned.
+                        // Example: return [3, 1, 2]
+    solution.reset();   // Resets the array back to its original configuration [1,2,3]. Return [1, 2, 3]
+    solution.shuffle(); // Returns the random shuffling of array [1,2,3].
+                        // Example: return [1, 3, 2]
+  </statement>
+  <solution>
+    <code>
+    class Solution:
+
+    def __init__(self, nums: List[int]):
+        self.nums = nums
+
+    def reset(self) -&gt; List[int]:
+        return self.nums
+
+    def shuffle(self) -&gt; List[int]:
+        count = len(self.nums)
+
+        random_index = random.sample(range(0, count), count)
+        return [self.nums[index] for index in random_index]
+
+    # Time complexity: __init__: O(1), reset:O(1), shuffle: O(n) where n is the number of elements in the input array.
+    # Space complexity: __init__:O(1), reset:O(1), shuffle:O(n) due to the storage needed for the shuffled array and the array of random indices.
+
+
+# Your Solution object will be instantiated and called as such:
+# obj = Solution(nums)
+# param_1 = obj.reset()
+# param_2 = obj.shuffle()
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/shuffle-an-array/description/</link>
+  </links>
+</question>
+<question>
+  <title>Find the Original Array of Prefix XOR</title>
+  <statement>
+    Given an array arr[] of size N which represents the prefix XOR values of an array, find the original array.
+
+    The prefix XOR of an array is defined as the sequence of XOR sums of the array where the i-th element in the prefix XOR is the XOR of first i elements in the array.
+
+    Example 1:
+    Input: arr = [1, 3, 4, 8]
+    Output: [1, 2, 7, 8]
+    Explanation:
+    The original array is: [1, 2, 7, 8].
+    Prefix XOR array is: [1, 1 XOR 2, 1 XOR 2 XOR 7, 1 XOR 2 XOR 7 XOR 8].
+
+    Example 2:
+    Input: arr = [5, 2, 0, 3, 1]
+    Output: [5, 7, 7, 4, 5]
+    Explanation:
+    The original array is: [5, 7, 7, 4, 5].
+    Prefix XOR array is: [5, 5 XOR 7, 5 XOR 7 XOR 7, 5 XOR 7 XOR 7 XOR 4, 5 XOR 7 XOR 7 XOR 4 XOR 5].
+
+
+  </statement>
+  <solution>
+    <code>
+      def findArray(self, pref: List[int]) -&gt; List[int]:
+        ans = [0] * len(pref)
+
+        ans[0] = pref[0]
+        for i in range(1, len(ans)):
+            ans[i] = pref[i] ^ pref[i - 1]
+
+        return ans
+
+        # Time Complexity: O(N)
+        # Space Complexity: O(N)
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/find-the-original-array-of-prefix-xor/description/</link>
+  </links>
+</question>
+<question>
+  <title>Number of Operations to Make Network Connected</title>
+  <statement>
+    There are n computers numbered from 0 to n-1 connected by ethernet cables connections forming a network where connections[i] = [a, b] represents a connection between computers a and b. Any computer can reach any other computer directly or indirectly through the network.
+
+    Given an initial computer network connections. You can extract certain cables between two directly connected computers, and place them between any pair of disconnected computers to make them directly connected.
+
+    Return the minimum number of times you need to do this in order to make all the computers connected. If it's not possible, return -1. 
+
+    Example 1:
+    Input: n = 4, connections = [[0,1],[0,2],[1,2]]
+    Output: 1
+    Explanation: Remove cable between computer 1 and 2 and place between computers 1 and 3.
+
+    Example 2:
+    Input: n = 6, connections = [[0,1],[0,2],[0,3],[1,2],[1,3]]
+    Output: 2
+    Explanation: There are two disconnected computers 4 and 5, we can connect them to the network by taking two cables from other computers and connect them to 4 and 5.
+
+  </statement>
+  <solution>
+    <code>
+
+      def makeConnected(self, n: int, connections: List[List[int]]) -&gt; int:
+        if len(connections) &lt; n - 1:
+            return -1
+
+        adj = {i:set() for i in range(n)}
+
+        for src, dest in connections:
+            adj[src].add(dest)
+            adj[dest].add(src)
+
+        visit = set()
+
+        def dfs(node):
+            if node in visit:
+                return 0
+            visit.add(node)
+
+            for ad in adj[node]:
+                dfs(ad)
+            return 1
+        return sum(dfs(node) for node in range(n)) - 1
+
+      # Time Complexity: O(N + M), where N is the number of nodes (computers) and M is the number of edges (connections).
+      # Space Complexity: O(N + M), accounting for the space used by the adjacency list, visit set, and the recursive call stack.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/number-of-operations-to-make-network-connected/description/</link>
+  </links>
+</question>
+<question>
+  <title>Longest Increasing Path in a Matrix</title>
+  <statement>
+    Given an m x n integers matrix, return the length of the longest increasing path in the matrix.
+
+    From each cell, you can either move in four directions: left, right, up, or down. You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).
+
+    Example 1:
+    Input: matrix = [[9,9,4],[6,6,8],[2,1,1]]
+    Output: 4
+    Explanation: The longest increasing path is [1, 2, 6, 9].
+
+    Example 2:
+    Input: matrix = [[3,4,5],[3,2,6],[2,2,1]]
+    Output: 4
+    Explanation: The longest increasing path is [3, 4, 5, 6]. Moving diagonally is not allowed.
+
+  </statement>
+  <solution>
+    <code>
+      def longestIncreasingPath(self, matrix: List[List[int]]) -&gt; int:
+        ROWS, COLS = len(matrix), len(matrix[0])
+        dp = {}  # (r, c) -&gt; LIP
+
+        def dfs(r, c, prevVal):
+            if r &lt; 0 or c &lt; 0 or r &gt;= ROWS or c &gt;= COLS or matrix[r][c] &lt;= prevVal:
+                return 0
+            if (r, c) in dp:
+                return dp[(r, c)]
+
+            res = 1
+            res = max(res, 1 + dfs(r + 1, c, matrix[r][c]))
+            res = max(res, 1 + dfs(r - 1, c, matrix[r][c]))
+            res = max(res, 1 + dfs(r, c + 1, matrix[r][c]))
+            res = max(res, 1 + dfs(r, c - 1, matrix[r][c]))
+            dp[(r, c)] = res
+            return res
+
+        for r in range(ROWS):
+            for c in range(COLS):
+                dfs(r, c, -1)
+        return max(dp.values())
+
+      # Time Complexity: O(m*n), where m is the number of rows and n is the number of columns in the matrix.
+      # Space Complexity: O(m*n), for the dp array and the recursion stack.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/longest-increasing-path-in-a-matrix/description/</link>
+  </links>
+</question>
+<question>
+  <title>Minimum Add to Make Parentheses Valid</title>
+  <statement>
+    Given a string s of '(' and ')' parentheses, return the minimum number of parentheses we must add to make the resulting string valid.
+
+    A string is valid if all parentheses are closed and every opening parenthesis has a corresponding closing parenthesis.
+
+    Example 1:
+    Input: s = "())"
+    Output: 1
+    Explanation: Adding one closing parenthesis at the end makes the string valid.
+
+    Example 2:
+    Input: s = "((("
+    Output: 3
+    Explanation: Adding three closing parentheses makes the string valid.
+
+  </statement>
+  <solution>
+    <code>
+        class Solution:
+          def minAddToMakeValid(self, s: str) -&gt; int:
+            l = 0
+            r = 0
+
+            for c in s:
+              if c == '(':
+                l += 1
+              else:
+                if l == 0:
+                  r += 1
+                else:
+                  l -= 1
+
+            return l + r
+
+      # Time Complexity: O(n), where n is the length of the string.
+      # Space Complexity: O(1), as no extra space is used except for variables.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/description/</link>
+  </links>
+</question>
+<question>
+  <title>Fibonacci Number</title>
+  <statement>
+    The Fibonacci numbers, commonly denoted F(n) form a sequence, called the Fibonacci sequence, such that each number is the sum of the two preceding ones, starting from 0 and 1. That is,
+
+    F(0) = 0, F(1) = 1
+    F(n) = F(n - 1) + F(n - 2), for n &gt; 1.
+
+    Given n, calculate F(n).
+
+    Example 1:
+    Input: n = 2
+    Output: 1
+    Explanation: F(2) = F(1) + F(0) = 1 + 0 = 1.
+
+    Example 2:
+    Input: n = 3
+    Output: 2
+    Explanation: F(3) = F(2) + F(1) = 1 + 1 = 2.
+
+    Example 3:
+    Input: n = 4
+    Output: 3
+    Explanation: F(4) = F(3) + F(2) = 2 + 1 = 3.
+
+  </statement>
+  <solution>
+    <code>
+      def fib(self, n: int) -&gt; int:
+          if n &lt;= 1:
+              return n
+          a, b = 0, 1
+          for _ in range(2, n + 1):
+              a, b = b, a + b
+          return b
+
+      # Time Complexity: O(n), where n is the input number.
+      # Space Complexity: O(1), as we only use two variables.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/fibonacci-number/description/</link>
+  </links>
+</question>
+<question>
+  <title>Single Element in a Sorted Array</title>
+  <statement>
+    You are given a sorted array consisting of only integers where every element appears exactly twice, except for one element which appears exactly once.
+
+    Find this single element that appears only once. Your solution should run in O(log n) time and O(1) space.
+
+    Example 1:
+    Input: nums = [1,1,2,3,3,4,4,8,8]
+    Output: 2
+
+    Example 2:
+    Input: nums = [3,3,7,7,10,11,11]
+    Output: 10
+
+  </statement>
+  <solution>
+    <code>
+      def singleNonDuplicate(self, nums: List[int]) -&gt; int:
+          l, r = 0, len(nums) - 1
+          while l &lt; r:
+              m = l + (r - l) // 2
+              # if left and right are same size
+              if m % 2 == 0:
+                  # the middle element is the first element of a pair
+                  if nums[m] == nums[m + 1]:
+                      l = m + 2
+                  else:
+                      r = m
+              else:
+                  if nums[m] == nums[m - 1]:
+                      l = m + 1
+                  else:
+                      r = m
+          return nums[l]
+
+      # Time Complexity: O(log n), where n is the number of elements in the array.
+      # Space Complexity: O(1), as no additional space is used.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/single-element-in-a-sorted-array/description/</link>
+  </links>
+</question>
+<question>
+  <title>Kth Largest Element in an Array</title>
+  <statement>
+    Find the kth largest element in an unsorted array. Note that it is the kth largest element in the sorted order, not the kth distinct element.
+
+    Example 1:
+    Input: [3,2,1,5,6,4] and k = 2
+    Output: 5
+
+    Example 2:
+    Input: [3,2,3,1,2,4,5,5,6] and k = 4
+    Output: 4
+
+    Note: 
+    You may assume k is always valid, 1 ≤ k ≤ array's length.
+
+  </statement>
+  <solution>
+    <code>
+      def findKthLargest(self, nums: List[int], k: int) -&gt; int:
+        nums = [-n for n in nums]
+        heapq.heapify(nums)
+
+        while k &gt; 0:
+            value = -1 * heapq.heappop(nums)
+            k -= 1
+            if k == 0:
+                return value
+      # Time Complexity: O(N log k), where N is the number of elements in the array.
+      # Space Complexity: O(k) for the heap.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/kth-largest-element-in-an-array/description/</link>
+  </links>
+</question>
+<question>
+  <title>Intersection of Two Linked Lists</title>
+  <statement>
+    Write a program to find the node at which the intersection of two singly linked lists begins.
+
+    For example, the following two linked lists begin to intersect at node c1:
+
+    A:          a1 → a2
+                        ↘
+                          c1 → c2 → c3
+                        ↗            
+    B:     b1 → b2 → b3
+
+    The intersected node's value is 'c1'. (Note that the lists must retain their original structure after the function returns.)
+
+    Example 1:
+    Input: intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3
+    Output: Reference of the node with value = 8
+
+    Constraints:
+    - If the two linked lists have no intersection at all, return null.
+    - The linked lists must retain their original structure after the function returns.
+    - You may assume there are no cycles anywhere in the entire linked structure.
+    - Each value on each linked list is in the range [1, 10^9].
+    - Your code should preferably run in O(n) time and use only O(1) memory.
+  </statement>
+  <solution>
+    <code>
+      # Definition for singly-linked list.
+      # class ListNode:
+      #     def __init__(self, val=0, next=None):
+      #         self.val = val
+      #         self.next = next
+
+      def getIntersectionNode(self, headA: ListNode, headB: ListNode) -&gt; Optional[ListNode]:
+        l1, l2 = headA, headB
+        while l1 != l2:
+            l1 = l1.next if l1 else headB
+            l2 = l2.next if l2 else headA
+        # when l1 == l2, either we found the intersection, or we arrive at the end null ptr
+        return l1
+
+      # Time Complexity: O(n + m), where n and m are the lengths of the two linked lists.
+      # Space Complexity: O(1), as it only uses pointers without extra data structure.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/intersection-of-two-linked-lists/description/</link>
+  </links>
+</question>
+<question>
+  <title>Copy List with Random Pointer</title>
+  <statement>
+    A linked list of length n is given such that each node contains an additional random pointer, which could point to any node in the list, or null.
+
+    Construct a deep copy of the list. The deep copy should consist of exactly n brand new nodes, where each new node has its value set to the value of its corresponding original node. Both the next and random pointer of the new nodes should point to new nodes in the copied list such that the pointers in the original list and copied list represent the same list state. None of the pointers in the new list should point to nodes in the original list.
+
+    For example, if there are two nodes X and Y in the original list, where X.random --&gt; Y, then for the corresponding two nodes x and y in the copied list, x.random --&gt; y.
+
+    Return the head of the copied linked list.
+
+    The linked list is represented in the input/output as a list of n nodes. Each node is represented as a pair of [val, random_index] where:
+    - val: an integer representing Node.val
+    - random_index: the index of the node (range from 0 to n-1) that the random pointer points to, or null if it does not point to any node.
+
+    Your code will only be given the head of the original linked list.
+
+    Example 1:
+    Input: head = [[7,null],[13,0],[11,4],[10,2],[1,0]]
+    Output: [[7,null],[13,0],[11,4],[10,2],[1,0]]
+    Explanation: The above represents the given linked list. The random pointer of node one points to node three, the random pointer of node two points to node one, etc. The deep copy should be the same as the original list.
+
+  </statement>
+  <solution>
+    <code>
+      # Definition for a Node.
+      # class Node:
+      #     def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+      #         self.val = x
+      #         self.next = next
+      #         self.random = random
+
+      class Solution:
+        def copyRandomList(self, head: 'Optional[Node]') -&gt; 'Optional[Node]':
+            oldToCopy = {None:None}
+
+            # create the copy nodes
+            cur = head
+            while cur:
+                copy = Node(cur.val)
+                oldToCopy[cur] = copy
+                cur = cur.next
+
+            # map the pointers
+            cur = head
+            while cur:
+                copy = oldToCopy[cur]
+                copy.next = oldToCopy[cur.next]
+                copy.random = oldToCopy[cur.random]
+                cur = cur.next
+            return oldToCopy[head]
+
+      # Time Complexity: O(N), where N is the number of nodes in the linked list.
+      # Space Complexity: O(1), as no extra space is used except the new linked list.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/copy-list-with-random-pointer/description/</link>
+  </links>
+</question>
+<question>
+  <title>Find the Duplicate Number</title>
+  <statement>
+    Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.
+
+    There is only one repeated number in nums, return this repeated number.
+
+    You must solve the problem without modifying the array nums and uses only constant extra space.
+
+    Example 1:
+    Input: nums = [1,3,4,2,2]
+    Output: 2
+
+    Example 2:
+    Input: nums = [3,1,3,4,2]
+    Output: 3
+
+  </statement>
+  <solution>
+    <code>
+      def findDuplicate(self, nums: List[int]) -&gt;int:
+        slow, fast = 0, 0
+
+        while True:
+            slow = nums[slow]
+            fast = nums[nums[fast]]
+            if slow == fast:
+                break
+        slow2 = 0
+        while True:
+            slow = nums[slow]
+            slow2 = nums[slow2]
+            if slow == slow2:
+                return slow
+
+      # Time Complexity: O(n), where n is the number of elements in nums.
+      # Space Complexity: O(1), as it only uses two pointers.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/find-the-duplicate-number/description/</link>
+  </links>
+</question>
+<question>
+  <title>Design Circular Queue</title>
+  <statement>
+    Design your implementation of the circular queue. The circular queue is a linear data structure in which the operations are performed based on FIFO (First In First Out) principle and the last position is connected back to the first position to make a circle. It is also called "Ring Buffer".
+
+    Your implementation should support following operations:
+    - MyCircularQueue(k): Constructor, set the size of the queue to be k.
+    - Front: Get the front item from the queue. If the queue is empty, return -1.
+    - Rear: Get the last item from the queue. If the queue is empty, return -1.
+    - enQueue(value): Insert an element into the circular queue. Return true if the operation is successful.
+    - deQueue(): Delete an element from the circular queue. Return true if the operation is successful.
+    - isEmpty(): Checks whether the circular queue is empty or not.
+    - isFull(): Checks whether the circular queue is full or not.
+
+    Example:
+    MyCircularQueue circularQueue = new MyCircularQueue(3); // set the size to be 3
+    circularQueue.enQueue(1);  // return true
+    circularQueue.enQueue(2);  // return true
+    circularQueue.enQueue(3);  // return true
+    circularQueue.enQueue(4);  // return false, the queue is full
+    circularQueue.Rear();  // return 3
+    circularQueue.isFull();  // return true
+    circularQueue.deQueue();  // return true
+    circularQueue.enQueue(4);  // return true
+    circularQueue.Rear();  // return 4
+
+    Constraints:
+    - All values will be in the range of [0, 1000].
+    - The number of operations will be in the range of [1, 1000].
+    - Please do not use the built-in Queue library.
+  </statement>
+  <solution>
+    <code>
+
+  class ListNode:
+    def __init__(self, value):
+        self.val = value
+        self.prev = self.next = None
+        
+class MyCircularQueue:
+
+    def __init__(self, k: int):
+        self.space = k
+        self.left = self.right = ListNode(0)
+        self.left.next, self.right.prev = self.right, self.left
+
+    def enQueue(self, value: int) -&gt; bool:
+        if self.isFull():
+            return False
+        prev, nxt = self.right.prev, self.right
+        cur = ListNode(value)
+        cur.prev, cur.next = prev, nxt
+        prev.next = nxt.prev = cur
+        self.space -= 1
+        return True
+
+    def deQueue(self) -&gt; bool:
+        if self.isEmpty():
+            return False
+        prev, nxt = self.left, self.left.next
+        prev.next, nxt.prev = nxt, prev
+        self.space += 1
+        return True
+        
+
+    def Front(self) -&gt; int:
+        if self.isEmpty():
+            return -1
+        return self.left.next.value
+
+    def Rear(self) -&gt; int:
+        if self.isEmpty():
+            return -1
+        return self.right.prev.value
+        
+
+    def isEmpty(self) -&gt; bool:
+        return self.left.next == self.right
+
+    def isFull(self) -&gt; bool:
+        return self.space == 0
+
+      # Time Complexity: All operations are O(1).
+      # Space Complexity: O(n), where n is the size of the queue.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/design-circular-queue/description/</link>
+  </links>
+</question>
+<question>
+  <title>Degree of an Array</title>
+  <statement>
+    Given a non-empty array of non-negative integers nums, the degree of this array is defined as the maximum frequency of any one of its elements.
+
+    Your task is to find the smallest possible length of a (contiguous) subarray of nums, that has the same degree as nums.
+
+    Example 1:
+    Input: nums = [1,2,2,3,1]
+    Output: 2
+    Explanation: 
+    The input array has a degree of 2 because both elements 1 and 2 appear twice.
+    Of the subarrays that have the same degree:
+    [1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3], [1, 2, 2], [2, 2]
+    The shortest length is 2. So return 2.
+
+    Example 2:
+    Input: nums = [1,2,2,3,1,4,2]
+    Output: 6
+    Explanation: 
+    The degree is 3 because the element 2 is repeated 3 times.
+    So [2,2,3,1,4,2] is the shortest subarray, therefore returning 6.
+
+    Constraints:
+    - nums.length will be between 1 and 50,000.
+    - nums[i] will be an integer between 0 and 49,999.
+  </statement>
+  <solution>
+    <code>
+      from collections import defaultdict
+
+      def findShortestSubArray(nums: List[int]) -&gt; int:
+        # left, right stores the first index of each element
+        # count stores frequency of each element
+          left, right, count = {}, {}, {}
+          for i, num in enumerate(nums):
+              if num not in left:
+                  left[num] = i
+              right[num] = i
+              count[num] = count.get(num, 0) + 1
+
+          degree = max(count.values())
+          minLength = len(nums)
+          for num in count:
+              if count[num] == degree:
+                  minLength = min(minLength, right[num] - left[num] + 1)
+
+          return minLength
+
+      # Time Complexity: O(n), where n is the number of elements in the array.
+      # Space Complexity: O(n), for storing the left, right, and count dictionaries.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/degree-of-an-array/description/</link>
+  </links>
+</question>
+<question>
+  <title>Count Binary Substrings</title>
+  <statement>
+    Give a binary string s, return the number of non-empty substrings that have the same number of 0's and 1's, and all the 0's and all the 1's in these substrings are grouped consecutively.
+
+    Substrings that occur multiple times are counted the number of times they occur.
+
+    Example 1:
+    Input: s = "00110011"
+    Output: 6
+    Explanation: There are 6 substrings that have equal number of consecutive 1's and 0's: "0011", "01", "1100", "10", "0011", and "01".
+    Notice that some of these substrings repeat and are counted the number of times they occur.
+    Also, "00110011" is not a valid substring because all the 0's (and 1's) are not grouped together.
+
+    Example 2:
+    Input: s = "10101"
+    Output: 4
+    Explanation: There are 4 substrings: "10", "01", "10", "01" that have equal number of consecutive 1's and 0's.
+  </statement>
+  <solution>
+    <code>
+      def countBinarySubstrings(self, s: str) -&gt; int:
+        ans = 0
+        prevCount = 0
+        equals = 1
+
+        for i in range(len(s) - 1):
+            # if it's the same value 1111 or 0000
+            if s[i] == s[i + 1]:
+                equals += 1
+            else:
+                # we take the minimum between the previous and the current
+                ans += min(prevCount, equals)
+                prevCount = equals
+                equals = 1
+
+        # after the loop, there is is still one sequence to check
+        return ans + min(prevCount, equals)
+
+      # Time Complexity: O(n), where n is the length of the string.
+      # Space Complexity: O(1), as only a few variables are used.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/count-binary-substrings/description/</link>
+  </links>
+</question>
+<question>
+  <title>Maximal Square</title>
+  <statement>
+    Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
+
+    Example 1:
+    Input: matrix = [
+      ["1","0","1","0","0"],
+      ["1","0","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","0","0","1","0"]
+    ]
+    Output: 4
+
+    Example 2:
+    Input: matrix = [
+      ["0","1"],
+      ["1","0"]
+    ]
+    Output: 1
+
+    Example 3:
+    Input: matrix = [["0"]]
+    Output: 0
+
+  </statement>
+  <solution>
+    <code>
+      class Solution:
+        def maximalSquare(self, matrix: List[List[chr]]) -&gt; int:
+          # dynamic programming: bottom-up
+          # recursive: top-bottom
+
+          ROWS, COLS = len(matrix), len(matrix[0])
+
+          DP = {} # map (r,c) to maxLength
+
+          def helper(r, c):
+              if r &gt;= ROWS or c &gt;= COLS:
+                  return 0
+              if (r,c) not in DP:
+                  down = helper(r + 1, c)
+                  right = helper(r, c + 1)
+                  diag = helper(r + 1, c + 1)
+
+                  DP[(r,c)] = 0
+
+                  if matrix[r][c] == "1":
+                      # min because if either down, right or diag is a 0, the area is a 1.
+                      DP[(r,c)] = 1 + min(down, right, diag)
+              return DP[(r,c)]
+          helper(0, 0)
+          return max(DP.values()) ** 2
+
+      # Time Complexity: O(m*n), where m is the number of rows and n is the number of columns in the matrix.
+      # Space Complexity: O(m*n), for the dp array.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/maximal-square/description/</link>
+  </links>
+</question>
+<question>
+  <title>Minimum Knight Moves</title>
+  <statement>
+    In an infinite chessboard with coordinates from -infinity to +infinity, you have a knight at square [0, 0].
+
+    A knight has 8 possible moves it can make, as illustrated below. Each move is two squares in a cardinal direction, then one square in an orthogonal direction.
+
+    Your task is to return the minimum number of steps needed to move the knight to the square [x, y]. It is guaranteed the answer exists.
+
+    Example 1:
+    Input: x = 2, y = 1
+    Output: 1
+    Explanation: [0, 0] → [2, 1]
+
+    Example 2:
+    Input: x = 5, y = 5
+    Output: 4
+    Explanation: [0, 0] → [2, 1] → [4, 2] → [3, 4] → [5, 5]
+
+    Constraints:
+    - |x| + |y| <= 300
+  </statement>
+  <solution>
+    <code>
+      from collections import deque
+
+      def minKnightMoves(x: int, y: int) -> int:
+          # All possible knight moves
+          directions = [(2, 1), (1, 2), (-1, -2), (-2, -1),
+                        (-2, 1), (-1, 2), (1, -2), (2, -1)]
+          # Starting point
+          queue = deque([(0, 0, 0)])
+          visited = set([(0, 0)])
+
+          while queue:
+              curr_x, curr_y, steps = queue.popleft()
+              if curr_x == x and curr_y == y:
+                  return steps
+              for dx, dy in directions:
+                  next_x, next_y = curr_x + dx, curr_y + dy
+                  if (next_x, next_y) not in visited:
+                      visited.add((next_x, next_y))
+                      queue.append((next_x, next_y, steps + 1))
+
+      # Time Complexity: O(|x|*|y|), in the worst case.
+      # Space Complexity: O(|x|*|y|), for the queue and visited set.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/minimum-knight-moves/description/</link>
+  </links>
+</question>
+<question>
+  <title>Range Sum Query 2D - Immutable</title>
+  <statement>
+    Given a 2D matrix matrix, handle multiple queries of the following type:
+    Calculate the sum of the elements of matrix inside the rectangle defined by its upper left corner (row1, col1) and lower right corner (row2, col2).
+
+    Implement the NumMatrix class:
+    - NumMatrix(int[][] matrix) Initializes the object with the integer matrix matrix.
+    - int sumRegion(int row1, int col1, int row2, int col2) Returns the sum of the elements of matrix inside the rectangle defined by its upper left corner (row1, col1) and lower right corner (row2, col2).
+
+    Example 1:
+    Input
+    ["NumMatrix", "sumRegion", "sumRegion", "sumRegion"]
+    [[[[3, 0, 1, 4, 2], [5, 6, 3, 2, 1], [1, 2, 0, 1, 5], [4, 1, 0, 1, 7], [1, 0, 3, 0, 5]]], [2, 1, 4, 3], [1, 1, 2, 2], [1, 2, 2, 4]]
+    Output
+    [null, 8, 11, 12]
+
+    Explanation
+    NumMatrix numMatrix = new NumMatrix(matrix);
+    numMatrix.sumRegion(2, 1, 4, 3); // return 8 (i.e sum of the red rectangle)
+    numMatrix.sumRegion(1, 1, 2, 2); // return 11 (i.e sum of the green rectangle)
+    numMatrix.sumRegion(1, 2, 2, 4); // return 12 (i.e sum of the blue rectangle)
+
+  </statement>
+  <solution>
+    <code>
+      class NumMatrix:
+
+          def __init__(self, matrix: List[List[int]]):
+              if not matrix or not matrix[0]:
+                  return
+              m, n = len(matrix), len(matrix[0])
+              self.dp = [[0] * (n + 1) for _ in range(m + 1)]
+              for i in range(1, m + 1):
+                  for j in range(1, n + 1):
+                      self.dp[i][j] = self.dp[i - 1][j] + self.dp[i][j - 1] - self.dp[i - 1][j - 1] + matrix[i - 1][j - 1]
+
+          def sumRegion(self, row1: int, col1: int, row2: int, col2: int) -&gt; int:
+              return self.dp[row2 + 1][col2 + 1] - self.dp[row1][col2 + 1] - self.dp[row2 + 1][col1] + self.dp[row1][col1]
+
+      # Time Complexity: 
+      # - Construction: O(m*n), where m is the number of rows and n is the number of columns in the matrix.
+      # - sumRegion: O(1), constant time for each query.
+      # Space Complexity: O(m*n), for the cumulative sum matrix.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/range-sum-query-2d-immutable/description/</link>
+  </links>
+</question>
+<question>
+  <title>Power of Two</title>
+  <statement>
+    Given an integer n, return true if it is a power of two. Otherwise, return false.
+
+    An integer n is a power of two, if there exists an integer x such that n == 2^x.
+
+    Example 1:
+    Input: n = 1
+    Output: true
+    Explanation: 2^0 = 1
+
+    Example 2:
+    Input: n = 16
+    Output: true
+    Explanation: 2^4 = 16
+
+    Example 3:
+    Input: n = 3
+    Output: false
+
+  </statement>
+  <solution>
+    <code>
+      def isPowerOfTwo(n: int) -&gt; bool:
+          if n &lt;= 0:
+              return False
+          return n & (n - 1) == 0
+
+      # Time Complexity: O(1), the operation is done in constant time.
+      # Space Complexity: O(1), no extra space is used.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/power-of-two/description/</link>
+  </links>
+</question>
+<question>
+  <title>Sort Colors</title>
+  <statement>
+    Given an array nums with n objects colored red, white, or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white, and blue.
+
+    We will use the integers 0, 1, and 2 to represent the color red, white, and blue, respectively.
+
+    You must solve this problem without using the library's sort function.
+
+    Example 1:
+    Input: nums = [2,0,2,1,1,0]
+    Output: [0,0,1,1,2,2]
+
+    Example 2:
+    Input: nums = [2,0,1]
+    Output: [0,1,2]
+
+    Example 3:
+    Input: nums = [0]
+    Output: [0]
+
+    Example 4:
+    Input: nums = [1]
+    Output: [1]
+
+    Follow up: Could you come up with a one-pass algorithm using only constant extra space?
+  </statement>
+  <solution>
+    <code>
+      def sortColors(nums: List[int]) -&gt; None:
+          """
+          Do not return anything, modify nums in-place instead.
+          """
+          l, r = 0, len(nums) - 1
+          i = 0
+          while i &lt;= r:
+              if nums[i] == 0:
+                  nums[l], nums[i] = nums[i], nums[l]
+                  i += 1
+                  l += 1
+              elif nums[i] == 2:
+                  nums[i], nums[r] = nums[r], nums[i]
+                  r -= 1
+              else:
+                  i += 1
+
+      # Time Complexity: O(n), where n is the number of elements in the array.
+      # Space Complexity: O(1), as no extra space is used.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/sort-colors/description/</link>
+  </links>
+</question>
+<question>
+  <title>Design Linked List</title>
+  <statement>
+    Design your implementation of the linked list. You can choose to use a singly or doubly linked list.
+    A node in a singly linked list should have two attributes: val and next. val is the value of the current node, and next is a pointer/reference to the next node.
+    If you want to use the doubly linked list, you will need one more attribute prev to indicate the previous node in the linked list. Assume all nodes in the linked list are 0-indexed.
+
+    Implement the MyLinkedList class:
+    - MyLinkedList() Initializes the MyLinkedList object.
+    - int get(int index) Get the value of the indexth node in the linked list. If the index is invalid, return -1.
+    - void addAtHead(int val) Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.
+    - void addAtTail(int val) Append a node of value val as the last element of the linked list.
+    - void addAtIndex(int index, int val) Add a node of value val before the indexth node in the linked list. If index equals the length of the linked list, the node will be appended to the end of the linked list. If index is greater than the length, the node will not be inserted.
+    - void deleteAtIndex(int index) Delete the indexth node in the linked list, if the index is valid.
+
+    Example 1:
+    Input
+    ["MyLinkedList", "addAtHead", "addAtTail", "addAtIndex", "get", "deleteAtIndex", "get"]
+    [[], [1], [3], [1, 2], [1], [1], [1]]
+    Output
+    [null, null, null, null, 2, null, 3]
+
+    Constraints:
+    - 0 <= index, val <= 1000
+    - Please do not use the built-in LinkedList library.
+    - At most 2000 calls will be made to get, addAtHead, addAtTail, addAtIndex and deleteAtIndex.
+  </statement>
+  <solution>
+    <code>
+      class ListNode:
+          def __init__(self, val):
+              self.val = val
+              self.prev = self.next = None
+      class MyLinkedList:
+
+          def __init__(self):
+              self.left = ListNode(0)
+              self.right = ListNode(0)
+              self.left.next, self.right.prev = self.right, self.left
+
+          def get(self, index: int) -&gt; int:
+              cur = self.left.next
+              while cur and index > 0:
+                  cur = cur.next
+                  index -= 1
+              
+              if cur and cur != self.right and index == 0:
+                  return cur.val
+              return -1
+
+          def addAtHead(self, val: int) -&gt; None:
+              node, prev, nxt = ListNode(val), self.left, self.left.next
+              prev.next = nxt.prev = node
+              node.next, node.prev = nxt, prev
+
+          def addAtTail(self, val: int) -> None:
+              node, prev, nxt = ListNode(val), self.right.prev, self.right
+              prev.next = nxt.prev = node
+              node.next, node.prev = nxt, prev
+
+          def addAtIndex(self, index: int, val: int) -&gt; None:
+              cur = self.left.next
+              while cur and index &gt; 0:
+                  cur = cur.next
+                  index -= 1
+              
+              if cur and index == 0:
+                  node, prev, nxt = ListNode(val), cur.prev, cur
+                  prev.next = nxt.prev = node
+                  node.next, node.prev = nxt, prev
+
+
+          def deleteAtIndex(self, index: int) -&gt; None:
+              cur = self.left.next
+              while cur and index &gt; 0:
+                  cur = cur.next
+                  index -= 1
+              
+              if cur and cur != self.right and index == 0:
+                  cur.prev.next = cur.next
+                  cur.next.prev = cur.prev
+
+
+      # Your MyLinkedList object will be instantiated and called as such:
+      # obj = MyLinkedList()
+      # param_1 = obj.get(index)
+      # obj.addAtHead(val)
+      # obj.addAtTail(val)
+      # obj.addAtIndex(index,val)
+      # obj.deleteAtIndex(index)
+
+      # Time Complexity: O(n) for get, addAtIndex, and deleteAtIndex, where n is the number of elements in the linked list. O(1) for addAtHead and addAtTail.
+      # Space Complexity: O(1) for all operations.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/design-linked-list/description/</link>
+  </links>
+</question>
+<question>
+  <title>Reverse Linked List II</title>
+  <statement>
+    Given the head of a singly linked list and two integers left and right where left &lt;= right, reverse the nodes of the list from position left to position right, and return the modified list.
+
+    Example 1:
+    Input: head = [1,2,3,4,5], left = 2, right = 4
+    Output: [1,4,3,2,5]
+
+    Example 2:
+    Input: head = [5], left = 1, right = 1
+    Output: [5]
+
+    Follow up: Could you do it in one pass?
+  </statement>
+  <solution>
+    <code>
+      # Definition for singly-linked list.
+      # class ListNode:
+      #     def __init__(self, val=0, next=None):
+      #         self.val = val
+      #         self.next = next
+
+      class Solution:
+    def reverseBetween(
+        self, head: Optional[ListNode], left: int, right: int) -&gt; Optional[ListNode]:
+        dummy = ListNode(0, head)
+
+        # 1) reach node at position "left"
+        leftPrev, cur = dummy, head
+        for i in range(left - 1):
+            cur = cur.next
+            leftPrev = leftPrev.next
+
+        # Now cur="left", leftPrev="node before left"
+        # 2) reverse from left to right
+        prev = None
+        for i in range(right - left + 1):
+            tmpNext = cur.next
+            cur.next = prev
+            prev, cur = cur, tmpNext
+
+        # 3) Update pointers
+        leftPrev.next.next = cur  # cur is node after "right"
+        leftPrev.next = prev  # prev is "right"
+        return dummy.next
+
+      # Time Complexity: O(n), where n is the number of nodes in the list.
+      # Space Complexity: O(1), as we only use pointers and do not allocate any extra data structures.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/reverse-linked-list-ii/description/</link>
+  </links>
+</question>
+<question>
+  <title>Design Circular Queue</title>
+  <statement>
+    Design your implementation of the circular queue. The circular queue is a linear data structure in which the operations are performed based on FIFO (First In First Out) principle and the last position is connected back to the first position to make a circle. It is also called "Ring Buffer".
+
+    Your implementation should support following operations:
+    - MyCircularQueue(k): Constructor, set the size of the queue to be k.
+    - Front: Get the front item from the queue. If the queue is empty, return -1.
+    - Rear: Get the last item from the queue. If the queue is empty, return -1.
+    - enQueue(value): Insert an element into the circular queue. Return true if the operation is successful.
+    - deQueue(): Delete an element from the circular queue. Return true if the operation is successful.
+    - isEmpty(): Checks whether the circular queue is empty or not.
+    - isFull(): Checks whether the circular queue is full or not.
+
+    Example:
+    MyCircularQueue circularQueue = new MyCircularQueue(3); // set the size to be 3
+    circularQueue.enQueue(1);  // return true
+    circularQueue.enQueue(2);  // return true
+    circularQueue.enQueue(3);  // return true
+    circularQueue.enQueue(4);  // return false, the queue is full
+    circularQueue.Rear();  // return 3
+    circularQueue.isFull();  // return true
+    circularQueue.deQueue();  // return true
+    circularQueue.enQueue(4);  // return true
+    circularQueue.Rear();  // return 4
+
+    Constraints:
+    - All values will be in the range of [0, 1000].
+    - The number of operations will be in the range of [1, 1000].
+    - Please do not use the built-in Queue library.
+  </statement>
+  <solution>
+    <code>
+
+    class ListNode:
+      def __init__(self, val, prev, nxt):
+          self.val = val
+          self.prev, self.next = prev, nxt
+
+    class MyCircularQueue:
+
+        def __init__(self, k: int):
+            self.space = k
+            self.left = ListNode(0, None, None)
+            self.right = ListNode(0, self.left, None)
+            self.left.next = self.right
+
+        def enQueue(self, value: int) -&gt; bool:
+            if self.isFull():
+                return False
+            prev, nxt = self.right.prev, self.right
+            cur = ListNode(value, prev, nxt)
+            prev.next = nxt.prev = cur
+            self.space -= 1
+            return True
+
+        def deQueue(self) -&gt; bool:
+          if self.isEmpty():
+              return False
+          prev, nxt = self.left, self.left.next.next
+          prev.next, nxt.prev = nxt, prev
+          self.space += 1
+          return True
+
+        def Front(self) -&gt; int:
+            if self.isEmpty():
+                return -1
+            return self.left.next.val
+
+        def Rear(self) -&gt; int:
+            if self.isEmpty():
+                return -1
+            return self.right.prev.val
+
+        def isEmpty(self) -&gt; bool:
+            return self.left.next == self.right
+
+        def isFull(self) -&gt; bool:
+            return self.space == 0
+
+
+# Your MyCircularQueue object will be instantiated and called as such:
+# obj = MyCircularQueue(k)
+# param_1 = obj.enQueue(value)
+# param_2 = obj.deQueue()
+# param_3 = obj.Front()
+# param_4 = obj.Rear()
+# param_5 = obj.isEmpty()
+# param_6 = obj.isFull()
+
+      # Time Complexity: All operations are O(1).
+      # Space Complexity: O(k), where k is the size of the queue.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/design-circular-queue/description/</link>
+  </links>
+</question>
+<question>
+  <title>Best Time to Buy and Sell Stock IV</title>
+  <statement>
+    You are given an integer array prices where prices[i] is the price of a given stock on the i-th day, and an integer k.
+
+    Design an algorithm to find the maximum profit. You may complete at most k transactions.
+
+    Note: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
+
+    Example 1:
+    Input: k = 2, prices = [2,4,1]
+    Output: 2
+    Explanation: Buy on day 1 (price = 2) and sell on day 2 (price = 4), profit = 4-2 = 2.
+
+    Example 2:
+    Input: k = 2, prices = [3,2,6,5,0,3]
+    Output: 7
+    Explanation: Buy on day 2 (price = 2) and sell on day 3 (price = 6), profit = 6-2 = 4.
+                 Then buy on day 5 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.
+  </statement>
+  <solution>
+    <code>
+    class Solution:
+  def maxProfit(self, k: int, prices: List[int]) -&gt; int:
+      # Edge case: if there are no prices or max transactions is zero
+        if not prices or k == 0:
+            return 0
+      
+        # Initialize a 2D list profits where profits[j][0] represents the maximum profit after j transactions when not holding a stock, 
+        # and profits[j][1] represents the maximum profit after j transactions when holding a stock.
+        profits = [[0] * 2 for _ in range(k + 1)]
+      
+        # Initialize the case where we've made one transaction, but are holding a stock,
+        # which is the negative value of the first price
+        for j in range(1, k + 1):
+            profits[j][1] = -prices[0]
+      
+        # Loop through all prices starting from the second day
+        for price in prices[1:]:
+            # Go through all possible transaction numbers
+            for j in range(k, 0, -1):
+                # Update the profit when not holding a stock:
+                # max(selling the stock today, not selling and keeping the previous profit)
+                profits[j][0] = max(profits[j][1] + price, profits[j][0])
+              
+                # Update the profit when holding a stock:
+                # max(buying the stock today, not buying and keeping the previous profit)
+                profits[j][1] = max(profits[j - 1][0] - price, profits[j][1])
+      
+        # Return the maximum profit after the allowable number of transactions
+        # without holding any stock
+        return profits[k][0]
+
+      # Time Complexity: O(k * n), where n is the number of days.
+      # Space Complexity: O(k * n), for the DP table.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/</link>
+  </links>
+</question>
+<question>
+  <title>Permutations</title>
+  <statement>
+    Given an array nums of distinct integers, return all the possible permutations. You can return the answer in any order.
+
+    Example 1:
+    Input: nums = [1,2,3]
+    Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+
+    Example 2:
+    Input: nums = [0,1]
+    Output: [[0,1],[1,0]]
+
+    Example 3:
+    Input: nums = [1]
+    Output: [[1]]
+
+  </statement>
+  <solution>
+    <code>
+    class Solution:
+      def permute(self, nums: List[int]) -&gt; List[List[int]]:
+          def backtrack(l, r):
+            if l == r:
+                result.append(nums[:])
+            for i in range(l, r):
+                nums[l], nums[i] = nums[i], nums[l]
+                backtrack(l + 1, r)
+                nums[l], nums[i] = nums[i], nums[l]
+
+          result = []
+          backtrack(0, len(nums))
+          return result
+
+      def permute_ite(nums):
+        stack = nums[::-1]  # Reverse the list to pop the first element last
+        results = [[stack.pop()]]  # Initialize with the last number in the list
+        while stack:
+            number = stack.pop()
+            new_results = []
+            # for all partial permutations
+            for i in results:
+                # for all positions in a partial permutation
+                for j in range(len(i) + 1):
+                    new_results.append(i[:j] + [number] + i[j:])
+            results = new_results
+        return results
+
+      # Time Complexity: O(n*n!), where n is the number of integers. There are n! permutations and it requires O(n) time to print a permutation.
+      # Space Complexity: O(n), for the recursion call stack.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/permutations/description/</link>
+  </links>
+</question>
+<question>
+  <title>Merge Sorted Array</title>
+  <statement>
+    Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array.
+
+    The number of elements initialized in nums1 and nums2 are m and n respectively. You may assume that nums1 has enough space (size that is equal to m + n) to hold additional elements from nums2.
+
+    Example 1:
+    Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+    Output: [1,2,2,3,5,6]
+
+    Example 2:
+    Input: nums1 = [1], m = 1, nums2 = [], n = 0
+    Output: [1]
+  </statement>
+  <solution>
+    <code>
+      def merge(nums1: List[int], m: int, nums2: List[int], n: int) -&gt; None:
+          """
+          Do not return anything, modify nums1 in-place instead.
+          """
+          # pointers for nums1, nums2 and the end of the merged array
+          p1, p2, p = m - 1, n - 1, m + n - 1
+
+          while p1 &gt;= 0 and p2 &gt;= 0:
+              if nums1[p1] &gt; nums2[p2]:
+                  nums1[p] = nums1[p1]
+                  p1 -= 1
+              else:
+                  nums1[p] = nums2[p2]
+                  p2 -= 1
+              p -= 1
+
+          # if nums2 is longer, copy its remaining elements to nums1
+          nums1[:p2 + 1] = nums2[:p2 + 1]
+
+      # Time Complexity: O(m + n), where m and n are the lengths of nums1 and nums2 respectively.
+      # Space Complexity: O(1), as no extra space is used.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/merge-sorted-array/description/</link>
+  </links>
+</question>
+<question>
+  <title>Pow(x, n)</title>
+  <statement>
+    Implement pow(x, n), which calculates x raised to the power n (i.e., x^n).
+
+    Example 1:
+    Input: x = 2.00000, n = 10
+    Output: 1024.00000
+
+    Example 2:
+    Input: x = 2.10000, n = 3
+    Output: 9.26100
+
+    Example 3:
+    Input: x = 2.00000, n = -2
+    Output: 0.25000
+    Explanation: 2^-2 = 1/2^2 = 1/4 = 0.25
+  </statement>
+  <solution>
+    <code>
+      class Solution:
+        def myPow(self, x: float, n: int) -&gt; float:
+            def helper(x, n):
+                if x == 0:
+                    return 0
+                if n == 0:
+                    return 1
+                res = helper(x, n // 2)
+                res = res * res
+                # if n is odd we need to do n * n^2 * n^2
+                return x * res if n % 2 else res
+
+            res = helper(x, abs(n))
+            return res if n &gt;= 0 else 1/ res
+
+      # Time Complexity: O(log n), where n is the power.
+      # Space Complexity: O(1), as no extra space is used.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/powx-n/description/</link>
+  </links>
+</question>
+<question>
+  <title>Diameter of Binary Tree</title>
+  <statement>
+    Given the root of a binary tree, return the length of the diameter of the tree.
+
+    The diameter of a binary tree is the length of the longest path between any two nodes in a tree. This path may or may not pass through the root.
+
+    The length of a path between two nodes is represented by the number of edges between them.
+
+    Example 1:
+    Input: root = [1,2,3,4,5]
+    Output: 3
+    Explanation: The length of the diameter of the tree is 3 (4→2→1→3 or 5→2→1→3).
+
+    Example 2:
+    Input: root = [1,2]
+    Output: 1
+  </statement>
+  <solution>
+    <code>
+      # Definition for a binary tree node.
+      # class TreeNode:
+      #     def __init__(self, val=0, left=None, right=None):
+      #         self.val = val
+      #         self.left = left
+      #         self.right = right
+      
+      class Solution:
+          def diameterOfBinaryTree(self, root: TreeNode) -&gt; int:
+              self.max_diameter = 0
+
+              def depth(node):
+                  if not node:
+                      return 0
+                  left_depth = depth(node.left)
+                  right_depth = depth(node.right)
+                  self.max_diameter = max(self.max_diameter, left_depth + right_depth)
+                  return max(left_depth, right_depth) + 1
+
+              depth(root)
+              return self.max_diameter
+
+      # Time Complexity: O(n), where n is the number of nodes in the tree.
+      # Space Complexity: O(height of tree), due to recursion call stack.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/diameter-of-binary-tree/description/</link>
+  </links>
+</question>
+<question>
+  <title>Balanced Binary Tree</title>
+  <statement>
+    Given a binary tree, determine if it is height-balanced.
+
+    For this problem, a height-balanced binary tree is defined as:
+    a binary tree in which the left and right subtrees of every node differ in height by no more than 1.
+
+    Example 1:
+    Input: root = [3,9,20,null,null,15,7]
+    Output: true
+
+    Example 2:
+    Input: root = [1,2,2,3,3,null,null,4,4]
+    Output: false
+
+    Example 3:
+    Input: root = []
+    Output: true
+  </statement>
+  <solution>
+    <code>
+      # Definition for a binary tree node.
+      # class TreeNode:
+      #     def __init__(self, val=0, left=None, right=None):
+      #         self.val = val
+      #         self.left = left
+      #         self.right = right
+      
+      class Solution:
+        def isBalanced(self, root: Optional[TreeNode]) -&gt; bool:
+            ans = True
+
+            def maxDepth(root: Optional[TreeNode]) -&gt; int:
+                nonlocal ans
+                if not root or not ans:
+                    return 0
+                left = maxDepth(root.left)
+                right = maxDepth(root.right)
+                if abs(left - right) &gt; 1:
+                    ans = False
+                return max(left, right) + 1
+
+            maxDepth(root)
+            return ans
+
+      # Time Complexity: O(n), where n is the number of nodes in the tree.
+      # Space Complexity: O(height of tree), due to recursion call stack.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/balanced-binary-tree/description/</link>
+  </links>
+</question>
+<question>
+  <title>Reverse Nodes in k-Group</title>
+  <statement>
+    Given a linked list, reverse the nodes of a linked list k at a time and return its modified list. k is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of k then left-out nodes, in the end, should remain as it is.
+
+    You may not alter the values in the list's nodes, only nodes themselves may be changed.
+
+    Example 1:
+    Input: head = [1,2,3,4,5], k = 2
+    Output: [2,1,4,3,5]
+
+    Example 2:
+    Input: head = [1,2,3,4,5], k = 3
+    Output: [3,2,1,4,5]
+
+    Follow-up: Can you solve the problem in O(1) extra memory space?
+  </statement>
+  <solution>
+    <code>
+      # Definition for singly-linked list.
+      # class ListNode:
+      #     def __init__(self, val=0, next=None):
+      #         self.val = val
+      #         self.next = next
+
+      class Solution:
+          def reverseKGroup(self, head: ListNode, k: int) -&gt; ListNode:
+              dummy = ListNode(0)
+              dummy.next = head
+              groupPrev = dummy
+
+              while True:
+                  kth = self.getKth(groupPrev, k)
+                  if not kth:
+                      break
+                  groupNext = kth.next
+                  # Reverse group
+                  prev, curr = kth.next, groupPrev.next
+                  while curr != groupNext:
+                      temp = curr.next
+                      curr.next = prev
+                      prev = curr
+                      curr = temp
+                  temp = groupPrev.next
+                  groupPrev.next = kth
+                  groupPrev = temp
+              return dummy.next
+
+          def getKth(self, curr: ListNode, k: int) -&gt; ListNode:
+              while curr and k &gt; 0:
+                  curr = curr.next
+                  k -= 1
+              return curr
+
+      # Time Complexity: O(n), where n is the number of nodes in the list.
+      # Space Complexity: O(1), as we only use a fixed amount of extra pointers.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/reverse-nodes-in-k-group/description/</link>
+  </links>
+</question>
+<question>
+  <title>Binary Tree Right Side View</title>
+  <statement>
+    Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.
+
+    Example 1:
+    Input: root = [1,2,3,null,5,null,4]
+    Output: [1,3,4]
+
+    Example 2:
+    Input: root = [1,null,3]
+    Output: [1,3]
+
+    Example 3:
+    Input: root = []
+    Output: []
+  </statement>
+  <solution>
+    <code>
+
+      # Definition for a binary tree node.
+      # class TreeNode:
+      #     def __init__(self, val=0, left=None, right=None):
+      #         self.val = val
+      #         self.left = left
+      #         self.right = right
+      class Solution:
+          def rightSideView(self, root: Optional[TreeNode]) -&gt; List[int]:
+              res = []
+              q = deque()
+              if root:
+                  q.append(root)
+              while q:
+                  rightSide = None
+                  for i in range(len(q)):
+                      node = q.popleft()
+                      rightSide = node
+                      if node.left:
+                          q.append(node.left)
+                      if node.right:
+                          q.append(node.right)
+                  res.append(rightSide.val)
+              return res
+
+      # Time Complexity: O(n), where n is the number of nodes in the tree.
+      # Space Complexity: O(d), where d is the diameter of the tree.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/binary-tree-right-side-view/description/</link>
+  </links>
+</question>
+<question>
+  <title>Count Good Nodes in Binary Tree</title>
+  <statement>
+    Given a binary tree root, a node X in the tree is named good if in the path from root to X there are no nodes with a value greater than X.
+
+    Return the number of good nodes in the binary tree.
+
+    Example 1:
+    Input: root = [3,1,4,3,null,1,5]
+    Output: 4
+    Explanation: Nodes in blue are good.
+    Root Node (3) is always a good node.
+    Node 4 -&gt; (3,4) is the maximum value in the path starting from the root.
+    Node 5 -&gt; (3,4,5) is the maximum value in the path
+    Node 3 -&gt; (3,1,3) is the maximum value in the path.
+
+    Example 2:
+    Input: root = [3,3,null,4,2]
+    Output: 3
+    Explanation: Node 2 -&gt; (3, 3, 2) is not good, because "3" is higher than it.
+
+    Example 3:
+    Input: root = [1]
+    Output: 1
+    Explanation: Root is considered as good.
+
+    Constraints:
+    - The number of nodes in the binary tree is in the range [1, 10^5].
+    - Each node's value is between [-10^4, 10^4].
+  </statement>
+  <solution>
+    <code>
+      # Definition for a binary tree node.
+      # class TreeNode:
+      #     def __init__(self, val=0, left=None, right=None):
+      #         self.val = val
+      #         self.left = left
+      #         self.right = right
+
+      class Solution:
+          def goodNodes(self, root: TreeNode) -&gt; int:
+              def dfs(node, max_val):
+                  if not node:
+                      return 0
+                  res = 1 if node.val &gt;= max_val else 0
+                  max_val = max(max_val, node.val)
+                  res += dfs(node.left, max_val)
+                  res += dfs(node.right, max_val)
+                  return res
+              
+              return dfs(root, root.val)
+
+      # Time Complexity: O(n), where n is the number of nodes in the tree.
+      # Space Complexity: O(h), where h is the height of the tree.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/count-good-nodes-in-binary-tree/description/</link>
+  </links>
+</question>
+<question>
+  <title>Reorganize String</title>
+  <statement>
+    Given a string s, rearrange the characters of s so that any two adjacent characters are not the same.
+
+    Return any possible rearrangement of s or return "" if not possible.
+
+    Example 1:
+    Input: s = "aab"
+    Output: "aba"
+
+    Example 2:
+    Input: s = "aaab"
+    Output: ""
+  </statement>
+  <solution>
+    <code>
+      def reorganizeString(self, s: str) -&gt; str:
+        count = Counter(s) # hashmap, counting the occurent of each char
+        maxHeap = [[-count, char] for char, count in count.items()]
+        heapq.heapify(maxHeap) # O(n)
+
+        prev = None
+        res = ""
+
+        while maxHeap or prev:
+            if prev and not maxHeap:
+                return ""
+            # most frequent, except prev
+            count, char = heapq.heappop(maxHeap)
+            res += char
+            count += 1
+
+            if prev:
+                heapq.heappush(maxHeap, prev)
+                prev = None
+        
+
+            if count != 0:
+                prev = [count, char]
+        return res
+
+      # Time Complexity: O(n log n), where n is the length of the string.
+      # Space Complexity: O(n), for storing the count of each character.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/reorganize-string/description/</link>
+  </links>
+</question>
+<question>
+  <title>Length of the Longest Valid Substring</title>
+  <statement>
+    You are given a string word and an array of strings forbidden. A string is called valid if none of its substrings are present in forbidden. Return the length of the longest valid substring of the string word. A substring is a contiguous sequence of characters in a string, possibly empty.
+
+    Example 1:
+    Input: word = "cbaaaabc", forbidden = ["aaa","cb"]
+    Output: 4
+    Explanation: There are 11 valid substrings in word: "c", "b", "a", "ba", "aa", "bc", "baa", "aab", "ab", "abc" and "aabc". The length of the longest valid substring is 4. It can be shown that all other substrings contain either "aaa" or "cb" as a substring.
+
+    Example 2:
+    Input: word = "leetcode", forbidden = ["de","le","e"]
+    Output: 4
+    Explanation: There are 11 valid substrings in word: "l", "t", "c", "o", "d", "tc", "co", "od", "tco", "cod", and "tcod". The length of the longest valid substring is 4. It can be shown that all other substrings contain either "de", "le", or "e" as a substring.
+
+  </statement>
+  <solution>
+    <code>
+      class Solution:
+          def longestValidSubstring(self, word: str, forbidden: List[str]) -&gt; int:
+              forbidden_set = set(forbidden)
+              res = 0
+              right = len(word) - 1
+              for left in range(len(word) - 1, -1, -1):
+                  for k in range(left, min(left + 10, right + 1)):
+                      if word[left:k+1] in forbidden_set:
+                          right = k - 1
+                          break
+                  res = max(res, right - left + 1)
+              return res
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/length-of-the-longest-valid-substring/</link>
+  </links>
+</question>
+<question>
+  <title>Plates Between Candles</title>
+  <statement>
+    There is a long table with a line of plates and candles arranged on top of it. You are given a 0-indexed string s consisting of characters '*' and '|' only, where '*' represents a plate and '|' represents a candle.
+
+    You are also given a 0-indexed 2D integer array queries where queries[i] = [lefti, righti] denotes the substring s[lefti...righti] (inclusive). For each query, you need to find the number of plates between candles that are in the substring. A plate is considered between candles if there is at least one candle to its left and at least one candle to its right in the substring.
+
+    Return an integer array answer where answer[i] is the answer to the ith query.
+
+    Example 1:
+    Input: s = "**|**|***|", queries = [[2,5],[5,9]]
+    Output: [2,3]
+    Explanation:
+    - queries[0] has two plates between candles.
+    - queries[1] has three plates between candles.
+
+    Example 2:
+    Input: s = "***|**|*****|**||**|*", queries = [[1,17],[4,5],[14,17],[5,11],[15,16]]
+    Output: [9,0,0,0,0]
+    Explanation:
+    - queries[0] has nine plates between candles.
+    - The other queries have zero plates between candles because there are no candles in the substrings.
+  </statement>
+  <solution>
+    <code>
+class Solution:
+    def platesBetweenCandles(self, s: str, queries: List[List[int]]) -&gt; List[int]:
+        ans = []
+        closeLeft = [0] * len(s)
+        closeRight = [0] * len(s)
+        candleCount = [0] * len(s)  # Tracks the cumulative number of candles up to the current index
+        
+        lastCandle = -1
+        for i, c in enumerate(s):
+            if c == '|':
+                lastCandle = i
+            closeLeft[i] = lastCandle
+            candleCount[i] = candleCount[i - 1] + (1 if c == '|' else 0)
+        
+        lastCandle = -1
+        for i in range(len(s) - 1, -1, -1):
+            if s[i] == '|':
+                lastCandle = i
+            closeRight[i] = lastCandle
+        
+        for left, right in queries:
+            leftCandle = closeRight[left]  # The first candle at or after the left query bound
+            rightCandle = closeLeft[right]  # The last candle at or before the right query bound
+            if leftCandle == -1 or rightCandle == -1 or leftCandle &gt;= rightCandle:
+                ans.append(0)
+            else:
+                totalPlates = rightCandle - leftCandle + 1 - (candleCount[rightCandle] - candleCount[leftCandle] + 1)
+                ans.append(totalPlates)
+        
+        return ans
+
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/plates-between-candles/description/</link>
+  </links>
+</question>
+<question>
+  <title>Count the Number of K-Big Indices</title>
+  <statement>
+    You are given an integer array nums and an integer k. An index i is called k-big if the sum of the elements in nums from the start up to index i is greater than or equal to k.
+
+    Return the number of k-big indices.
+
+    Example 1:
+    Input: nums = [1,2,3,4,5], k = 9
+    Output: 3
+    Explanation: 
+    - The sum of the first three elements is 6, which is less than 9, so index 2 is not a k-big index.
+    - The sum of the first four elements is 10, which is greater than or equal to 9, so indices 3, 4, and 5 are k-big indices.
+
+    Example 2:
+    Input: nums = [4,2,1,3], k = 5
+    Output: 3
+    Explanation: 
+    - The sum of the first two elements is 6, which is greater than or equal to 5, so indices 1, 2, 3, and 4 are k-big indices.
+  </statement>
+  <solution>
+    <code>
+      class Solution:
+          def kBigIndices(self, nums: List[int], k: int) -&gt; int:
+              n = len(nums)
+              bigIndices = 0
+              
+              # use minheap of size k with negated values to track of kth smallest elem to the left or right of index i
+              # use two passes: first pass checks which indices i satisfy left side, second pass checks right side; for indices i where both sides are satisfied, increment the count
+
+              left = [-nums[i] for i in range(k)]
+              heapify(left)
+              bigLeft = [0] * n
+              for i in range(k, n-k):
+                  if nums[i] &gt; -left[0]:
+                      bigLeft[i] = 1
+                  heappushpop(left, -nums[i])
+              
+              right = [-nums[i] for i in range(n-1, n-1-k, -1)]
+              heapify(right)
+              for i in range(n-k-1, k-1, -1):
+                  if nums[i] &gt; -right[0] and bigLeft[i]:
+                      bigIndices += 1
+                  heappushpop(right, -nums[i])
+              
+              return bigIndices
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/count-the-number-of-k-big-indices/</link>
+  </links>
+</question>
+<problem>
+  <title>Analyze User Website Visit Pattern</title>
+  <url>https://leetcode.com/problems/analyze-user-website-visit-pattern/</url>
+  <statement>
+    You are given a list of usernames, websites, and timestamps, where each visit is described by a username (a string of English letters), a website (a string of English letters and dots), and an integer timestamp. Return the three-sequence of websites that was visited by the most users. If there are more than one, return the lexicographically smallest one.
+
+    A three-sequence of websites is a list of websites of length three that was visited by the same user in ascending order according to the timestamp. The user can visit websites in any order, multiple times.
+
+    Example 1:
+    Input: username = ["joe","joe","joe","james","james","james","james","mary","mary","mary"], timestamp = [1,2,3,4,5,6,7,8,9,10], website = ["home","about","career","home","cart","maps","home","home","about","career"]
+    Output: ["home","about","career"]
+    Explanation: The sequence ("home", "about", "career") was visited at least once by 2 users.
+    The sequence ("home", "cart", "maps") was visited at least once by 1 user.
+    The sequence ("home", "cart", "home") was visited at least once by 1 user.
+    The sequence ("home", "maps", "home") was visited at least once by 1 user.
+    The sequence ("cart", "maps", "home") was visited at least once by 1 user.
+
+  </statement>
+  <solution>
+    <code>
+      class Solution:
+          def mostVisitedPattern(self, username: List[str], timestamp: List[int], website: List[str]) -&gt; List[str]:
+              userToSites = collections.defaultdict(list)
+
+              # Sort websites of each user by timestamp.
+              for user, _, site in sorted(zip(username, timestamp, website), key=lambda x: (x[1])):
+                  userToSites[user].append(site)
+
+              # For each of three websites, count its frequency.
+              patternCount = collections.Counter()
+
+              for user, sites in userToSites.items():
+                  patternCount.update(Counter(set(itertools.combinations(sites, 3))))
+
+              return max(sorted(patternCount), key=patternCount.get)
+    </code>
+  </solution>
+</problem>
+
 </questions>
