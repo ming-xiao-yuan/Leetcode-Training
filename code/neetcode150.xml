@@ -103,25 +103,13 @@
   </examples>
   <solution>
     <code>
-      def isPalindrome(self, s: str):
-        l, r = 0, len(s) - 1
-        while l &lt; r:
-            while l &lt; r and not self.alphanum(s[l]):
-                l += 1
-            while l &lt; r and not self.alphanum(s[r]):
-                r -= 1
-            if s[l].lower() != s[r].lower():
-                return False
-            l += 1
-            r -= 1
-        return True
-
-    def alphanum(self, c):
-        return (
-            ord("A") &lt;= ord(c) &lt;= ord("Z")
-            or ord("a") &lt;= ord(c) &lt;= ord("z")
-            or ord("0") &lt;= ord(c) &lt;= ord("9")
-        )
+    class Solution:
+      def isPalindrome(self, s: str) -&gt; bool:
+          new = ''
+          for a in s:
+              if a.isalpha() or a.isdigit():
+                  new += a.lower()
+          return (new == new[::-1])
     Time: O(n)
     Space: O(1)
     </code>
@@ -6399,5 +6387,277 @@ class Solution:
     </code>
   </solution>
 </problem>
+<question>
+  <title>Valid Sudoku</title>
+  <statement>
+    Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
+    1. Each row must contain the digits 1-9 without repetition.
+    2. Each column must contain the digits 1-9 without repetition.
+    3. Each of the nine 3 x 3 sub-boxes of the grid must contain the digits 1-9 without repetition.
+    
+    Note:
+    - A Sudoku board (partially filled) could be valid but is not necessarily solvable.
+    - Only the filled cells need to be validated according to the mentioned rules.
+
+    Example 1:
+    Input: board = 
+    [["5","3",".",".","7",".",".",".","."]
+    ,["6",".",".","1","9","5",".",".","."]
+    ,[".","9","8",".",".",".",".","6","."]
+    ,["8",".",".",".","6",".",".",".","3"]
+    ,["4",".",".","8",".","3",".",".","1"]
+    ,["7",".",".",".","2",".",".",".","6"]
+    ,[".","6",".",".",".",".","2","8","."]
+    ,[".",".",".","4","1","9",".",".","5"]
+    ,[".",".",".",".","8",".",".","7","9"]]
+    Output: true
+
+    Example 2:
+    Input: board = 
+    [["8","3",".",".","7",".",".",".","."]
+    ,["6",".",".","1","9","5",".",".","."]
+    ,[".","9","8",".",".",".",".","6","."]
+    ,["8",".",".",".","6",".",".",".","3"]
+    ,["4",".",".","8",".","3",".",".","1"]
+    ,["7",".",".",".","2",".",".",".","6"]
+    ,[".","6",".",".",".",".","2","8","."]
+    ,[".",".",".","4","1","9",".",".","5"]
+    ,[".",".",".",".","8",".",".","7","9"]]
+    Output: false
+    Explanation: Same as Example 1, except with the 5 in the top left corner being modified to 8. Since there are two 8's in the top left 3x3 sub-box, it is not a valid Sudoku.
+
+    Constraints:
+    - board.length == 9
+    - board[i].length == 9
+    - board[i][j] is a digit 1-9 or '.'.
+  </statement>
+  <solution>
+    <code>
+    class Solution:
+      def isValidSudoku(self, board: List[List[str]]) -&gt; bool:
+          rows = collections.defaultdict(set)
+          cols = collections.defaultdict(set)
+          squares = collections.defaultdict(set)
+
+          for r in range(9):
+              for c in range(9):
+                  if board[r][c] == ".":
+                      continue
+                  if board[r][c] in rows[r] or board[r][c] in cols[c] or board[r][c] in squares[(r//3,c//3)]:
+                      return False
+                  rows[r].add(board[c][c])
+                  cols[c].add(board[r][c])
+                  squares[(r//3,c//3)].add(board[r][c])
+          return True
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/valid-sudoku/description/</link>
+  </links>
+</question>
+<question>
+  <title>Kth Largest Element in a Stream</title>
+  <statement>
+    Design a class to find the kth largest element in a stream. Note that it is the kth largest element in the sorted order, not the kth distinct element.
+
+    Implement KthLargest class:
+    - KthLargest(int k, int[] nums) Initializes the object with the integer k and the stream of integers nums.
+    - int add(int val) Appends the integer val to the stream and returns the element representing the kth largest element in the stream.
+
+    Example 1:
+    Input
+    ["KthLargest", "add", "add", "add", "add", "add"]
+    [[3, [4, 5, 8, 2]], [3], [5], [10], [9], [4]]
+    Output
+    [null, 4, 5, 5, 8, 8]
+
+    Explanation
+    KthLargest kthLargest = new KthLargest(3, [4, 5, 8, 2]);
+    kthLargest.add(3);   // return 4
+    kthLargest.add(5);   // return 5
+    kthLargest.add(10);  // return 5
+    kthLargest.add(9);   // return 8
+    kthLargest.add(4);   // return 8
+  </statement>
+  <solution>
+    <code>
+
+      class KthLargest:
+
+        def __init__(self, k: int, nums: List[int]):
+            # minHeap with K Largest integers
+            self.k = k
+            self.minHeap = nums
+            heapq.heapify(self.minHeap)
+
+            # execute only if there are more than k elements
+            while len(self.minHeap) &gt; k:
+                heapq.heappop(self.minHeap)
+
+        def add(self, val: int) -&gt; int:
+            heapq.heappush(self.minHeap, val)
+
+            # only pop elements if it has more than k elements
+            if len(self.minHeap) &gt; self.k:
+                heapq.heappop(self.minHeap)
+            return self.minHeap[0]
+
+      # Time Complexity for add: O(log k)
+      # Space Complexity: O(k) for maintaining the heap
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/kth-largest-element-in-a-stream/description/</link>
+  </links>
+</question>
+<question>
+  <title>K Closest Points to Origin</title>
+  <statement>
+    Given an array of points where points[i] = [xi, yi] represents a point on the X-Y plane and an integer k, return the k closest points to the origin (0, 0).
+
+    The distance between two points on the X-Y plane is the Euclidean distance (i.e., √(x1 - x2)^2 + (y1 - y2)^2).
+
+    You may return the answer in any order. The answer is guaranteed to be unique (except for the order that it is in).
+
+    Example 1:
+    Input: points = [[1,3],[-2,2]], k = 1
+    Output: [[-2,2]]
+    Explanation:
+    The distance between (1, 3) and the origin is sqrt(10).
+    The distance between (-2, 2) and the origin is sqrt(8).
+    Since sqrt(8) &lt; sqrt(10), (-2, 2) is closer to the origin.
+    We only want the closest k = 1 points from the origin, so the answer is just [[-2,2]].
+
+    Example 2:
+    Input: points = [[3,3],[5,-1],[-2,4]], k = 2
+    Output: [[3,3],[-2,4]]
+    Explanation: The answer [[-2,4],[3,3]] would also be accepted.
+  </statement>
+  <solution>
+    <code>
+
+    class Solution:
+    def kClosest(self, points: List[List[int]], k: int) -&gt; List[List[int]]:
+        minHeap = []
+        for x, y in points:
+            dist = (x ** 2) + (y ** 2)
+            minHeap.append((dist, x, y))
+
+        heapq.heapify(minHeap)
+
+        res = []
+        for i in range(k):
+            dist, x, y = heapq.heappop(minHeap)
+            res.append([x, y])
+        return res
+
+      # Time Complexity: O(N log k) for creating the heap of size k out of N points.
+      # Space Complexity: O(k) for storing the heap.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/k-closest-points-to-origin/description/</link>
+  </links>
+</question>
+<question>
+  <title>Kth Largest Element in an Array</title>
+  <statement>
+    Find the kth largest element in an unsorted array. Note that it is the kth largest element in the sorted order, not the kth distinct element.
+
+    Example 1:
+    Input: [3,2,1,5,6,4], k = 2
+    Output: 5
+
+    Example 2:
+    Input: [3,2,3,1,2,4,5,5,6], k = 4
+    Output: 4
+
+    Note:
+    You may assume k is always valid, 1 ≤ k ≤ array's length.
+
+  </statement>
+  <solution>
+    <code>
+
+    class Solution:
+      def findKthLargest(self, nums: List[int], k: int) -&gt; int:
+          nums.sort()
+          return nums[len(nums) - k]
+
+      # Time Complexity: O(N log k) for creating the heap for the k largest elements.
+      # Space Complexity: O(k) for the heap.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/kth-largest-element-in-an-array/description/</link>
+  </links>
+</question>
+<question>
+  <title>Task Scheduler</title>
+  <statement>
+    Given a characters array tasks, representing the tasks a CPU needs to do, where each letter represents a different task. Tasks could be done in any order. Each task is done in one unit of time. For each unit of time, the CPU could complete either one task or just be idle.
+
+    However, there is a non-negative integer n that represents the cooldown period between two same tasks (the same letter in the array), that is that there must be at least n units of time between any two same tasks.
+
+    Return the least number of units of times that the CPU will take to finish all the given tasks.
+
+    Example 1:
+    Input: tasks = ["A","A","A","B","B","B"], n = 2
+    Output: 8
+    Explanation: 
+    A -&gt; B -&gt; idle -&gt; A -&gt; B -&gt; idle -&gt; A -&gt; B
+    There is at least 2 units of time between any two same tasks.
+
+    Example 2:
+    Input: tasks = ["A","A","A","B","B","B"], n = 0
+    Output: 6
+    Explanation: On this case any permutation of size 6 would work since n = 0.
+    ["A","A","A","B","B","B"]
+    ["A","B","A","B","A","B"]
+    ["B","B","B","A","A","A"]
+    ...
+    And so on.
+
+    Example 3:
+    Input: tasks = ["A","A","A","A","A","A","B","C","D","E","F","G"], n = 2
+    Output: 16
+    Explanation: 
+    One possible solution is
+    A -&gt; B -&gt; C -&gt; A -&gt; D -&gt; E -&gt; A -&gt; F -&gt; G -&gt; A -&gt; idle -&gt; idle -&gt; A -&gt; idle -&gt; idle -&gt; A
+
+  </statement>
+  <solution>
+    <code>
+        class Solution:
+            def leastInterval(self, tasks: List[str], n: int) -&gt; int:
+                
+                # count the number of occurences of all the tasks
+                counter = Counter(tasks)
+                maxHeap = [-cnt for cnt in counter.values()]
+                heapq.heapify(maxHeap)
+
+                time = 0
+                q = deque() # pairs of [-count, idleTime]
+
+                while maxHeap or q:
+                    time += 1
+
+                    if maxHeap:
+                        count = 1 + heapq.heappop(maxHeap) # 1 + beccause we are using negative count
+                        if count:
+                            q.append([count, time + n])
+                    # if the cooldown time is reached
+                    if q and q[0][1] == time:
+                        heapq.heappush(maxHeap, q.popleft()[0])
+                return time
+
+          # Time Complexity: O(n * m) where n is the cooldown time and m is the number of tasks.
+          # Space Complexity: O(n * m ) for the heap and queue.
+    </code>
+  </solution>
+  <links>
+    <link>https://leetcode.com/problems/task-scheduler/description/</link>
+  </links>
+</question>
 
 </questions>
