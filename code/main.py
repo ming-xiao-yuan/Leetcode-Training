@@ -6,6 +6,7 @@ import webbrowser
 
 USED_INDICES_FILE = "used_indices.txt"
 
+
 def main():
     while True:
         choice = input("Press 1 for Blind 75 or Press 2 for Neetcode 150: ")
@@ -23,7 +24,9 @@ def main():
     print(len(questions))
     used_indices = load_used_indices()
 
-    reveal_choice = input("Press 1 to reveal in Notepad or Press 2 to open in Browser: ")
+    reveal_choice = input(
+        "Press 1 to reveal in Notepad or Press 2 to open in Browser: "
+    )
 
     while len(used_indices) < len(questions):
         random_index = random.randint(0, len(questions) - 1)
@@ -66,8 +69,6 @@ def main():
         subprocess.Popen(["notepad.exe", "output_answer.txt"], shell=True)
 
     print("All questions have been used.")
-
-
 
 
 def load_used_indices():
